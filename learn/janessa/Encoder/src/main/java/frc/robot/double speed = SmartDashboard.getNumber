@@ -1,0 +1,8 @@
+double speed = SmartDashboard.getNumber("Velocity", 0) * RPMtoUnits;
+
+    _tal.set(ControlMode.Velocity, speed);
+
+
+    double actualSpeed = _tal.getSelectedSensorVelocity() * unitsToRPM;
+
+    SmartDashboard.putNumber("ActualSpeed", actualSpeed);
