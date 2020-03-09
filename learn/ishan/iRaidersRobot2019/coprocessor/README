@@ -1,0 +1,10 @@
+To run manually from the pi, displaying windows on your laptop:
+
+* Make sure you have a working X Server on your computer (use XMing on Windows)
+
+* SSH into the pi (with X forwarding enabled in PuTTY)
+
+* Stop the running vision process `sudo systemctl stop vision`
+
+* Run the vision on the pi, and within a few seconds it should pop up ('cd vision && ./start.sh')
+

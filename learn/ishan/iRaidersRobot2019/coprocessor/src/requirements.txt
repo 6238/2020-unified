@@ -1,0 +1,4 @@
+pynetworktables==2018.0.1
+numpy==1.14.5
+opencv_python==3.4.5.20
+Pillow==5.4.1

@@ -1,0 +1,11 @@
+THIS MAY NOT WORK / IS UNTESTED, FOR NOW DEPLOY TO RESTART
+
+To use on a new pi, drop these files (ending with .service and .path) in /etc/systemd/system/
+
+Then, enable them with `sudo systemctl enable vision.service && sudo systemctl enable vision-watcher.path`
+
+Finally, to start the whole thing (this will happen automatically after a reboot), do `sudo systemctl start vision.service && sudo systemctl start vision-watcher.path`
+
+From then on, for every deploy the vision code will restart.
+
+Lots from https://superuser.com/a/1276457/205632
