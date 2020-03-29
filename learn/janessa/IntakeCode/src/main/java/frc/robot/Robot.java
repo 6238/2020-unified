@@ -43,11 +43,11 @@ public class Robot extends TimedRobot {
 
   private SpeedControllerGroup magazine;
 
-  private CANSparkMax leftShooter;
-  private CANSparkMax rightShooter;
+  // private CANSparkMax leftShooter;
+  // private CANSparkMax rightShooter;
 
-  private CANEncoder leftEncoder;
-  private CANEncoder rightEncoder;
+  // private CANEncoder leftEncoder;
+  // private CANEncoder rightEncoder;
   private boolean shootBoolean;
 
   /**
@@ -69,12 +69,12 @@ public class Robot extends TimedRobot {
 
     SmartDashboard.putNumber("Feeder Motor", 0);
 
-    frontMagazine = new WPI_TalonSRX(2);// Arbirtary
+    frontMagazine = new WPI_TalonSRX(8);// Arbirtary
     frontMagazine.setInverted(true);
 
-    backMagazine = new WPI_TalonSRX(3); // Arbritary
+    backMagazine = new WPI_TalonSRX(7); // Arbritary
 
-    feederMotor = new WPI_TalonSRX(1);
+    feederMotor = new WPI_TalonSRX(9);
     feederMotor.setInverted(true);
 
     // Speed Controllers
