@@ -1,0 +1,11 @@
+[
+  {
+    "name": "2020-robot-code (in project 2020-robot-code)",
+    "file": "/Users/ishanmadan/Developer/Popcorn Penguins/2020-robot-code/build/libs/2020-robot-code.jar",
+    "extensions": [
+      "/Users/ishanmadan/Developer/Popcorn Penguins/2020-robot-code/build/tmp/expandedArchives/halsim_gui-2020.2.2-osxx86-64.zip_1ad08ae2af1e48b55eb81983cc56ca10/osx/x86-64/shared/libhalsim_gui.dylib"
+    ],
+    "librarydir": "/Users/ishanmadan/Developer/Popcorn Penguins/2020-robot-code/build/tmp/jniExtractDir",
+    "mainclass": "frc.robot.Main"
+  }
+]
