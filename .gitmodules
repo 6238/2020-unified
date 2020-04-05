@@ -1,0 +1,12 @@
+[submodule "sample/frc-docs"]
+	path = sample/frc-docs
+	url = git@github.com:wpilibsuite/frc-docs.git
+[submodule "sample/SPARK-MAX-Examples"]
+	path = sample/SPARK-MAX-Examples
+	url = git@github.com:REVrobotics/SPARK-MAX-Examples.git
+[submodule "sample/Color-Sensor-v3-Examples"]
+	path = sample/Color-Sensor-v3-Examples
+	url = git@github.com:REVrobotics/Color-Sensor-v3-Examples.git
+[submodule "sample/allwpilib"]
+	path = sample/allwpilib
+	url = git@github.com:wpilibsuite/allwpilib.git
