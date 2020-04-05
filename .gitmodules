@@ -10,3 +10,6 @@
 [submodule "sample/allwpilib"]
 	path = sample/allwpilib
 	url = git@github.com:wpilibsuite/allwpilib.git
+[submodule "sample/Phoenix-Examples-Languages"]
+	path = sample/Phoenix-Examples-Languages
+	url = git@github.com:CrossTheRoadElec/Phoenix-Examples-Languages.git
