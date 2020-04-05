@@ -87,7 +87,7 @@ public class Robot extends TimedRobot {
         feederMotor = new WPI_TalonSRX(3);
         feederMotor.setInverted(true);
 
-        System.out.println("HELLO CHRIS!!!!");
+        System.out.println("HELLO TEAM!! GO PENGUINS!!");
 
         magazine = new SpeedControllerGroup(frontMagazine, backMagazine);
 
