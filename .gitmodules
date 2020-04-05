@@ -13,3 +13,9 @@
 [submodule "sample/Phoenix-Examples-Languages"]
 	path = sample/Phoenix-Examples-Languages
 	url = git@github.com:CrossTheRoadElec/Phoenix-Examples-Languages.git
+[submodule "learn/timed-robot-code"]
+	path = learn/timed-robot-code
+	url = git@github.com:6238/2020-robot-code.git
+[submodule "learn/command-robot-code"]
+	path = learn/command-robot-code
+	url = git@github.com:6238/2020-command-robot-code.git
