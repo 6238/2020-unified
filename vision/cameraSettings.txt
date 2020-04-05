@@ -1,0 +1,3 @@
+160, 120, 30
+0, auto, 15
+[{"name":"connect_verbose","value":1},{"name":"contrast","value":100},{"name":"saturation","value":100},{"name":"power_line_frequency","value":2},{"name":"sharpness","value":42},{"name":"backlight_compensation","value":0},{"name":"pan_absolute","value":0},{"name":"tilt_absolute","value":0},{"name":"zoom_absolute","value":0}]
