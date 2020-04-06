@@ -2,6 +2,44 @@
 
 **One combined repository for Popcorn Penguins 6238 in the 2020 Infinite Recharge Season**
 
+## Installations:
+Install tools in this order
+### WPILib (Mac/Windows/Linux, recommended):
+Necessary to write & deploy code.
+
+https://docs.wpilib.org/en/latest/docs/getting-started/getting-started-frc-control-system/wpilib-setup.html
+
+### LabVIEW (Windows only, not recommended):
+Optional, only necessary to do LabVIEW coding. Completely unnecessary for the Popcorn Penguins.
+
+https://docs.wpilib.org/en/latest/docs/getting-started/getting-started-frc-control-system/labview-setup.html
+
+### FRC Game Tools (Windows only, recommended):
+Optional, only necessary if you want to _control_ the robot.
+
+https://docs.wpilib.org/en/latest/docs/getting-started/getting-started-frc-control-system/frc-game-tools.html
+
+### 3rd Party Libraries (Mac/Windows/Linux, recommended):
+Suggested libraries to install:
+- Analog Devices ADIS16470 IMU 
+  - Go to releases tab
+  - Download the latest version (unless it says otherwise)
+- CTRE Phoenix Toolsuite 
+  - Download the latest version
+    - "Installer" for Windows
+    - "No Installer" for Mac/Linux
+- REV Robotics Color Sensor v3 
+  - Scroll down to "Software Libraries", "Direct Download" is offline installer, JSON link is online installer)
+- REV Robotics Spark MAX 
+  - Scroll down to LabVIEW API, Java API, or C++ API
+  - Download correct offline installer or copy correct JSON link
+  - Java and C++ have the same installer
+  - Spark MAX client is useful but optional (allows you to configure & update Spark MAX motor controllers)
+
+Offline installers are preferred (allows you to install once for all the robot projects you create)
+
+https://docs.wpilib.org/en/latest/docs/software/wpilib-overview/3rd-party-libraries.html
+
 ## Creating a WPILib project with unit tests using VS Code
 
 - Cmd-Shift-P; WPILib Create a new project
