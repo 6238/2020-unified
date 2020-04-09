@@ -44,7 +44,7 @@ public class AutonomousCommand extends CommandBase {
   @Override
   public void initialize() {
       // Create a voltage constraint to ensure we don't accelerate too fast
-    var autoVoltageConstraint =
+    /* var autoVoltageConstraint =
         new DifferentialDriveVoltageConstraint(
             new SimpleMotorFeedforward(DriveConstants.ksVolts,
                                     DriveConstants.kvVoltSecondsPerMeter,
@@ -74,7 +74,7 @@ public class AutonomousCommand extends CommandBase {
         new Pose2d(3, 0, new Rotation2d(0)),
         // Pass config
         config
-    );
+    ); */
   }
 
   // Called every time the scheduler runs while the command is scheduled.
