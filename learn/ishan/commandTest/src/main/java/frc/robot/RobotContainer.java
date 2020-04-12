@@ -32,7 +32,7 @@ public class RobotContainer {
     Joystick m_leftJoystick = new Joystick(OIConstants.kLeftJoystickPort);
     Joystick m_rightJoystick = new Joystick(OIConstants.kRightJoystickPort);
 
-    private final AutonomousCommand m_autoCommand = new AutonomousCommand(m_robotDrive);
+    // private final AutonomousCommand m_autoCommand = new AutonomousCommand(m_robotDrive);
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
