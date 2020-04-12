@@ -48,7 +48,9 @@ https://docs.wpilib.org/en/latest/docs/software/wpilib-overview/3rd-party-librar
   - Team number: 6238
   - Enable simulation and unit testing by clicking checkbox
   - Click "Generate Project"
-- From the terminal edit the classpath to include the test directory:
+- Add the path to the test directory to the `.classpath` file
+
+The `.classpath` file is in the topmost folder of the project. Since the filename starts with a `.` the file is hidden by default.  It does not appear when you list the files using the `ls` command in the terminal or when browsing for files in VS Code. To make it appear in the terminal invoke `ls` with the `-a` flag: `ls -a`.  To make it appear in the VS Code File open dialog box hit `Cmd-Shift+.`. Open the file and edit it to include the section below referencing the `src/test/java`.
 ```
 echo '<?xml version="1.0" encoding="UTF-8"?>
 <classpath>
