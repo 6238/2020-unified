@@ -2,6 +2,8 @@
 
 **One combined repository for Popcorn Penguins 6238 in the 2020 Infinite Recharge Season**
 
+Run `./update` in the root (2020-unified) directory to update all submodules. You could also copy the update executable to `/usr/local/bin/` to allow running the command without the `./`.
+
 ## Installations:
 Install tools in this order
 ### WPILib (Mac/Windows/Linux, recommended):
