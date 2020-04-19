@@ -38,6 +38,16 @@ Suggested libraries to install:
 Offline installers are preferred (allows you to install once for all the robot projects you create)  
 https://docs.wpilib.org/en/latest/docs/software/wpilib-overview/3rd-party-libraries.html
 
+## Adding libraries to a WPILib project
+- Open an existing WPILib project or create a new one
+- Open the Command Palette (Cmd + Shift + P on Mac, Ctrl + Shift + P on Windows/Linux, or click the hexagon "W" icon in the top right)
+- Search for and run "WPILib: Manage Vendor Libraries"
+- Click "Install new libraries (Offline)"
+- Check the boxes next to the libraries you want to install (ex. "CTRE-Phoenix")
+- Click the blue "OK" button at the top right of the command palette dialog
+- Click "Yes" at the dialog asking to build the project
+- **WARNING:** In 2020, the WPILib-New-Commands library is added to command-based projects by default. Do not install both the WPILib-New-Commands and WPILib-Old Commands libraries in the same project.
+
 ## Creating a WPILib project with unit tests using VS Code
 - WPILib > Create a new project
   - Cmd-Shift-P on Mac
@@ -93,5 +103,5 @@ public class MainTest {
 ```
 repositories { jcenter() }
 dependencies {
-  testImplementation 'org.mockito:mockito-core:3.+'```
-}
+  testImplementation 'org.mockito:mockito-core:3.+'
+}```
