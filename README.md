@@ -89,3 +89,9 @@ public class MainTest {
     }
 }
 ```
+- Add support for Mockito by adding the following lines to the build.gradle file
+```
+repositories { jcenter() }
+dependencies {
+  testImplementation 'org.mockito:mockito-core:3.+'```
+}
