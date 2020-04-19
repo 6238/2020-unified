@@ -10,15 +10,31 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ExampleSubsystem extends SubsystemBase {
-  /**
-   * Creates a new ExampleSubsystem.
-   */
-  public ExampleSubsystem() {
+    MotorController front;
+    MotorController back;
 
-  }
+    double speed;
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+    /**
+     * Creates a new ExampleSubsystem.
+     */
+    public ExampleSubsystem(MotorControllerFactory m) {
+        front = m.create(0);
+        back = m.create(1);
+    }
+
+    public void start() {
+        speed = 0.5;
+    }
+    
+    public void stop() {
+        speed = 0;
+    }
+
+    @Override
+    public void periodic() {
+        // This method will be called once per scheduler run
+        front.set(speed);
+        back.set(-speed);
+    }
 }
