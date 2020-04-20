@@ -22,3 +22,6 @@
 [submodule "learn/ishan/2020-command-robot"]
 	path = learn/ishan/2020-command-robot
 	url = git@github.com:stevejobs3768/2020-command-robot.git
+[submodule "learn/ishan/iRaidersRobot2019"]
+	path = learn/ishan/iRaidersRobot2019
+	url = git@github.com:iraiders/Robot2019.git
