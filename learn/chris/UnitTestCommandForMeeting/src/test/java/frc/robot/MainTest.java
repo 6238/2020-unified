@@ -1,49 +1,54 @@
 package frc.robot;
 
 import org.junit.*;
+import org.mockito.*;
+import static org.mockito.Mockito.*;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import frc.robot.subsystems.*;
 
 
 public class MainTest {
 
-    @Test
-    public void testElevatorMotorRunsWhenElevatorStarted() {
+    MotorControllerFactory factory;
+    WPI_TalonSRX front;
+    WPI_TalonSRX back;
 
-        MotorControllerFactory f = new MotorControllerFactory();
+    @Before
+    public void setup() {
+        factory = mock(MotorControllerFactory.class);
+        front = mock(WPI_TalonSRX.class);
+        back = mock(WPI_TalonSRX.class);
 
-        Assert.assertEquals(f.getMotorControllers().size(), 0);
-
-        ExampleSubsystem e = new ExampleSubsystem(f);
-        Assert.assertEquals(f.getMotorControllers().size(), 2);
-
-        e.start();
-
-        e.periodic();
-
-        Assert.assertEquals(f.getMotorControllers().size(), 2);
-        Assert.assertEquals(f.getMotorControllers().get(0).getCanBusId(), 13);
-        Assert.assertEquals(f.getMotorControllers().get(1).getCanBusId(), 16);
-        Assert.assertEquals(f.getMotorControllers().get(0).getSet(), 0.5, 0.0001);
-        Assert.assertEquals(f.getMotorControllers().get(1).getSet(), -0.5, 0.0001);
-
+        when(factory.create(13)).thenReturn(front);
+        when(factory.create(16)).thenReturn(back);
     }
 
     @Test
-    public void testElevatorMotorStopsWhenSubsystemStopped() {
+    public void testElevatorCreatesMotorControllers() {
+        ElevatorSubsystem subsystem = new ElevatorSubsystem(factory);
+        verify(factory).create(13);
+        verify(factory).create(16);
+    }
 
-        MotorControllerFactory f = new MotorControllerFactory();
+    @Test
+    public void testElevatorStopCausesMotorsToStop() {
+        ElevatorSubsystem subsystem = new ElevatorSubsystem(factory);
+        subsystem.stop();
+        subsystem.periodic();
 
-        ExampleSubsystem e = new ExampleSubsystem(f);
+        verify(front).set(0.0);
+        verify(back).set(-0.0);
+    }
 
-        e.start();
-        e.periodic();
-        e.stop();
-        e.periodic();
+    @Test
+    public void testElevatorStartCausesMotorsToStart() {
+        ElevatorSubsystem subsystem = new ElevatorSubsystem(factory);
+        subsystem.start();
+        subsystem.periodic();
 
-        Assert.assertEquals(f.getMotorControllers().size(), 2);
-        Assert.assertEquals(f.getMotorControllers().get(0).getSet(), 0, 0.0001);
-        Assert.assertEquals(f.getMotorControllers().get(1).getSet(), 0, 0.0001);
-
+        verify(front).set(0.5);
+        verify(back).set(-0.5);
     }
 }

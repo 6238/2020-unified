@@ -2,16 +2,10 @@ package frc.robot.subsystems;
 
 import java.util.*;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 public class MotorControllerFactory {
-    public ArrayList<MotorController> motorControllers_ = new ArrayList<MotorController>();
-
-    public final MotorController create(int canBusId) {
-        motorControllers_.add(new MotorController(canBusId));
-        return  motorControllers_.get(motorControllers_.size()-1);
+    public WPI_TalonSRX create(int canBusId) {
+        return new WPI_TalonSRX(canBusId);
     }
-
-    public ArrayList<MotorController> getMotorControllers() {
-        return motorControllers_;
-    }
-
 }
