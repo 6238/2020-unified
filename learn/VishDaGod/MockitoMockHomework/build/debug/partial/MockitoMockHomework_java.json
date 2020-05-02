@@ -1,0 +1,11 @@
+[
+  {
+    "name": "MockitoMockHomework (in project MockitoMockHomework)",
+    "file": "/Users/VtheBoss27/Popcorn Penguins Coding/MockitoMockHomework/build/libs/MockitoMockHomework.jar",
+    "extensions": [
+      "/Users/VtheBoss27/Popcorn Penguins Coding/MockitoMockHomework/build/tmp/expandedArchives/halsim_gui-2020.2.2-osxx86-64.zip_1ad08ae2af1e48b55eb81983cc56ca10/osx/x86-64/shared/libhalsim_gui.dylib"
+    ],
+    "librarydir": "/Users/VtheBoss27/Popcorn Penguins Coding/MockitoMockHomework/build/tmp/jniExtractDir",
+    "mainclass": "frc.robot.Main"
+  }
+]
