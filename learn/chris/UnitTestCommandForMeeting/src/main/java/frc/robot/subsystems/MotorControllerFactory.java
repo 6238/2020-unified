@@ -1,7 +1,5 @@
 package frc.robot.subsystems;
 
-import java.util.*;
-
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 public class MotorControllerFactory {
