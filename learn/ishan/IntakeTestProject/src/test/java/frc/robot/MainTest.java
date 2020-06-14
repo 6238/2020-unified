@@ -6,6 +6,7 @@ import edu.wpi.first.hal.HAL;
 import edu.wpi.first.hal.sim.DriverStationSim;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.StartIntakeCommand;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.TalonFactory;
 
@@ -156,5 +157,64 @@ public class MainTest {
         i.periodic();
 
         verify(elevatorFront).set(0.0);
+    }
+
+    @Test
+    public void testStartCallsMotorsEachSchedulerRun() {
+        IntakeSubsystem i = new IntakeSubsystem(f);
+
+        verify(throatRight, times(1)).follow(throatLeft);
+        verify(throatRight, times(1)).setInverted(true);
+
+        i.startThroat();
+        CommandScheduler.getInstance().run();
+
+        verify(throatLeft, times(1)).set(0.5);
+        verify(throatLeft, times(0)).set(0.0);
+        
+        CommandScheduler.getInstance().run();
+
+        verify(throatLeft, times(2)).set(0.5);
+        verify(throatLeft, times(0)).set(0.0);
+
+        CommandScheduler.getInstance().disable();
+        CommandScheduler.getInstance().run();
+
+        verify(throatLeft, times(2)).set(0.5);
+        verify(throatLeft, times(0)).set(0.0);
+
+        CommandScheduler.getInstance().unregisterSubsystem(i);
+    }
+
+    @Test
+    public void testStartIntakeCommandRunsMotors() {
+        IntakeSubsystem subsystem = new IntakeSubsystem(f);
+        StartIntakeCommand command = new StartIntakeCommand(subsystem);
+
+        CommandScheduler.getInstance().run();
+
+        verify(elevatorFront, times(1)).set(0.0);
+        verify(throatLeft, times(1)).set(0.0);
+        verify(outer, times(1)).set(0.0);
+
+        command.schedule();
+        
+        verify(elevatorFront, times(1)).set(0.0);
+        verify(throatLeft, times(1)).set(0.0);
+        verify(outer, times(1)).set(0.0);
+
+        verify(elevatorFront, times(0)).set(0.5);
+        verify(throatLeft, times(0)).set(0.5);
+        verify(outer, times(0)).set(0.5);
+        
+        CommandScheduler.getInstance().run();
+        
+        verify(elevatorFront, times(1)).set(0.0);
+        verify(throatLeft, times(1)).set(0.0);
+        verify(outer, times(1)).set(0.0);
+        
+        verify(elevatorFront, times(1)).set(0.5);
+        verify(throatLeft, times(1)).set(0.5);
+        verify(outer, times(1)).set(0.5);
     }
 }

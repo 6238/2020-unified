@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 /**
  * An example command that uses an example subsystem.
  */
-public class ExampleCommand extends CommandBase {
+public class StartIntakeCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final IntakeSubsystem m_subsystem;
 
@@ -22,7 +22,7 @@ public class ExampleCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ExampleCommand(IntakeSubsystem subsystem) {
+  public StartIntakeCommand(IntakeSubsystem subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -31,6 +31,9 @@ public class ExampleCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_subsystem.startElevator();
+    m_subsystem.startThroat();
+    m_subsystem.startOuter();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
