@@ -2,6 +2,10 @@ package frc.robot;
 
 import org.junit.*;
 
+import edu.wpi.first.hal.HAL;
+import edu.wpi.first.hal.sim.DriverStationSim;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.TalonFactory;
 
@@ -39,6 +43,19 @@ public class MainTest {
 
         when(f.create(Constants.kElevatorBackPort)).thenReturn(elevatorBack);
         when(f.create(Constants.kElevatorFrontPort)).thenReturn(elevatorFront);
+
+        HAL.initialize(500, 0);
+        DriverStationSim dsSim = new DriverStationSim();
+        dsSim.setDsAttached(true);
+        dsSim.setAutonomous(false);
+        dsSim.setEnabled(true);
+        dsSim.setTest(true);
+    }
+
+    @After
+    public void afterAll() {
+        DriverStation.getInstance().release();
+        HAL.releaseDSMutex();
     }
 
     @Test
@@ -65,6 +82,27 @@ public class MainTest {
         i.periodic();
 
         verify(throatLeft).set(0.5);
+    }
+
+    @Test
+    public void testCommandThroatStartStop() {
+        IntakeSubsystem i = new IntakeSubsystem(f);
+
+        verify(throatRight, times(1)).follow(throatLeft);
+        verify(throatRight, times(1)).setInverted(true);
+
+        i.startThroat();
+        CommandScheduler.getInstance().run();
+
+        verify(throatLeft).set(0.5);
+        verify(throatLeft, times(0)).set(0.0);
+
+        i.stopThroat();
+        CommandScheduler.getInstance().run();
+
+        verify(throatLeft).set(0.0);
+
+        CommandScheduler.getInstance().unregisterSubsystem(i);
     }
 
     @Test
