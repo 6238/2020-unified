@@ -1,10 +1,13 @@
 package frc.robot;
 
 import org.junit.*;
+
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import frc.robot.commands.StartElevator;
 import frc.robot.subsystems.*;
 
 import edu.wpi.first.hal.HAL;
@@ -34,7 +37,9 @@ public class MainTest {
 		dsSim.setDsAttached(true);
 		dsSim.setAutonomous(false);
 		dsSim.setEnabled(true);
-		dsSim.setTest(true);
+        dsSim.setTest(true);
+
+        CommandScheduler.getInstance().enable();
     }
 
     @After
@@ -81,4 +86,52 @@ public class MainTest {
         verify(front).set(0.5);
         verify(back).set(-0.5);
     }
+
+    @Test
+    public void testElevatorStartCallsMotorSetEachSchedulerRunWhileEnabled() {
+        ElevatorSubsystem subsystem = new ElevatorSubsystem(factory);
+
+        subsystem.start();
+        CommandScheduler.getInstance().run();
+
+        verify(front, times(1)).set(0.5);
+        verify(back, times(1)).set(-0.5);
+
+        CommandScheduler.getInstance().run();
+
+        verify(front, times(2)).set(0.5);
+        verify(back, times(2)).set(-0.5);
+
+        CommandScheduler.getInstance().disable();
+        CommandScheduler.getInstance().run();
+
+        verify(front, times(2)).set(0.5);
+        verify(back, times(2)).set(-0.5);
+    }
+
+    @Test
+    public void testStartElevatorCommandRunsTheMotors() {
+        ElevatorSubsystem subsystem = new ElevatorSubsystem(factory);
+        StartElevator cmd = new StartElevator(subsystem);
+
+        CommandScheduler.getInstance().run();
+
+        verify(front, times(1)).set(0.0);
+        verify(back, times(1)).set(-0.0);
+
+        cmd.schedule();
+        verify(front, times(1)).set(0.0);
+        verify(back, times(1)).set(-0.0);
+        verify(front, times(0)).set(0.5);
+        verify(back, times(0)).set(-0.5);
+
+        CommandScheduler.getInstance().run();
+
+        verify(front, times(1)).set(0.0);
+        verify(back, times(1)).set(-0.0);
+        verify(front, times(1)).set(0.5);
+        verify(back, times(1)).set(-0.5);
+        assertEquals(cmd.isScheduled(), false);
+    }
+
 }

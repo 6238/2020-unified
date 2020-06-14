@@ -9,10 +9,11 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.StartElevator;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.MotorControllerFactory;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -24,9 +25,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ElevatorSubsystem m_exampleSubsystem = new ElevatorSubsystem(new MotorControllerFactory());
 
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-
-
+  private final StartElevator m_autoCommand = new StartElevator(m_exampleSubsystem);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -43,6 +42,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+//    new JoystickButton(joystick, buttonNumber).whenPressed(new StartElevator(m_exampleSubsystem));
   }
 
 
