@@ -2,43 +2,56 @@
 
 **One combined repository for Popcorn Penguins 6238 in the 2020 Infinite Recharge Season**
 
-Run `./update` in the root (2020-unified) directory to update all submodules. You could also copy the update executable to `/usr/local/bin/` to allow running the command without the `./`.
+Run `./update` in the root (2020-unified) directory to update all submodules (Mac/Linux only). To allow running the command without the `./`, copy the `update` executable to `/usr/local/bin/`.
 
-## Installations:
+## Installations
 Install tools in this order
-### WPILib (Mac/Windows/Linux, recommended):
+### WPILib (Mac/Windows/Linux, required)
 Necessary to write & deploy code.  
 https://docs.wpilib.org/en/latest/docs/getting-started/getting-started-frc-control-system/wpilib-setup.html
 
-### LabVIEW (Windows only, not recommended):
-Optional, only necessary to do LabVIEW coding. Completely unnecessary for the Popcorn Penguins.  
+### LabVIEW (Windows only, not recommended)
+Necessary to do LabVIEW coding. Completely unnecessary for the Popcorn Penguins. If you decide to do this, you must do it **before** installing the FRC Game Tools and the 3rd Party Libraries.
 https://docs.wpilib.org/en/latest/docs/getting-started/getting-started-frc-control-system/labview-setup.html
 
-### FRC Game Tools (Windows only, recommended):
-Optional, only necessary if you want to _control_ the robot.  
+### FRC Game Tools (Windows only, optional)
+Necessary if you want to *control* the robot.
 https://docs.wpilib.org/en/latest/docs/getting-started/getting-started-frc-control-system/frc-game-tools.html
 
-### 3rd Party Libraries (Mac/Windows/Linux, recommended):
-Suggested libraries to install:
-- Analog Devices ADIS16470 IMU 
+### FRC Radio Configuration 20.0.0 (Windows only, optional)
+Necessary to program the robot radios.
+https://firstfrc.blob.core.windows.net/frc2020/Radio/FRC_Radio_Configuration_20_0_0.zip
+
+### 3rd Party Libraries (Mac/Windows/Linux, required)
+- Analog Devices ADIS16470 IMU
+  - https://github.com/juchong/ADIS16470-RoboRIO-Driver/releases/latest
   - Go to releases tab
   - Download the latest version (unless it says otherwise)
 - CTRE Phoenix Toolsuite 
+  - http://www.ctr-electronics.com/hro.html#product_tabs_technical_resources
   - Download the latest version
     - "Installer" for Windows
     - "No Installer" for Mac/Linux
-- REV Robotics Color Sensor v3 
-  - Scroll down to "Software Libraries", "Direct Download" is offline installer, JSON link is online installer)
-- REV Robotics Spark MAX 
-  - Scroll down to LabVIEW API, Java API, or C++ API
-  - Download correct offline installer or copy correct JSON link
-  - Java and C++ have the same installer
-  - Spark MAX client is useful but optional (allows you to configure & update Spark MAX motor controllers)
+- REV Robotics Color Sensor v3
+  - https://www.revrobotics.com/rev-31-1557/
+  - Scroll down to "Software Libraries"
+  - "Java/C++ SDK Direct Download"
+- REV Robotics Spark MAX
+  - https://www.revrobotics.com/sparkmax-software/#java-api
+  - "Download Latest Java API"
+- **How to install:** https://docs.wpilib.org/en/latest/docs/software/wpilib-overview/3rd-party-libraries.html#the-mechanism-c-java
 
 Offline installers are preferred (allows you to install once for all the robot projects you create)  
 https://docs.wpilib.org/en/latest/docs/software/wpilib-overview/3rd-party-libraries.html
 
-## Adding libraries to a WPILib project
+### Spark MAX Client (Windows only, optional)
+Necessary to configure Spark MAX's.
+https://www.revrobotics.com/sparkmax-software/#spark-max-client-application
+
+
+## Using WPILib and Visual Studio Code
+
+### Adding libraries to a WPILib project
 - Open an existing WPILib project or create a new one
 - Open the Command Palette (Cmd + Shift + P on Mac, Ctrl + Shift + P on Windows/Linux, or click the hexagon "W" icon in the top right)
 - Search for and run "WPILib: Manage Vendor Libraries"
@@ -48,7 +61,7 @@ https://docs.wpilib.org/en/latest/docs/software/wpilib-overview/3rd-party-librar
 - Click "Yes" at the dialog asking to build the project
 - **WARNING:** In 2020, the WPILib-New-Commands library is added to command-based projects by default. Do not install both the WPILib-New-Commands and WPILib-Old Commands libraries in the same project.
 
-## Creating a WPILib project with unit tests using VS Code
+### Creating a WPILib project with unit tests using Visual Studio Code
 - WPILib > Create a new project
   - Cmd-Shift-P on Mac
   - Ctrl-Shift-P on Windows
