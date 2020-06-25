@@ -48,6 +48,65 @@ https://docs.wpilib.org/en/latest/docs/software/wpilib-overview/3rd-party-librar
 Necessary to configure Spark MAX's.
 https://www.revrobotics.com/sparkmax-software/#spark-max-client-application
 
+## Setup for Vision
+If on Mac/Windows, install Ubuntu. In Ubuntu, install vim, python-opencv, and robotpy-cscore, and download and run a sample vision program.
+
+### Mac
+Use VMware Fusion to install and set up a Ubuntu virtual machine.
+- Download VMware Fusion: https://www.vmware.com/go/getfusion
+- Install VMware Fusion
+  - Open the .dmg file
+  - Open the VMware Fusion app on the disk image (requires admin)
+  - After Fusion installs itself, accept the license agreement
+  - Contact a member of the programming team for the license key
+  - You should now be at the "Select the Installation Method" screen
+- Download Ubuntu: https://ubuntu.com/download/desktop
+- Drag the ubuntu-xx.xx-desktop-amd64.iso (where xx.xx is the version) into VMware and continue
+- Uncheck "Use Easy Install"
+- Select "UEFI" for the boot firmware
+- Click "Customize Settings" instead of "Finish"
+- Save the virtual machine file to your computer or to an external drive (this is a very large file that could reach 10-20GB)
+- In the settings window that opens, configure the following options:
+  - Hard Disk: under Advanced options, change Bus type to NVMe and click Apply
+    - Optional: increase storage to 32GB
+  - USB & Bluetooth: under Advanced USB options, change USB Compatibility to USB 3.1
+  - Camera: change to preferred camera
+- Close the settings window and click the large play button in the VMware Fusion window titled "Ubuntu 64-bit xx.xx"
+- After Ubuntu boots up, choose English in the left sidebar and Install Ubuntu
+- Ensure English (US) is selected in both the left and right lists and test your keyboard in the text box. Continue.
+- Select Minimal installation, check the box next to "Download updates while installing Ubuntu", and uncheck "Install third-party software for graphics and Wi-Fi hardware and additional media formats". Continue.
+- Select "Erase disk and install Ubuntu" (This will erase your virtual machine's disk, which is already empty, and will not affect your actual computer). Click "Install Now" and, in the popup, "Continue".
+- Select your time zone on the map and continue.
+- Enter the name on your user account, then a hostname for the VM, then your desired username and password. "Log in automatically" is recommended. Continue.
+- Restart Now when prompted
+- VMware disconnects the install "CD" automatically, so when "Please remove the installation medium, then press ENTER" appears, just press the enter key and ignore the error messages.
+- Skip connecting online accounts.
+- Livepatch is optional, but if set up, requires a Ubuntu One account.
+- Sending system info to Canonical is optional.
+- Location Services is optional, not necessary.
+- Click Done and do not download any of the suggested software.
+- If there are software updates available, a prompt to install them will be shown. Select Install Now.
+  - Continue to the next step only when the updates have finished installing and you are asked to log back in.
+- Continue to the Linux section of these install instructions.
+
+### Windows
+Install Ubuntu on Windows using Windows Subsystem for Linux (WSL)
+- Install: https://ubuntu.com/wsl#install-ubuntu-on-wsl
+- Enable WSL 2: https://ubuntu.com/blog/ubuntu-on-wsl-2-is-generally-available
+  - Scroll down to "Enable WSL 2"
+- Continue to the Linux section of these install instructions.
+
+### Linux 
+This process has only been tested on Ubuntu. For any other distro, you will have to do your own research.
+- Open Terminal
+- Run `cd Documents` (or path to desired directory) to change the directory to your Documents folder
+  - Skip this step if on Windows
+- Run `wget https://gist.githubusercontent.com/stevejobs3768/5610e767438a1bb1e38c88f41bcf04ac/raw/01b962e961c417eca8c8b5c69d5525beda912440/install-vim-cv-cscore.sh` to download the install script
+- Run `chmod a+x install-vim-cv-cscore.sh` to make the install script executable by all users
+- Run `sudo ./install-vim-cv-cscore.sh` to run the install script
+- You will be asked multiple times, "Do you want to continue? [Y/n]" You must type y and click enter each time for the install to succeed.
+- If a browser does not automatically open, open it yourself and go to http://0.0.0.0:8081
+- In the terminal, "got frame at time..." indicates a frame successfully received from the camera and sent to the web server, but "error: timed out getting frame" indicates a dropped frame.
 
 ## Using WPILib and Visual Studio Code
 
