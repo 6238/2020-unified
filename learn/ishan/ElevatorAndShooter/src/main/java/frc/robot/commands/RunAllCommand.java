@@ -32,10 +32,13 @@ public class RunAllCommand extends CommandBase {
   private double shooterSpeed = 0.5;
   private double elevatorSpeed = 0.5;
 
+  private boolean enable = false;
+
   private NetworkTableEntry feederSpeedEntry = Constants.kTab.add("feederSpeed", feederSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1)).getEntry();
   private NetworkTableEntry shooterSpeedEntry = Constants.kTab.add("shooterSpeed", shooterSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1)).getEntry();
   private NetworkTableEntry elevatorSpeedEntry = Constants.kTab.add("elevatorSpeed", elevatorSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1)).getEntry();
 
+  private ToggleButton enableButton = new ToggleButton("enable", enable);
   /**
    * Creates a new ExampleCommand.
    *
@@ -61,11 +64,22 @@ public class RunAllCommand extends CommandBase {
     shooterSpeed = shooterSpeedEntry.getDouble(shooterSpeed);
     elevatorSpeed = elevatorSpeedEntry.getDouble(elevatorSpeed);
 
-    m_elevator.front(elevatorSpeed);
-    m_elevator.back(elevatorSpeed);
-    m_elevator.feeder(feederSpeed);
+    enable = enableButton.get();
+    
+    if (enable) {
+      m_elevator.front(elevatorSpeed);
+      m_elevator.back(elevatorSpeed);
+      m_elevator.feeder(feederSpeed);
+      
+      m_shooter.shooter(shooterSpeed);
+    } else {
+      m_elevator.front(0);
+      m_elevator.back(0);
+      m_elevator.feeder(0);
+  
+      m_shooter.shooter(0);  
+    }
 
-    m_shooter.shooter(shooterSpeed);
     System.out.println("running");
   }
 
@@ -75,7 +89,7 @@ public class RunAllCommand extends CommandBase {
     m_elevator.front(0);
     m_elevator.back(0);
     m_elevator.feeder(0);
-
+  
     m_shooter.shooter(0);
     System.out.println("stopped");
   }
