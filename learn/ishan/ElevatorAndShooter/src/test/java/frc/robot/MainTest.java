@@ -75,7 +75,7 @@ public class MainTest {
         verify(f).createSpark(Constants.kRightShooterSpark); */
     }
 
-    @Test
+    /* @Test
     public void testRunAllCommandRunsMotors() {
         ShooterSubsystem shooter = new ShooterSubsystem(f);
         ElevatorSubsystem elevator = new ElevatorSubsystem(f);
@@ -88,5 +88,5 @@ public class MainTest {
         verify(elevatorFront, times(1)).set(0.25);
         verify(elevatorBack, times(1)).set(0.25);
         verify(feeder, times(1)).set(0.25);
-    }
+    } */
 }

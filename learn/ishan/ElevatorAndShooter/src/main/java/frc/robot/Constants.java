@@ -21,6 +21,6 @@ public final class Constants {
 
     public static final int kFeederTalon = 13;
 
-    public static final int kLeftShooterSpark = 14;
-    public static final int kRightShooterSpark = 14;
+    public static final int kLeftShooterSpark = 7;
+    public static final int kRightShooterSpark = 6;
 }

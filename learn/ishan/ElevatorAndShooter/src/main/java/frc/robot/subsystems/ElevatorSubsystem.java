@@ -25,6 +25,9 @@ public class ElevatorSubsystem extends SubsystemBase {
     m_front = f.createTalon(Constants.kFrontElevatorTalon);
     m_back = f.createTalon(Constants.kRearElevatorTalon);
     m_feeder = f.createTalon(Constants.kFeederTalon);
+
+    m_front.setInverted(true);
+    m_feeder.setInverted(true);
   }
 
   public void front(double speed) {
