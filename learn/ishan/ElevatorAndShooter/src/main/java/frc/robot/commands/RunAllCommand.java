@@ -7,9 +7,18 @@
 
 package frc.robot.commands;
 
+import java.util.Map;
+
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+
+import edu.wpi.first.networktables.NetworkTableEntry;
+
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+
+import frc.robot.Constants;
 
 /**
  * An example command that uses an example subsystem.
