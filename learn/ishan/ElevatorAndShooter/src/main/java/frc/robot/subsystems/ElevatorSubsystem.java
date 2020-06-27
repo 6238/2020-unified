@@ -7,18 +7,35 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-public class ExampleSubsystem extends SubsystemBase {
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
+
+public class ElevatorSubsystem extends SubsystemBase {
+
+  WPI_TalonSRX m_front;
+  WPI_TalonSRX m_back;
+  WPI_TalonSRX m_feeder;
+
   /**
    * Creates a new ExampleSubsystem.
    */
-  public ExampleSubsystem() {
-
+  public ElevatorSubsystem(Factory f) {
+    m_front = f.createTalon(Constants.kFrontElevatorTalon);
+    m_back = f.createTalon(Constants.kRearElevatorTalon);
+    m_feeder = f.createTalon(Constants.kFeederTalon);
   }
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
+  public void front(double speed) {
+    m_front.set(speed);
+  }
+  
+  public void back(double speed) {
+    m_back.set(speed);
+  }
+  
+  public void feeder(double speed) {
+    m_feeder.set(speed);
   }
 }
