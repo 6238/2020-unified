@@ -20,9 +20,11 @@ public class ShooterSubsystem extends SubsystemBase {
     m_shooterLeft = f.createSpark(Constants.kLeftShooterSpark);
     m_shooterRight = f.createSpark(Constants.kRightShooterSpark);
     m_shooterRight.follow(m_shooterLeft, true);
+    System.out.println("shooter");
   }
 
   public void shooter(double speed) {
     m_shooterLeft.set(speed);
+    System.out.println("shooting");
   }
 }

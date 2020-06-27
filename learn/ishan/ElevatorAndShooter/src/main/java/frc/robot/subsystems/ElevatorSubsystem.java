@@ -28,17 +28,21 @@ public class ElevatorSubsystem extends SubsystemBase {
 
     m_front.setInverted(true);
     m_feeder.setInverted(true);
+    System.out.println("elevator");
   }
 
   public void front(double speed) {
     m_front.set(speed);
+    System.out.println("front");
   }
   
   public void back(double speed) {
     m_back.set(speed);
+    System.out.println("back");
   }
   
   public void feeder(double speed) {
     m_feeder.set(speed);
+    System.out.println("feeder");
   }
 }
