@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.triggers;
+package frc.robot;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
 
@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
-import frc.robot.Constants.OIConstants;
+import frc.robot.Constants;
 
 /**
  * Shuffleboard Boolean ToggleButton Trigger
@@ -24,7 +24,7 @@ public class ToggleButton extends Trigger {
 
     public ToggleButton(String buttonName, boolean defaultValue) {
         value = defaultValue;
-        toggleButtonEntry = OIConstants.kTab.add(buttonName, defaultValue).withWidget(BuiltInWidgets.kToggleButton).getEntry();
+        toggleButtonEntry = Constants.kTab.add(buttonName, defaultValue).withWidget(BuiltInWidgets.kToggleButton).getEntry();
     }
 
     public NetworkTableEntry getEntry() {
