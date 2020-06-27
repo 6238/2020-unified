@@ -36,6 +36,7 @@ public class RunAllCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    System.out.println("started");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -46,6 +47,7 @@ public class RunAllCommand extends CommandBase {
     m_elevator.feeder(speed);
 
     m_shooter.shooter(speed);
+    System.out.println("running");
   }
 
   // Called once the command ends or is interrupted.
