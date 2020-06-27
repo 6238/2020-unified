@@ -4,25 +4,43 @@
 
 Run `./update` in the root (2020-unified) directory to update all submodules (Mac/Linux only). To allow running the command without the `./`, copy the `update` executable to `/usr/local/bin/`.
 
+## Table of Contents
+1. [Installations](#installations)
+2. [Setup for Vision (Running on Mac/Windows/Linux)](#setup-for-vision)
+3. [Using WPILib and Visual Studio Code](#using-wpilib-and-visual-studio-code)
+
+
 ## Installations
-Install tools in this order
-### WPILib (Mac/Windows/Linux, required)
+Install tools in this order:
+1. [WPILib](#wpilib) 
+2. [LabVIEW](#labview) 
+3. [FRC Game Tools](#frc-game-tools) 
+4. [FRC Radio Configuration](#frc-radio-configuration-2000) 
+5. [3rd Party Libraries](#3rd-party-libraries) 
+6. [Spark MAX Client](#spark-max-client) 
+
+### WPILib
+#### (Mac/Windows/Linux, required)
 Necessary to write & deploy code.  
 https://docs.wpilib.org/en/latest/docs/getting-started/getting-started-frc-control-system/wpilib-setup.html
 
-### LabVIEW (Windows only, not recommended)
+### LabVIEW
+#### (Windows only, not recommended)
 Necessary to do LabVIEW coding. Completely unnecessary for the Popcorn Penguins. If you decide to do this, you must do it **before** installing the FRC Game Tools and the 3rd Party Libraries.
 https://docs.wpilib.org/en/latest/docs/getting-started/getting-started-frc-control-system/labview-setup.html
 
-### FRC Game Tools (Windows only, optional)
+### FRC Game Tools
+#### (Windows only, optional)
 Necessary if you want to *control* the robot.
 https://docs.wpilib.org/en/latest/docs/getting-started/getting-started-frc-control-system/frc-game-tools.html
 
-### FRC Radio Configuration 20.0.0 (Windows only, optional)
+### FRC Radio Configuration 20.0.0
+#### (Windows only, optional)
 Necessary to program the robot radios.
 https://firstfrc.blob.core.windows.net/frc2020/Radio/FRC_Radio_Configuration_20_0_0.zip
 
-### 3rd Party Libraries (Mac/Windows/Linux, required)
+### 3rd Party Libraries
+#### (Mac/Windows/Linux, required)
 - Analog Devices ADIS16470 IMU
   - https://github.com/juchong/ADIS16470-RoboRIO-Driver/releases/latest
   - Go to releases tab
@@ -44,7 +62,8 @@ https://firstfrc.blob.core.windows.net/frc2020/Radio/FRC_Radio_Configuration_20_
 Offline installers are preferred (allows you to install once for all the robot projects you create)  
 https://docs.wpilib.org/en/latest/docs/software/wpilib-overview/3rd-party-libraries.html
 
-### Spark MAX Client (Windows only, optional)
+### Spark MAX Client
+#### (Windows only, optional)
 Necessary to configure Spark MAX's.
 https://www.revrobotics.com/sparkmax-software/#spark-max-client-application
 
