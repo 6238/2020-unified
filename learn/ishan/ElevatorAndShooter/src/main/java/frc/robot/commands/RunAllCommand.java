@@ -19,7 +19,13 @@ public class RunAllCommand extends CommandBase {
   private final ShooterSubsystem m_shooter;
   private final ElevatorSubsystem m_elevator;
 
-  private double speed = 0.25;
+  private double feederSpeed = 0.5;
+  private double shooterSpeed = 0.5;
+  private double elevatorSpeed = 0.5;
+
+  private NetworkTableEntry feederSpeedEntry = Constants.kTab.add("feederSpeed", feederSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1)).getEntry();
+  private NetworkTableEntry shooterSpeedEntry = Constants.kTab.add("shooterSpeed", shooterSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1)).getEntry();
+  private NetworkTableEntry elevatorSpeedEntry = Constants.kTab.add("elevatorSpeed", elevatorSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1)).getEntry();
 
   /**
    * Creates a new ExampleCommand.
@@ -42,11 +48,15 @@ public class RunAllCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_elevator.front(speed);
-    m_elevator.back(speed);
-    m_elevator.feeder(speed);
+    feederSpeed = feederSpeedEntry.getDouble(feederSpeed);
+    shooterSpeed = shooterSpeedEntry.getDouble(shooterSpeed);
+    elevatorSpeed = elevatorSpeedEntry.getDouble(elevatorSpeed);
 
-    m_shooter.shooter(speed);
+    m_elevator.front(elevatorSpeed);
+    m_elevator.back(elevatorSpeed);
+    m_elevator.feeder(feederSpeed);
+
+    m_shooter.shooter(shooterSpeed);
     System.out.println("running");
   }
 

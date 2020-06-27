@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants.  This class should not be used for any other purpose.  All constants should be
@@ -23,4 +25,19 @@ public final class Constants {
 
     public static final int kLeftShooterSpark = 7;
     public static final int kRightShooterSpark = 6;
+
+    /**
+     * Get the default instance of NetworkTables that was created automatically when
+     * your program starts
+     */
+    private static final NetworkTableInstance kInst = NetworkTableInstance.getDefault();
+
+    /*
+     * Get the table within that instance that contains the data. There can be as
+     * many tables as you like and exist to make it easier to organize your data. In
+     * this case, it's a table called datatable.
+     */
+    public static final NetworkTable kTable = kInst.getTable("SmartDashboard");
+
+    public static final ShuffleboardTab kTab = Shuffleboard.getTab("SmartDashboard");
 }
