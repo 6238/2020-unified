@@ -58,6 +58,7 @@ public class RunAllCommand extends CommandBase {
     m_elevator.feeder(0);
 
     m_shooter.shooter(0);
+    System.out.println("stopped");
   }
 
   // Returns true when the command should end.
