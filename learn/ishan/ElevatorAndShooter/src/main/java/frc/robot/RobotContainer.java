@@ -35,7 +35,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-    // m_runAllCommand.schedule();
+    // m_elevatorSubsystem.setDefaultCommand(m_runAllCommand);
   }
 
   /**
@@ -54,6 +54,11 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
+    // An ExampleCommand will run in autonomous
+    return null;
+  }
+  
+  public Command getTeleopCommand() {
     // An ExampleCommand will run in autonomous
     return m_runAllCommand;
   }
