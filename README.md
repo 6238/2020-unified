@@ -2,11 +2,11 @@
 
 **One combined repository for Popcorn Penguins 6238 in the 2020 Infinite Recharge Season**
 
-Run `./update` in the root (2020-unified) directory to update all submodules (Mac/Linux only). To allow running the command without the `./`, copy the `update` executable to `/usr/local/bin/`.
+Run `./update` in the root (2020-unified) directory to update all submodules (macOS/Linux only). To allow running the command without the `./`, copy the `update` executable to `/usr/local/bin/`.
 
 ## Table of Contents
 1. [Installations](#installations)
-2. [Setup for Vision (Running on Mac/Windows/Linux)](#setup-for-vision)
+2. [Setup for Vision](#setup-for-vision)
 3. [Using WPILib and Visual Studio Code](#using-wpilib-and-visual-studio-code)
 
 
@@ -20,7 +20,7 @@ Install tools in this order:
 6. [Spark MAX Client](#spark-max-client) 
 
 ### WPILib
-#### (Mac/Windows/Linux, required)
+#### (macOS/Windows/Linux, required)
 Necessary to write & deploy code.  
 https://docs.wpilib.org/en/latest/docs/getting-started/getting-started-frc-control-system/wpilib-setup.html
 
@@ -40,7 +40,7 @@ Necessary to program the robot radios.
 https://firstfrc.blob.core.windows.net/frc2020/Radio/FRC_Radio_Configuration_20_0_0.zip
 
 ### 3rd Party Libraries
-#### (Mac/Windows/Linux, required)
+#### (macOS/Windows/Linux, required)
 - Analog Devices ADIS16470 IMU
   - https://github.com/juchong/ADIS16470-RoboRIO-Driver/releases/latest
   - Go to releases tab
@@ -49,7 +49,7 @@ https://firstfrc.blob.core.windows.net/frc2020/Radio/FRC_Radio_Configuration_20_
   - http://www.ctr-electronics.com/hro.html#product_tabs_technical_resources
   - Download the latest version
     - "Installer" for Windows
-    - "No Installer" for Mac/Linux
+    - "No Installer" for macOS/Linux
 - REV Robotics Color Sensor v3
   - https://www.revrobotics.com/rev-31-1557/
   - Scroll down to "Software Libraries"
@@ -68,9 +68,17 @@ Necessary to configure Spark MAX's.
 https://www.revrobotics.com/sparkmax-software/#spark-max-client-application
 
 ## Setup for Vision
-If on Mac/Windows, install Ubuntu. In Ubuntu, install vim, python-opencv, and robotpy-cscore, and download and run a sample vision program.
+The recommended method to run vision code is on a Raspberry Pi. However, if this is not a viable option, it is possible to run your code on a Mac or PC. To setup run environments, continue to the section corresponding to your use case.
+- [Raspberry Pi](#raspberry-pi)
+- [macOS](#macos)
+- [Windows](#windows)
+- [Linux](#linux)
 
-### Mac
+### Raspberry Pi
+Use balenaEtcher to flash a microSD card with the FRC Vision image, then connect to the Raspberry Pi.
+https://docs.wpilib.org/en/stable/docs/software/vision-processing/raspberry-pi/installing-the-image-to-your-microsd-card.html
+
+### macOS
 Use VMware Fusion to install and set up a Ubuntu virtual machine.
 - Download VMware Fusion: https://www.vmware.com/go/getfusion
 - Install VMware Fusion
@@ -131,7 +139,7 @@ This process has only been tested on Ubuntu. For any other distro, you will have
 
 ### Adding libraries to a WPILib project
 - Open an existing WPILib project or create a new one
-- Open the Command Palette (Cmd + Shift + P on Mac, Ctrl + Shift + P on Windows/Linux, or click the hexagon "W" icon in the top right)
+- Open the Command Palette (Cmd + Shift + P on macOS, Ctrl + Shift + P on Windows/Linux, or click the hexagon "W" icon in the top right)
 - Search for and run "WPILib: Manage Vendor Libraries"
 - Click "Install new libraries (Offline)"
 - Check the boxes next to the libraries you want to install (ex. "CTRE-Phoenix")
@@ -141,7 +149,7 @@ This process has only been tested on Ubuntu. For any other distro, you will have
 
 ### Creating a WPILib project with unit tests using Visual Studio Code
 - WPILib > Create a new project
-  - Cmd-Shift-P on Mac
+  - Cmd-Shift-P on macOS
   - Ctrl-Shift-P on Windows
 - Project attributes:
   - type: Template > Java > Command Robot
