@@ -25,3 +25,6 @@
 [submodule "learn/ishan/iRaidersRobot2019"]
 	path = learn/ishan/iRaidersRobot2019
 	url = git@github.com:iraiders/Robot2019.git
+[submodule "learn/ishan/ElevatorAndShooter/src/test/java/ler/mocks"]
+	path = learn/ishan/ElevatorAndShooter/src/test/java/ler/mocks
+	url = git@github.com:Aree-Vanier/FRCMocks.git
