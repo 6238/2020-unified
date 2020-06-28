@@ -5,11 +5,11 @@ import org.junit.*;
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.hal.sim.DriverStationSim;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.RunAllCommand;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.Factory;
 import frc.robot.subsystems.ShooterSubsystem;
+import ler.mocks.rev.MockCANSparkMax;
 
 import static org.mockito.Mockito.*;
 
@@ -24,8 +24,11 @@ public class MainTest {
     WPI_TalonSRX elevatorBack;
     WPI_TalonSRX feeder;
 
-    /* CANSparkMax shooterLeft;
-    CANSparkMax shooterRight; */
+    MockCANSparkMax mockShooterLeft;
+    MockCANSparkMax mockShooterRight;
+
+    CANSparkMax shooterLeft;
+    CANSparkMax shooterRight;
 
     @Before
     public void setup() {
@@ -35,8 +38,11 @@ public class MainTest {
         elevatorBack = mock(WPI_TalonSRX.class);
         feeder = mock(WPI_TalonSRX.class);
 
-        /* shooterLeft = mock(CANSparkMax.class);
-        shooterRight = mock(CANSparkMax.class); */
+        mockShooterLeft = new MockCANSparkMax();
+        mockShooterRight = new MockCANSparkMax();
+
+        shooterLeft = mockShooterLeft.getMock();
+        shooterRight = mockShooterRight.getMock();
 
         when(f.createTalon(Constants.kFrontElevatorTalon)).thenReturn(elevatorFront);
         when(f.createTalon(Constants.kRearElevatorTalon)).thenReturn(elevatorBack);

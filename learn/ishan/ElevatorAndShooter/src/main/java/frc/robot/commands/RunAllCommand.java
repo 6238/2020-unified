@@ -14,9 +14,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
-
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 import frc.robot.Constants;
 import frc.robot.ToggleButton;
