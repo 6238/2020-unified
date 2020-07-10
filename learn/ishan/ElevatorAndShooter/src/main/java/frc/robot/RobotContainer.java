@@ -9,9 +9,10 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.StartIntakeCommand;
-import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.subsystems.TalonFactory;
+import frc.robot.commands.RunAllCommand;
+import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.Factory;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -22,8 +23,11 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final IntakeSubsystem m_exampleSubsystem = new IntakeSubsystem(new TalonFactory());
-  private final StartIntakeCommand m_autoCommand = new StartIntakeCommand(m_exampleSubsystem);
+  private final Factory factory = new Factory();
+  private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem(factory);
+  private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem(factory);
+
+  private final RunAllCommand m_runAllCommand = new RunAllCommand(m_shooterSubsystem, m_elevatorSubsystem);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -31,6 +35,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    // m_elevatorSubsystem.setDefaultCommand(m_runAllCommand);
   }
 
   /**
@@ -50,6 +55,11 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return null;
+  }
+  
+  public Command getTeleopCommand() {
+    // An ExampleCommand will run in autonomous
+    return m_runAllCommand;
   }
 }
