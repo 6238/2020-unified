@@ -83,7 +83,7 @@ public class ShooterSubsystem extends SubsystemBase {
 		maxRPM = maxRPMEntry.getDouble(maxRPM);
 
 		rpm = m_encoder.getVelocity();
-		rpmEntry.setDouble(rpm);
+		rpmEntry.setNumber(rpm);
 	}
 
 	public void shooter(double speed) {
