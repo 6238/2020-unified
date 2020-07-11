@@ -25,9 +25,9 @@ public class ShooterSubsystem extends SubsystemBase {
 	CANSparkMax m_shooterRight;
 	CANPIDController m_pidController;
 	CANEncoder m_encoder;
-	double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM, rpm;
+	double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, targetRPM, rpm;
 
-	NetworkTableEntry kPEntry, kIEntry, kDEntry, kIzEntry, kFFEntry, kMaxOutputEntry, kMinOutputEntry, maxRPMEntry, rpmEntry;
+	NetworkTableEntry kPEntry, kIEntry, kDEntry, kIzEntry, kFFEntry, kMaxOutputEntry, kMinOutputEntry, targetRPMEntry, rpmEntry;
 	
 	boolean pidToggle = false;
 	ToggleButton pidToggleButton = new ToggleButton("pidToggle", pidToggle);
@@ -42,7 +42,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
 		kMaxOutput = 1;
 		kMinOutput = -1;
-		maxRPM = 5700;
+		targetRPM = 5700;
 
 		kPEntry = Constants.kTab.add("kP", kP).getEntry();
 		kIEntry = Constants.kTab.add("kI", kI).getEntry();
@@ -51,7 +51,7 @@ public class ShooterSubsystem extends SubsystemBase {
 		kFFEntry = Constants.kTab.add("kFF", kFF).getEntry();
 		kMaxOutputEntry = Constants.kTab.add("kMaxOutput", kMaxOutput).withProperties(Map.of("min", -1, "max", 1)).getEntry();
 		kMinOutputEntry = Constants.kTab.add("kMinOutput", kMinOutput).withProperties(Map.of("min", -1, "max", 1)).getEntry();
-		maxRPMEntry = Constants.kTab.add("maxRPM", maxRPM).withProperties(Map.of("min", 0, "max", 5700)).getEntry();
+		targetRPMEntry = Constants.kTab.add("targetRPM", targetRPM).withProperties(Map.of("min", 0, "max", 5700)).getEntry();
 		rpmEntry = Constants.kTab.add("rpm", rpm).withWidget(BuiltInWidgets.kGraph).getEntry();
 		periodic();
 	}
@@ -80,7 +80,7 @@ public class ShooterSubsystem extends SubsystemBase {
 		  kMinOutput = min; kMaxOutput = max; 
 		}
 
-		maxRPM = maxRPMEntry.getDouble(maxRPM);
+		targetRPM = targetRPMEntry.getDouble(targetRPM);
 
 		rpm = m_encoder.getVelocity();
 		rpmEntry.setNumber(rpm);
@@ -90,7 +90,7 @@ public class ShooterSubsystem extends SubsystemBase {
 		if (!pidToggle) {
 			m_shooterLeft.set(speed);
 		} else {
-			m_pidController.setReference(maxRPM, ControlType.kVelocity);
+			m_pidController.setReference(targetRPM, ControlType.kVelocity);
 		}
 	}
 }
