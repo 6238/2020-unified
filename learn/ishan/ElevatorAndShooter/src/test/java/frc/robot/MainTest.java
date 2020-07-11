@@ -38,11 +38,11 @@ public class MainTest {
         elevatorBack = mock(WPI_TalonSRX.class);
         feeder = mock(WPI_TalonSRX.class);
 
-        mockShooterLeft = new MockCANSparkMax();
-        mockShooterRight = new MockCANSparkMax();
+        // mockShooterLeft = new MockCANSparkMax();
+        // mockShooterRight = new MockCANSparkMax();
 
-        shooterLeft = mockShooterLeft.getMock();
-        shooterRight = mockShooterRight.getMock();
+        // shooterLeft = mockShooterLeft.getMock();
+        // shooterRight = mockShooterRight.getMock();
 
         when(f.createTalon(Constants.kFrontElevatorTalon)).thenReturn(elevatorFront);
         when(f.createTalon(Constants.kRearElevatorTalon)).thenReturn(elevatorBack);

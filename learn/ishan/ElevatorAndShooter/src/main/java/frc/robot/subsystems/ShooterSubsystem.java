@@ -60,7 +60,7 @@ public class ShooterSubsystem extends SubsystemBase {
 	public void periodic() {
 		pidToggle = pidToggleButton.get();
 
-		// read PID coefficients from SmartDashboard
+		// read PID coefficients from Shuffleboard
 		double p = kPEntry.getDouble(kP);
 		double i = kIEntry.getDouble(kI);
 		double d = kDEntry.getDouble(kD);
@@ -69,7 +69,7 @@ public class ShooterSubsystem extends SubsystemBase {
 		double max = kMaxOutputEntry.getDouble(kMaxOutput);
 		double min = kMinOutputEntry.getDouble(kMinOutput);
 	
-		// if PID coefficients on SmartDashboard have changed, write new values to controller
+		// if PID coefficients on Shuffleboard have changed, write new values to controller
 		if((p != kP)) { m_pidController.setP(p); kP = p; }
 		if((i != kI)) { m_pidController.setI(i); kI = i; }
 		if((d != kD)) { m_pidController.setD(d); kD = d; }
