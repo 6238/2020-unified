@@ -34,11 +34,11 @@ public class RunAllCommand extends CommandBase {
 	private boolean enable = false;
 
 	private NetworkTableEntry feederSpeedEntry = Constants.kTab.add("feederSpeed", feederSpeed)
-			.withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1)).getEntry();
+			.withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", -1, "max", 1)).getEntry();
 	private NetworkTableEntry shooterSpeedEntry = Constants.kTab.add("shooterSpeed", shooterSpeed)
-			.withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1)).getEntry();
+			.withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", -1, "max", 1)).getEntry();
 	private NetworkTableEntry elevatorSpeedEntry = Constants.kTab.add("elevatorSpeed", elevatorSpeed)
-			.withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1)).getEntry();
+			.withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", -1, "max", 1)).getEntry();
 
 	private ToggleButton enableButton = new ToggleButton("enable", enable);
 
