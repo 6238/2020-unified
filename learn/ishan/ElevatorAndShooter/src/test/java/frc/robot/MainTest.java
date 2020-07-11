@@ -9,7 +9,7 @@ import frc.robot.commands.RunAllCommand;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.Factory;
 import frc.robot.subsystems.ShooterSubsystem;
-import ler.mocks.rev.MockCANSparkMax;
+//import ler.mocks.rev.MockCANSparkMax;
 
 import static org.mockito.Mockito.*;
 
@@ -24,8 +24,8 @@ public class MainTest {
     WPI_TalonSRX elevatorBack;
     WPI_TalonSRX feeder;
 
-    MockCANSparkMax mockShooterLeft;
-    MockCANSparkMax mockShooterRight;
+ //   MockCANSparkMax mockShooterLeft;
+ //   MockCANSparkMax mockShooterRight;
 
     CANSparkMax shooterLeft;
     CANSparkMax shooterRight;
