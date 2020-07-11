@@ -5,11 +5,11 @@ import org.junit.*;
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.hal.sim.DriverStationSim;
 import edu.wpi.first.wpilibj.DriverStation;
-import frc.robot.commands.RunAllCommand;
-import frc.robot.subsystems.ElevatorSubsystem;
+// import frc.robot.commands.RunAllCommand;
+// import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.Factory;
-import frc.robot.subsystems.ShooterSubsystem;
-import ler.mocks.rev.MockCANSparkMax;
+// import frc.robot.subsystems.ShooterSubsystem;
+// import ler.mocks.rev.MockCANSparkMax;
 
 import static org.mockito.Mockito.*;
 
@@ -24,8 +24,8 @@ public class MainTest {
     WPI_TalonSRX elevatorBack;
     WPI_TalonSRX feeder;
 
-    MockCANSparkMax mockShooterLeft;
-    MockCANSparkMax mockShooterRight;
+    // MockCANSparkMax mockShooterLeft;
+    // MockCANSparkMax mockShooterRight;
 
     CANSparkMax shooterLeft;
     CANSparkMax shooterRight;
@@ -68,7 +68,7 @@ public class MainTest {
 
     @Test
     public void testSubsystemCreatesMotorControllers() {
-        ElevatorSubsystem e = new ElevatorSubsystem(f);
+        // ElevatorSubsystem e = new ElevatorSubsystem(f);
 
         verify(f).createTalon(Constants.kFrontElevatorTalon);
         verify(f).createTalon(Constants.kRearElevatorTalon);
