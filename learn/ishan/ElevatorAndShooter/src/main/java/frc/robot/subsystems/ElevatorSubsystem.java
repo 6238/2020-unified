@@ -14,35 +14,32 @@ import frc.robot.Constants;
 
 public class ElevatorSubsystem extends SubsystemBase {
 
-  WPI_TalonSRX m_front;
-  WPI_TalonSRX m_back;
-  WPI_TalonSRX m_feeder;
+	WPI_TalonSRX m_front;
+	WPI_TalonSRX m_back;
+	WPI_TalonSRX m_feeder;
 
-  /**
-   * Creates a new ExampleSubsystem.
-   */
-  public ElevatorSubsystem(Factory f) {
-    m_front = f.createTalon(Constants.kFrontElevatorTalon);
-    m_back = f.createTalon(Constants.kRearElevatorTalon);
-    m_feeder = f.createTalon(Constants.kFeederTalon);
+	/**
+	 * Creates a new ExampleSubsystem.
+	 */
+	public ElevatorSubsystem(Factory f) {
+		m_front = f.createTalon(Constants.kFrontElevatorTalon);
+		m_back = f.createTalon(Constants.kRearElevatorTalon);
+		m_feeder = f.createTalon(Constants.kFeederTalon);
 
-    m_front.setInverted(true);
-    m_feeder.setInverted(true);
-    System.out.println("elevator");
-  }
+		m_front.setInverted(false);
+		m_back.setInverted(true);
+		m_feeder.setInverted(false);
+	}
 
-  public void front(double speed) {
-    m_front.set(speed);
-    System.out.println("front");
-  }
-  
-  public void back(double speed) {
-    m_back.set(speed);
-    System.out.println("back");
-  }
-  
-  public void feeder(double speed) {
-    m_feeder.set(speed);
-    System.out.println("feeder");
-  }
+	public void front(double speed) {
+		m_front.set(speed);
+	}
+
+	public void back(double speed) {
+		m_back.set(speed);
+	}
+
+	public void feeder(double speed) {
+		m_feeder.set(speed);
+	}
 }

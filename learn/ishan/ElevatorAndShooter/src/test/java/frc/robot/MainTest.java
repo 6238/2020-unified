@@ -13,21 +13,21 @@ import frc.robot.subsystems.Factory;
 import static org.mockito.Mockito.*;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.revrobotics.CANSparkMax;
+// import com.revrobotics.CANSparkMax;
 
 public class MainTest {
 
     Factory f;
-    
+
     WPI_TalonSRX elevatorFront;
     WPI_TalonSRX elevatorBack;
     WPI_TalonSRX feeder;
 
- //   MockCANSparkMax mockShooterLeft;
- //   MockCANSparkMax mockShooterRight;
+    // MockCANSparkMax mockShooterLeft;
+    // MockCANSparkMax mockShooterRight;
 
- //   CANSparkMax shooterLeft;
-  //  CANSparkMax shooterRight;
+    // CANSparkMax shooterLeft;
+    // CANSparkMax shooterRight;
 
     @Before
     public void setup() {
@@ -48,8 +48,10 @@ public class MainTest {
 
         when(f.createTalon(Constants.kFeederTalon)).thenReturn(feeder);
 
-        /* when(f.createSpark(Constants.kLeftShooterSpark)).thenReturn(shooterLeft);
-        when(f.createSpark(Constants.kRightShooterSpark)).thenReturn(shooterRight); */
+        /*
+         * when(f.createSpark(Constants.kLeftShooterSpark)).thenReturn(shooterLeft);
+         * when(f.createSpark(Constants.kRightShooterSpark)).thenReturn(shooterRight);
+         */
 
         HAL.initialize(500, 0);
         DriverStationSim dsSim = new DriverStationSim();
@@ -69,29 +71,30 @@ public class MainTest {
     public void testSubsystemCreatesMotorControllers() {
         // ElevatorSubsystem e = new ElevatorSubsystem(f);
 
-        //verify(f).createTalon(Constants.kFrontElevatorTalon);
-        //verify(f).createTalon(Constants.kRearElevatorTalon);
+        // verify(f).createTalon(Constants.kFrontElevatorTalon);
+        // verify(f).createTalon(Constants.kRearElevatorTalon);
 
-        //verify(f).createTalon(Constants.kFeederTalon);
+        // verify(f).createTalon(Constants.kFeederTalon);
 
         // ShooterSubsystem s = new ShooterSubsystem(f);
 
-        /* verify(f).createSpark(Constants.kLeftShooterSpark);
-        verify(f).createSpark(Constants.kRightShooterSpark); */
+        /*
+         * verify(f).createSpark(Constants.kLeftShooterSpark);
+         * verify(f).createSpark(Constants.kRightShooterSpark);
+         */
     }
 
-    /* @Test
-    public void testRunAllCommandRunsMotors() {
-        ShooterSubsystem shooter = new ShooterSubsystem(f);
-        ElevatorSubsystem elevator = new ElevatorSubsystem(f);
-        RunAllCommand command = new RunAllCommand(shooter, elevator);
-
-        CommandScheduler.getInstance().run();
-
-        command.schedule();
-
-        verify(elevatorFront, times(1)).set(0.25);
-        verify(elevatorBack, times(1)).set(0.25);
-        verify(feeder, times(1)).set(0.25);
-    } */
+    /*
+     * @Test public void testRunAllCommandRunsMotors() { ShooterSubsystem shooter =
+     * new ShooterSubsystem(f); ElevatorSubsystem elevator = new
+     * ElevatorSubsystem(f); RunAllCommand command = new RunAllCommand(shooter,
+     * elevator);
+     * 
+     * CommandScheduler.getInstance().run();
+     * 
+     * command.schedule();
+     * 
+     * verify(elevatorFront, times(1)).set(0.25); verify(elevatorBack,
+     * times(1)).set(0.25); verify(feeder, times(1)).set(0.25); }
+     */
 }
