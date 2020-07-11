@@ -35,6 +35,7 @@ public class ShooterSubsystem extends SubsystemBase {
 	public ShooterSubsystem(Factory f) {
 		m_shooterLeft = f.createSpark(Constants.kLeftShooterSpark);
 		m_shooterRight = f.createSpark(Constants.kRightShooterSpark);
+		m_shooterLeft.setInverted(true);
 		m_shooterRight.follow(m_shooterLeft, true);
 
 		m_pidController = m_shooterLeft.getPIDController();
