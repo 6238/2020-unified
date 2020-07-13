@@ -1,5 +1,0 @@
-[Path]
-PathModified=/home/pi/vision
-
-[Install]
-WantedBy=multi-user.target

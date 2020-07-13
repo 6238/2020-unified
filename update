@@ -1,0 +1,4 @@
+git submodule foreach git pull origin master
+cat .gitmodules | sed 's/.*path = \(.*\).*$/\1/' | grep -Ev '\[submodule|url' | xargs git add
+git commit -m "updated submodules"
+git push
