@@ -17,7 +17,9 @@ import com.revrobotics.ControlType;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+
+import frc.robot.Constants.OIConstants;
+import frc.robot.Constants.Shooter;
 import frc.robot.ToggleButton;
 
 public class ShooterSubsystem extends SubsystemBase {
@@ -27,14 +29,19 @@ public class ShooterSubsystem extends SubsystemBase {
 	CANEncoder m_encoder;
 	double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, targetRPM, rpm;
 
-	NetworkTableEntry kPEntry, kIEntry, kDEntry, kIzEntry, kFFEntry, kMaxOutputEntry, kMinOutputEntry, targetRPMEntry, rpmEntry;
-	
+	NetworkTableEntry kPEntry, kIEntry, kDEntry, kIzEntry, kFFEntry, kMaxOutputEntry, kMinOutputEntry, targetRPMEntry,
+			rpmEntry;
+
+	private double speed = Shooter.kStartingSpeed;
+	private final NetworkTableEntry kSpeedEntry = OIConstants.kTab.add("shooterSpeed", speed)
+			.withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", -1, "max", 1)).getEntry();
+
 	boolean pidToggle = false;
 	ToggleButton pidToggleButton = new ToggleButton("pidToggle", pidToggle);
 
 	public ShooterSubsystem(Factory f) {
-		m_shooterLeft = f.createSpark(Constants.kLeftShooterSpark);
-		m_shooterRight = f.createSpark(Constants.kRightShooterSpark);
+		m_shooterLeft = f.createSpark(Shooter.kLeftShooterSpark);
+		m_shooterRight = f.createSpark(Shooter.kRightShooterSpark);
 		m_shooterLeft.setInverted(true);
 		m_shooterRight.follow(m_shooterLeft, true);
 
@@ -45,20 +52,25 @@ public class ShooterSubsystem extends SubsystemBase {
 		kMinOutput = -1;
 		targetRPM = 5700;
 
-		kPEntry = Constants.kTab.add("kP", kP).getEntry();
-		kIEntry = Constants.kTab.add("kI", kI).getEntry();
-		kDEntry = Constants.kTab.add("kD", kD).getEntry();
-		kIzEntry = Constants.kTab.add("kIz", kIz).getEntry();
-		kFFEntry = Constants.kTab.add("kFF", kFF).getEntry();
-		kMaxOutputEntry = Constants.kTab.add("kMaxOutput", kMaxOutput).withProperties(Map.of("min", -1, "max", 1)).getEntry();
-		kMinOutputEntry = Constants.kTab.add("kMinOutput", kMinOutput).withProperties(Map.of("min", -1, "max", 1)).getEntry();
-		targetRPMEntry = Constants.kTab.add("targetRPM", targetRPM).withProperties(Map.of("min", 0, "max", 5700)).getEntry();
-		rpmEntry = Constants.kTab.add("rpm", rpm).withWidget(BuiltInWidgets.kGraph).getEntry();
+		kPEntry = OIConstants.kTab.add("kP", kP).getEntry();
+		kIEntry = OIConstants.kTab.add("kI", kI).getEntry();
+		kDEntry = OIConstants.kTab.add("kD", kD).getEntry();
+		kIzEntry = OIConstants.kTab.add("kIz", kIz).getEntry();
+		kFFEntry = OIConstants.kTab.add("kFF", kFF).getEntry();
+		kMaxOutputEntry = OIConstants.kTab.add("kMaxOutput", kMaxOutput).withProperties(Map.of("min", -1, "max", 1))
+				.getEntry();
+		kMinOutputEntry = OIConstants.kTab.add("kMinOutput", kMinOutput).withProperties(Map.of("min", -1, "max", 1))
+				.getEntry();
+		targetRPMEntry = OIConstants.kTab.add("targetRPM", targetRPM).withProperties(Map.of("min", 0, "max", 5700))
+				.getEntry();
+		rpmEntry = OIConstants.kTab.add("rpm", rpm).withWidget(BuiltInWidgets.kGraph).getEntry();
 		periodic();
 	}
 
 	@Override
 	public void periodic() {
+		speed = kSpeedEntry.getDouble(speed);
+
 		pidToggle = pidToggleButton.get();
 
 		// read PID coefficients from Shuffleboard
@@ -69,16 +81,33 @@ public class ShooterSubsystem extends SubsystemBase {
 		double ff = kFFEntry.getDouble(kFF);
 		double max = kMaxOutputEntry.getDouble(kMaxOutput);
 		double min = kMinOutputEntry.getDouble(kMinOutput);
-	
-		// if PID coefficients on Shuffleboard have changed, write new values to controller
-		if((p != kP)) { m_pidController.setP(p); kP = p; }
-		if((i != kI)) { m_pidController.setI(i); kI = i; }
-		if((d != kD)) { m_pidController.setD(d); kD = d; }
-		if((iz != kIz)) { m_pidController.setIZone(iz); kIz = iz; }
-		if((ff != kFF)) { m_pidController.setFF(ff); kFF = ff; }
-		if((max != kMaxOutput) || (min != kMinOutput)) { 
-		  m_pidController.setOutputRange(min, max); 
-		  kMinOutput = min; kMaxOutput = max; 
+
+		// if PID coefficients on Shuffleboard have changed, write new values to
+		// controller
+		if ((p != kP)) {
+			m_pidController.setP(p);
+			kP = p;
+		}
+		if ((i != kI)) {
+			m_pidController.setI(i);
+			kI = i;
+		}
+		if ((d != kD)) {
+			m_pidController.setD(d);
+			kD = d;
+		}
+		if ((iz != kIz)) {
+			m_pidController.setIZone(iz);
+			kIz = iz;
+		}
+		if ((ff != kFF)) {
+			m_pidController.setFF(ff);
+			kFF = ff;
+		}
+		if ((max != kMaxOutput) || (min != kMinOutput)) {
+			m_pidController.setOutputRange(min, max);
+			kMinOutput = min;
+			kMaxOutput = max;
 		}
 
 		targetRPM = targetRPMEntry.getDouble(targetRPM);
@@ -87,11 +116,19 @@ public class ShooterSubsystem extends SubsystemBase {
 		rpmEntry.setNumber(rpm);
 	}
 
-	public void shooter(double speed) {
+	public void run() {
 		if (!pidToggle) {
 			m_shooterLeft.set(speed);
 		} else {
 			m_pidController.setReference(targetRPM, ControlType.kVelocity);
+		}
+	}
+	
+	public void stop() {
+		if (!pidToggle) {
+			m_shooterLeft.set(0);
+		} else {
+			m_pidController.setReference(0, ControlType.kVelocity);
 		}
 	}
 }
