@@ -1,21 +1,24 @@
 package frc.robot.subsystems;
 
-import java.util.Map;
-
 import com.analog.adis16470.frc.ADIS16470_IMU;
 import com.analog.adis16470.frc.ADIS16470_IMU.IMUAxis;
+
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
+
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
 import frc.robot.Constants;
-import frc.robot.ToggleButton;
 import frc.robot.Constants.Drive;
 import frc.robot.Constants.OIConstants;
+
+import frc.robot.Slider;
+import frc.robot.ToggleButton;
 
 public class DriveSubsystem extends SubsystemBase {
 	private final WPI_TalonSRX m_leftTalon1;
@@ -39,10 +42,8 @@ public class DriveSubsystem extends SubsystemBase {
 	private boolean curvatureDrive = false;
 	private boolean curvatureDriveQuickTurn = false;
 
-	private NetworkTableEntry insanityFactorEntry = OIConstants.kTab.add("insanityFactor", insanityFactor)
-			.withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1)).getEntry();
-	private NetworkTableEntry sensitivityEntry = OIConstants.kTab.add("sensitivity", sensitivity)
-			.withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1)).getEntry();
+	private Slider insanityFactorSlider = new Slider("insanityFactor", insanityFactor);
+	private Slider sensitivitySlider = new Slider("sensitivity", sensitivity);
 
 	private NetworkTableEntry leftEncoderEntry = OIConstants.kTab.add("leftEncoder", 0).getEntry();
 	private NetworkTableEntry rightEncoderEntry = OIConstants.kTab.add("rightEncoder", 0).getEntry();
@@ -75,8 +76,8 @@ public class DriveSubsystem extends SubsystemBase {
 
 	@Override
 	public void periodic() {
-		insanityFactor = insanityFactorEntry.getDouble(insanityFactor);
-		sensitivity = sensitivityEntry.getDouble(sensitivity);
+		insanityFactor = insanityFactorSlider.get();
+		sensitivity = sensitivitySlider.get();
 
 		curvatureDrive = curvatureDriveButton.get();
 		curvatureDriveQuickTurnButton.set(curvatureDriveQuickTurn);
