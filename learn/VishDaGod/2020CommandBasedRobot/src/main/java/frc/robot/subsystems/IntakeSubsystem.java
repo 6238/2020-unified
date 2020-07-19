@@ -7,49 +7,47 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 //This class is for the Ball Intake Subsystem
 public class IntakeSubsystem extends SubsystemBase {
- 
-  private WPI_TalonSRX feeder;
-  private WPI_TalonSRX backMagazine;
-  private WPI_TalonSRX frontMagazine;
 
-  public IntakeSubsystem(WPI_TalontalonFactory talonFactory) {
-    //Top feeder wheel
-    feeder = talonFactory.create(0); //Change based on ID needed
+	private final WPI_TalonSRX feeder;
+	private final WPI_TalonSRX backMagazine;
+	private final WPI_TalonSRX frontMagazine;
 
-    //Back wheel for ball intake
-    backMagazine = talonFactory.create(2); //Change based on ID needed
+	public IntakeSubsystem(final Factory factory) {
+		// Top feeder wheel
+		feeder = factory.createTalon(0); // Change based on ID needed
 
-    //Front wheel for ball intake
-    frontMagazine = talonFactory.create(1); //Change based on ID Needed
+		// Back wheel for ball intake
+		backMagazine = factory.createTalon(2); // Change based on ID needed
 
-    //Back is a follower of front
-    backMagazine.follow(frontMagazine);
-    backMagazine.setInverted(InvertType.FollowMaster); //Back is inverted of front
-    
-  }
+		// Front wheel for ball intake
+		frontMagazine = factory.createTalon(1); // Change based on ID Needed
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+		// Back is a follower of front
+		backMagazine.follow(frontMagazine);
+		backMagazine.setInverted(true); // Back is inverted of front
 
-  //Run to start all motors
-  public void start(){
-    frontMagazine.set(0.5); //Back should move with the front
-    feeder.set(0.5);
-  }
+	}
 
-  //Run to stop all motors
-  public void stop(){
-    frontMagazine.set(0.0); // Back should move with the front
-    feeder.set(0.0);
-  }
+	@Override
+	public void periodic() {
+		// This method will be called once per scheduler run
+	}
+
+	// Run to start all motors
+	public void start() {
+		frontMagazine.set(0.5); // Back should move with the front
+		feeder.set(0.5);
+	}
+
+	// Run to stop all motors
+	public void stop() {
+		frontMagazine.set(0.0); // Back should move with the front
+		feeder.set(0.0);
+	}
 }

@@ -1,24 +1,36 @@
-public class Slider{
+package frc.robot.shuffleboard;
 
-    private NetworkTableEntry slider;
+import java.util.Map;
 
-    public Slider(String name, double defaultValue){
-        slider = OIConstants.kTab.add(name, defaultValue)
-            .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1)).getEntry();
-    }
+import frc.robot.Constants.OIConstants;
 
-    public Slider(String name, double defaultValue, double min, double max){
-        slider = OIConstants.kTab.add(name, defaultValue)
-            .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", min, "max", max)).getEntry();
-    }
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 
-    public double get() {
-        return slider.getDouble();
-    }
+public class Slider {
 
-    public void set(double speed){ //I dont remember the function and intelli whatever isnt helping
-        
-    }
+	private NetworkTableEntry slider;
+	private double value;
 
+	public Slider(String name, double defaultValue) {
+		slider = OIConstants.kTab.add(name, defaultValue).withWidget(BuiltInWidgets.kNumberSlider)
+				.withProperties(Map.of("min", 0, "max", 1)).getEntry();
+		value = defaultValue;
+	}
 
+	public Slider(String name, double defaultValue, double min, double max) {
+		slider = OIConstants.kTab.add(name, defaultValue).withWidget(BuiltInWidgets.kNumberSlider)
+				.withProperties(Map.of("min", min, "max", max)).getEntry();
+		value = defaultValue;
+	}
+
+	public double get() {
+		value = slider.getDouble(value);
+		return value;
+	}
+
+	public void set(double input) {
+		value = input;
+		slider.setDouble(value);
+	}
 }
