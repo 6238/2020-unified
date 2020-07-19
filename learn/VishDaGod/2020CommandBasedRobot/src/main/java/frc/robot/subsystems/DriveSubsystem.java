@@ -64,8 +64,8 @@ public class DriveSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    insanityFactor = Dashboard.intsanityFactorEntry.getDouble();
-    sensitivityFactor = Dashboard.sensitivityFactorEntry.getDouble();
+    insanityFactor = Dashboard.intsanityFactorEntry.get();
+    sensitivityFactor = Dashboard.sensitivityFactorEntry.get();
   }
 
   public void arcadeDrive() {
