@@ -14,4 +14,6 @@ public class WPI_TalonFactory {
         talons.add(new WPI_TalonSRX(canBusID));
         return talons.get(talons.size() - 1);
     }
+
 }
+
