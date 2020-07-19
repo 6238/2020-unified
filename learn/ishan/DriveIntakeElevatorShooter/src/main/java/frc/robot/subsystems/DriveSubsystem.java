@@ -34,12 +34,16 @@ public class DriveSubsystem extends SubsystemBase {
 	private final ADIS16470_IMU kIMU = Drive.kIMU;
 
 	private double insanityFactor = 0.5;
+	private double sensitivity = 0.75;
 	
 	private boolean curvatureDrive = false;
 	private boolean curvatureDriveQuickTurn = false;
 
 	private NetworkTableEntry insanityFactorEntry = OIConstants.kTab.add("insanityFactor", insanityFactor)
 			.withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1)).getEntry();
+	private NetworkTableEntry sensitivityEntry = OIConstants.kTab.add("sensitivity", sensitivity)
+			.withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1)).getEntry();
+
 	private NetworkTableEntry leftEncoderEntry = OIConstants.kTab.add("leftEncoder", 0).getEntry();
 	private NetworkTableEntry rightEncoderEntry = OIConstants.kTab.add("rightEncoder", 0).getEntry();
 	
@@ -72,6 +76,8 @@ public class DriveSubsystem extends SubsystemBase {
 	@Override
 	public void periodic() {
 		insanityFactor = insanityFactorEntry.getDouble(insanityFactor);
+		sensitivity = sensitivityEntry.getDouble(sensitivity);
+
 		curvatureDrive = curvatureDriveButton.get();
 		curvatureDriveQuickTurnButton.set(curvatureDriveQuickTurn);
 
@@ -81,9 +87,9 @@ public class DriveSubsystem extends SubsystemBase {
 
 	public void drive(double ySpeed, double zSpeed) {
 		if (curvatureDrive) {
-			m_drive.curvatureDrive(ySpeed * insanityFactor, zSpeed * insanityFactor, curvatureDriveQuickTurn);
+			m_drive.curvatureDrive(ySpeed * insanityFactor, zSpeed * sensitivity, curvatureDriveQuickTurn);
 		} else {
-			m_drive.arcadeDrive(ySpeed * insanityFactor, zSpeed * insanityFactor, false);
+			m_drive.arcadeDrive(ySpeed * insanityFactor, zSpeed * sensitivity, false);
 		}
 	}
 
