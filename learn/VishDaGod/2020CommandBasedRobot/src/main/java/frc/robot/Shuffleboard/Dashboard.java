@@ -1,4 +1,4 @@
-package frc.robot.Shuffleboard;
+package frc.robot.shuffleboard;
 
 import frc.robot.Constants.DriveConstants;
 
@@ -11,11 +11,12 @@ import frc.robot.Constants.DriveConstants;
  * @since 1.00
  */
 public class Dashboard {
-    
+
     /**
      * Drive Subsystem NetworkEntries
      */
     public static Slider insanityFactorEntry = new Slider("Insanity Factor", DriveConstants.kDefaultValueInsanityFactor);
     public static Slider sensitivityFactorEntry = new Slider("Sensitivty Factor", DriveConstants.kDefaultValueSensitivityFactor);
     public static ToggleButton reverseButton = new ToggleButton("Reverse Toggle", DriveConstants.kDefaultReverse);
+
 }

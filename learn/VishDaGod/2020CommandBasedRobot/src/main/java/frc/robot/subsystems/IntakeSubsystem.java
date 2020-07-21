@@ -43,7 +43,6 @@ public class IntakeSubsystem extends SubsystemBase {
 		// Back is a follower of front
 		backMagazine.follow(frontMagazine);
 		backMagazine.setInverted(true); // Back is inverted of front
-
 	}
 
 	@Override

@@ -1,5 +1,4 @@
-package frc.robot.Shuffleboard;
-
+package frc.robot.shuffleboard;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
