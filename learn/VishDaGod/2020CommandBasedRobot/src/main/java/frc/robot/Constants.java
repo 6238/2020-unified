@@ -33,6 +33,12 @@ public final class Constants {
         public static final ShuffleboardTab kTab = Shuffleboard.getTab("SmartDashboard");
     }
 
+    //Joysticks for driving
+    public static final class JoystickObjects {
+        public static final Joystick leftJoystick = factory.createJoystick(0); //Change based on ID needed
+        public static final Joystick rightJoystick = factory.createJoystick(0); //Change based on ID needed
+    }
+
     //Driving Contstants
     public static final class DriveConstants {
         public static final double kDefaultValueInsanityFactor = 1;
@@ -50,9 +56,10 @@ public final class Constants {
         public static final boolean kDefaultReverse = false;
     }
 
-    //Joysticks for driving
-    public static final class JoystickObjects {
-        public static final Joystick leftJoystick = factory.createJoystick(0);
-        public static final Joystick rightJoystick = factory.createJoystick(0);
+    //Intake Constants
+    public static final class IntakeConstants {
+        public static final int feeder = 6; // Change based on ID Needed
+        public static final int backMagazine = 7; // Change based on ID Needed
+        public static final int frontMagazine = 8; // Change based on ID Needed
     }
 }
