@@ -45,7 +45,9 @@ public final class Constants {
         public static final int rightTalon2 = 4; //Change based on ID needed
         public static final int rightTalon3 = 5; //Change based on ID needed
 
-        public static final int driveModeDefault = 1;
+        public static final int kDriveModeDefault = 1;
+
+        public static final boolean kDefaultReverse = false;
     }
 
     //Joysticks for driving

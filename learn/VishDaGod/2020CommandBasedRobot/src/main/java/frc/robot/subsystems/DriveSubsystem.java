@@ -18,14 +18,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants.OIConstants;
 import frc.robot.Shuffleboard.Dashboard;
 
 //This class is for the West Coast Drive Train based on Arcade Drive
 public class DriveSubsystem extends SubsystemBase {
   
-  //Speed distortion
+  //Speed and turn distortion
   private double insanityFactor;
   private double sensitivityFactor;
+
+  private boolean isReverse;
   //Shuffleboard entry for changing the insanity factor
 
   //All of the motor controllers for the 6 motors on the Gearbox
@@ -45,14 +48,15 @@ public class DriveSubsystem extends SubsystemBase {
 
   //Driver can choose which robot drive to choose
   private final SendableChooser<String> driveModeChooser = new SendableChooser<>();
-  private ArrayList<String> kDriveModeOptions = new ArrayList<String>();
-  public int driveMode = DriveConstants.driveModeDefault;
-  private String m_driveModeSelected;
+  private ArrayList<String> driveModeOptions = new ArrayList<String>();
+  public int driveMode = DriveConstants.kDriveModeDefault;
+  private String driveModeSelected;
 
   public DriveSubsystem(Factory talonFactory, Factory factory) { //Should implement joystick factory
     //Keeping it chill
     insanityFactor = DriveConstants.kDefaultValueInsanityFactor;
     sensitivityFactor = DriveConstants.kDefaultValueSensitivityFactor; 
+    isReverse = DriveConstants.kDefaultReverse;
 
     leftTalon1 = talonFactory.createTalon(DriveConstants.leftTalon1); 
     leftTalon2 = talonFactory.createTalon(DriveConstants.leftTalon2); 
@@ -69,27 +73,63 @@ public class DriveSubsystem extends SubsystemBase {
     robotDrive = new DifferentialDrive(leftMotors, rightMotors);
 
     //Add the options for the chooser
-    kDriveModeOptions.add("Tank");
-    kDriveModeOptions.add("Arcade");
-    kDriveModeOptions.add("Curvature");
+    driveModeOptions.add("Tank");
+    driveModeOptions.add("Arcade");
+    driveModeOptions.add("Curvature");
 
-    driveModeChooser.setDefaultOption(kDriveModeOptions.get(driveMode), kDriveModeOptions.get(driveMode));
+    driveModeChooser.setDefaultOption(driveModeOptions.get(driveMode), driveModeOptions.get(driveMode));
 
-    for (int i = 0; i < kDriveModeOptions.size(); i++) {
+    //Set the options
+    for (int i = 0; i < driveModeOptions.size(); i++) {
       if (i != driveMode) {
-        driveModeChooser.addOption(kDriveModeOptions.get(i), kDriveModeOptions.get(driveMode));
+        driveModeChooser.addOption(driveModeOptions.get(i), driveModeOptions.get(driveMode));
       }
     }
+
+    //Add the sendable chooser to the dashboard
+    OIConstants.kTab.add(driveModeChooser);
   }
 
   @Override
   public void periodic() {
+    //Get the factors
     insanityFactor = Dashboard.insanityFactorEntry.get();
     sensitivityFactor = Dashboard.sensitivityFactorEntry.get();
+    isReverse = Dashboard.reverseButton.get();
+
+    //Choose the drive mode
+    driveModeSelected = driveModeChooser.getSelected();
+    driveMode = driveModeOptions.indexOf(driveModeSelected);
+    if (driveMode < 0 || driveMode >= driveModeOptions.size())
+      driveMode = DriveConstants.kDriveModeDefault;
   }
 
   //Choose which drive type to use
-  public void drive() {
+  public void drive(double tank_leftY, double tank_rightY, double ySpeed, double zSpeed) {
+    //When it is in reverse
+    if (isReverse) {
+      switch (driveMode){
+        case 0:
+          this.tankDrive(-tank_leftY, -tank_rightY);
+        case 1:
+          this.arcadeDrive(-ySpeed, zSpeed);
+        case 2:
+          this.curvatureDrive(-ySpeed, zSpeed, true);
+      }
+    }
+    //This is the NORMAL one
+    else {
+      switch (driveMode){
+        case 0:
+          this.tankDrive(tank_leftY, tank_rightY);
+        case 1:
+          this.arcadeDrive(ySpeed, zSpeed);
+        case 2:
+          this.curvatureDrive(ySpeed, zSpeed, true);
+      }
+    }
+
+    
 
   }
 
@@ -99,8 +139,8 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   //Tank Drive is speed with both joysticks
-  public void tankDrive(double leftSpeed, double rightSpeed) {
-    robotDrive.tankDrive(leftSpeed * insanityFactor, rightSpeed * insanityFactor);
+  public void tankDrive(double leftY, double rightY) {
+    robotDrive.tankDrive(leftY * insanityFactor, rightY * insanityFactor);
   }
 
   //Curvature Drive is controlling speed with one and controlling turning speed with another 
