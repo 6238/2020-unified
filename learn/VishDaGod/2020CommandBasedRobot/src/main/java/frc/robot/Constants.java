@@ -22,37 +22,36 @@ import frc.robot.subsystems.Factory;
  * It is advised to statically import this class (or one of its inner classes)
  * wherever the constants are needed, to reduce verbosity.
  */
-
 public final class Constants {
 
-    //Factory Object
-    private static Factory factory = new Factory();
+	// Factory Object
+	private static Factory factory = new Factory();
 
-    //Shuffleboard Constants
-    public static final class OIConstants {
-        public static final ShuffleboardTab kTab = Shuffleboard.getTab("SmartDashboard");
-    }
+	// Shuffleboard Constants
+	public static final class OIConstants {
+		public static final ShuffleboardTab kTab = Shuffleboard.getTab("SmartDashboard");
+	}
 
-    //Driving Contstants
-    public static final class DriveConstants {
-        public static final double kDefaultValueInsanityFactor = 1;
-        public static final double kDefaultValueSensitivityFactor = 1;
+	// Driving Contstants
+	public static final class DriveConstants {
+		public static final double kDefaultValueInsanityFactor = 1;
+		public static final double kDefaultValueSensitivityFactor = 1;
 
-        public static final int leftTalon1 = 0; //Change based on ID needed
-        public static final int leftTalon2 = 1; //Change based on ID needed
-        public static final int leftTalon3 = 2; //Change based on ID needed
-        public static final int rightTalon1 = 3; //Change based on ID needed
-        public static final int rightTalon2 = 4; //Change based on ID needed
-        public static final int rightTalon3 = 5; //Change based on ID needed
+		public static final int leftTalon1 = 0; // Change based on ID needed
+		public static final int leftTalon2 = 1; // Change based on ID needed
+		public static final int leftTalon3 = 2; // Change based on ID needed
+		public static final int rightTalon1 = 3; // Change based on ID needed
+		public static final int rightTalon2 = 4; // Change based on ID needed
+		public static final int rightTalon3 = 5; // Change based on ID needed
 
-        public static final int kDriveModeDefault = 1;
+		public static final int kDriveModeDefault = 1;
 
-        public static final boolean kDefaultReverse = false;
-    }
+		public static final boolean kDefaultReverse = false;
+	}
 
-    //Joysticks for driving
-    public static final class JoystickObjects {
-        public static final Joystick leftJoystick = factory.createJoystick(0);
-        public static final Joystick rightJoystick = factory.createJoystick(0);
-    }
+	// Joysticks for driving
+	public static final class JoystickObjects {
+		public static final Joystick leftJoystick = factory.createJoystick(0);
+		public static final Joystick rightJoystick = factory.createJoystick(1);
+	}
 }

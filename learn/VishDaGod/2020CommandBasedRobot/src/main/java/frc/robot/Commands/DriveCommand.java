@@ -5,50 +5,50 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.Commands;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.JoystickObjects;
 import frc.robot.subsystems.DriveSubsystem;
 
+/**
+ * Creates a new DriveCommand.
+ */
 public class DriveCommand extends CommandBase {
-  /**
-   * Creates a new DriveCommand.
-   */
 
-  // Joysticks for driving
-  private Joystick leftJoystick = JoystickObjects.leftJoystick;
-  private Joystick rightJoystick = JoystickObjects.rightJoystick;
+	// Joysticks for driving
+	private Joystick leftJoystick = JoystickObjects.leftJoystick;
+	private Joystick rightJoystick = JoystickObjects.rightJoystick;
 
-  //Doubles for the driving numbers
-  private double tank_leftY;
-  private double tank_rightY;
-  private double ySpeed;
-  private double zSpeed;
+	// Doubles for the driving numbers
+	private double tank_left;
+	private double tank_right;
+	private double ySpeed;
+	private double zSpeed;
 
-  //The subsystem for the file
-  private final DriveSubsystem driveSubsystem;
+	// The subsystem for the file
+	private final DriveSubsystem driveSubsystem;
 
-  public DriveCommand(DriveSubsystem driveSubsystem) {
-    this.driveSubsystem = driveSubsystem;
-    // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(driveSubsystem);
-  }
+	public DriveCommand(DriveSubsystem driveSubsystem) {
+		this.driveSubsystem = driveSubsystem;
+		addRequirements(driveSubsystem);
+	}
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    tank_leftY = leftJoystick.getY();
-    tank_rightY = rightJoystick.getY();
-    ySpeed = leftJoystick.getY();
-    zSpeed = rightJoystick.getZ();
-    driveSubsystem.drive(tank_leftY, tank_rightY, ySpeed, zSpeed);
-  }
+	// Called every time the scheduler runs while the command is scheduled.
+	@Override
+	public void execute() {
+		tank_left = leftJoystick.getY();
+		tank_right = rightJoystick.getY();
+		ySpeed = leftJoystick.getY();
+		zSpeed = rightJoystick.getZ();
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+		driveSubsystem.drive(tank_left, tank_right, ySpeed, zSpeed);
+	}
+
+	// Returns true when the command should end.
+	@Override
+	public boolean isFinished() {
+		return false;
+	}
 }

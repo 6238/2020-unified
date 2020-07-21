@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.Joystick;
 
 import java.util.*;
 
-//This Class is a Talon Factory in case of mocking
+//This Class is a Factory in case of mocking
 //Not sure if I will do this today or something
 public class Factory {
 
