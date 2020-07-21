@@ -12,10 +12,16 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.JoystickObjects;
 import frc.robot.subsystems.DriveSubsystem;
 
+
+/**
+ * This class is the Driving Command called by the Scheduler
+ * @author Vishnu Velayuthan
+ * @author vishnuvelayuthan@gmail.com
+ * @version 1.0
+ * @since 1.00
+ */
 public class DriveCommand extends CommandBase {
-  /**
-   * Creates a new DriveCommand.
-   */
+
 
   // Joysticks for driving
   private Joystick leftJoystick = JoystickObjects.leftJoystick;
@@ -30,14 +36,22 @@ public class DriveCommand extends CommandBase {
   //The subsystem for the file
   private final DriveSubsystem driveSubsystem;
 
+  /**
+   * Adds all the Subsystems and requirements to the Command
+   * @param driveSubsystem The Drive Subsystem is the subsystem we are using for this command
+   */
   public DriveCommand(DriveSubsystem driveSubsystem) {
     this.driveSubsystem = driveSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveSubsystem);
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
+
   @Override
+  /**
+   * Called every time the scheduler runs while the command is scheduled
+   * Runs the drive method from the subsystem
+   */
   public void execute() {
     tank_leftY = leftJoystick.getY();
     tank_rightY = rightJoystick.getY();

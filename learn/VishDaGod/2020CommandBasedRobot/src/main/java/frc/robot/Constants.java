@@ -12,8 +12,9 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.subsystems.Factory;
 
+
 /**
- * The Constants class provides a convenient place for teams to hold robot-wide
+  * The Constants class provides a convenient place for teams to hold robot-wide
  * numerical or boolean constants. This class should not be used for any other
  * purpose. All constants should be declared globally (i.e. public static). Do
  * not put anything functional in this class.
@@ -21,25 +22,36 @@ import frc.robot.subsystems.Factory;
  * <p>
  * It is advised to statically import this class (or one of its inner classes)
  * wherever the constants are needed, to reduce verbosity.
+ * @author Vishnu Velayuthan
+ * @author vishnuvelayuthan@gmail.com
+ * @version 1.0
+ * @since 1.00
  */
-
 public final class Constants {
 
     //Factory Object
     private static Factory factory = new Factory();
 
-    //Shuffleboard Constants
+    /**
+     * These are the Shuffleboard Constants
+     */
     public static final class OIConstants {
         public static final ShuffleboardTab kTab = Shuffleboard.getTab("SmartDashboard");
     }
 
-    //Joysticks for driving
+
+    /**
+     * These are the Joystick Objects for Driving
+     */
     public static final class JoystickObjects {
         public static final Joystick leftJoystick = factory.createJoystick(0); //Change based on ID needed
         public static final Joystick rightJoystick = factory.createJoystick(0); //Change based on ID needed
     }
 
     //Driving Contstants
+    /**
+     * These are the Drive Constants for ID numbers and Default values
+     */
     public static final class DriveConstants {
         public static final double kDefaultValueInsanityFactor = 1;
         public static final double kDefaultValueSensitivityFactor = 1;
@@ -56,7 +68,10 @@ public final class Constants {
         public static final boolean kDefaultReverse = false;
     }
 
-    //Intake Constants
+    
+    /**
+     * These are ID numbers for the Intake Subsystem
+     */
     public static final class IntakeConstants {
         public static final int feeder = 6; // Change based on ID Needed
         public static final int backMagazine = 7; // Change based on ID Needed

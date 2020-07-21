@@ -20,7 +20,14 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.Shuffleboard.Dashboard;
 
-//This class is for the West Coast Drive Train based on Arcade Drive
+
+/**
+ * This class is for the West Coast Drive Train and has functionality for all 3 drives
+ * @author Vishnu Velayuthan
+ * @author vishnuvelayuthan@gmail.com
+ * @version 1.0
+ * @since 1.00
+ */
 public class DriveSubsystem extends SubsystemBase {
   
   //Speed and turn distortion
@@ -51,18 +58,23 @@ public class DriveSubsystem extends SubsystemBase {
   public int driveMode = DriveConstants.kDriveModeDefault;
   private String driveModeSelected;
 
-  public DriveSubsystem(Factory talonFactory, Factory factory) { //Should implement joystick factory
+
+  /**
+   * This is the constructor for the DriveSubsystem, initialising the objects of this file
+   * @param factory The factory object that creates all the Objects available for mocking
+   */
+  public DriveSubsystem(Factory factory) { //Should implement joystick factory
     //Keeping it chill
     insanityFactor = DriveConstants.kDefaultValueInsanityFactor;
     sensitivityFactor = DriveConstants.kDefaultValueSensitivityFactor; 
     isReverse = DriveConstants.kDefaultReverse;
 
-    leftTalon1 = talonFactory.createTalon(DriveConstants.leftTalon1); 
-    leftTalon2 = talonFactory.createTalon(DriveConstants.leftTalon2); 
-    leftTalon3 = talonFactory.createTalon(DriveConstants.leftTalon3); 
-    rightTalon1 = talonFactory.createTalon(DriveConstants.rightTalon1); 
-    rightTalon2 = talonFactory.createTalon(DriveConstants.rightTalon1); 
-    rightTalon3 = talonFactory.createTalon(DriveConstants.rightTalon1); //Change based on ID needed
+    leftTalon1 = factory.createTalon(DriveConstants.leftTalon1); 
+    leftTalon2 = factory.createTalon(DriveConstants.leftTalon2); 
+    leftTalon3 = factory.createTalon(DriveConstants.leftTalon3); 
+    rightTalon1 = factory.createTalon(DriveConstants.rightTalon1); 
+    rightTalon2 = factory.createTalon(DriveConstants.rightTalon1); 
+    rightTalon3 = factory.createTalon(DriveConstants.rightTalon1); //Change based on ID needed
 
     //Left of the robot
     leftMotors = new SpeedControllerGroup(leftTalon1,leftTalon2, leftTalon3); 
@@ -89,7 +101,12 @@ public class DriveSubsystem extends SubsystemBase {
     OIConstants.kTab.add(driveModeChooser);
   }
 
+
   @Override
+  /**
+   * This function is for the updating of the variables that are
+   * dependent on the NetworkTableEntries 
+   */
   public void periodic() {
     //Get the factors
     insanityFactor = Dashboard.insanityFactorEntry.get();
@@ -103,7 +120,14 @@ public class DriveSubsystem extends SubsystemBase {
       driveMode = DriveConstants.kDriveModeDefault;
   }
 
-  //Choose which drive type to use
+  
+  /**
+   * This function chooses which drive type to use
+   * @param tank_leftY The left Joystick Y axis, used for left speed for the tank drive
+   * @param tank_rightY The right Joystick Y axis used for right speed for the tank drive
+   * @param ySpeed The left Joystick Y axis, used for the speed for the Arcade/Curvature drive
+   * @param zSpeed The right Joystick Z Axis, used for the direction for the Arcade/Curvature drive
+   */
   public void drive(double tank_leftY, double tank_rightY, double ySpeed, double zSpeed) {
     //When it is in reverse
     if (isReverse) {
@@ -127,27 +151,37 @@ public class DriveSubsystem extends SubsystemBase {
           this.curvatureDrive(ySpeed, zSpeed, true);
       }
     }
-
-    
-
   }
 
-  //Arcade drive is speed with one joystick, and direction with one joystick
+
+  /**
+   * Tank Drive is speed with both joysticks
+   * @param ySpeed The left Joystick Y axis, used for left speed for the tank drive
+   * @param zSpeed The right Joystick Y axis, used for right speed for the tank drive
+   */
+  public void tankDrive(double ySpeed, double zSpeed) {
+    robotDrive.tankDrive(ySpeed * insanityFactor, zSpeed * insanityFactor);
+  }
+
+
+  /**
+   * Arcade drive is speed with one joystick, and direction with one joystick
+   * @param leftJoystickY The left Joystick Y axis, used to control the speed of the bot
+   * @param rightJoystickZ The right Joystick Z axis, used to control the direction of the bot
+   */
   public void arcadeDrive(double leftJoystickY, double rightJoystickZ) {
     robotDrive.arcadeDrive(leftJoystickY * insanityFactor, rightJoystickZ * sensitivityFactor);
   }
 
-  //Tank Drive is speed with both joysticks
-  public void tankDrive(double leftY, double rightY) {
-    robotDrive.tankDrive(leftY * insanityFactor, rightY * insanityFactor);
-  }
 
-  //Curvature Drive is controlling speed with one and controlling turning speed with another 
+  /**
+   * Curvature Drive is controlling speed with one and controlling turning speed with another 
+   * @param ySpeed The left Joystick Y axis, used for left speed for the tank drive
+   * @param zSpeed The right Joystick Y axis, used for right speed for the tank drive
+   * @param isQuickTurn The boolean value to turn on QuickTurn mode
+   */
   public void curvatureDrive(double ySpeed, double zSpeed, boolean isQuickTurn) {
     robotDrive.curvatureDrive(ySpeed * insanityFactor, zSpeed * insanityFactor, isQuickTurn);
   }
 
-  //When game ends
-  public void stop() {
-  }
 }

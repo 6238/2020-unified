@@ -12,13 +12,24 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.IntakeConstants;
 
-//This class is for the Ball Intake Subsystem
+/**
+ * This class is for the Ball Intake Subsystem 
+ * @author Vishnu Velayuthan
+ * @author vishnuvelayuthan@gmail.com
+ * @version 1.0
+ * @since 1.00
+ */
 public class IntakeSubsystem extends SubsystemBase {
 
 	private final WPI_TalonSRX feeder;
 	private final WPI_TalonSRX backMagazine;
 	private final WPI_TalonSRX frontMagazine;
 
+
+	/**
+	 * This constructor initialises the talons of the subsystem
+	 * @param factory The factory that creates the Talon objects
+	 */
 	public IntakeSubsystem(final Factory factory) {
 		// Top feeder wheel
 		feeder = factory.createTalon(IntakeConstants.feeder); 
@@ -40,13 +51,22 @@ public class IntakeSubsystem extends SubsystemBase {
 		// This method will be called once per scheduler run
 	}
 
-	// Run to start all motors
+
+	// 
+	/**
+	 * This function is run when the subsystem starts
+	 * Starts all motors
+	 */
 	public void start() {
 		frontMagazine.set(0.5); // Back should move with the front
 		feeder.set(0.5);
 	}
 
-	// Run to stop all motors
+
+	/**
+	 * This function is run when the subsystem ends
+	 * Stops all motors
+	 */
 	public void stop() {
 		frontMagazine.set(0.0); // Back should move with the front
 		feeder.set(0.0);
