@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import frc.robot.subsystems.Factory;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -22,12 +23,31 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
  */
 
 public final class Constants {
+
+    //Factory Object
+    private static Factory factory = new Factory();
+
+    //Shuffleboard Constants
     public static final class OIConstants {
         public static final ShuffleboardTab kTab = Shuffleboard.getTab("SmartDashboard");
     }
 
+    //Driving Contstants
     public static final class DriveConstants {
         public static final double kDefaultValueInsanityFactor = 1;
         public static final double kDefaultValueSensitivityFactor = 1;
+
+        public static final double leftTalon1 = 0; //Change based on ID needed
+        public static final double leftTalon2 = 1; //Change based on ID needed
+        public static final double leftTalon3 = 2; //Change based on ID needed
+        public static final double rightTalon1 = 3; //Change based on ID needed
+        public static final double rightTalon2 = 4; //Change based on ID needed
+        public static final double rightTalon3 = 5; //Change based on ID needed
+    }
+
+    //Joysticks for driving
+    public static final class JoystickObjects {
+        public static final Joystick leftJoystick = factory.createJoystick(0);
+        public static final Joystick rightJoystick = factory.createJoystick(0);
     }
 }

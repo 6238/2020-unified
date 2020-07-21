@@ -24,11 +24,6 @@ public class DriveSubsystem extends SubsystemBase {
   private double insanityFactor;
   private double sensitivityFactor;
   //Shuffleboard entry for changing the insanity factor
-  
-
-  //Joysticks to control robot
-  private Joystick leftJoystick;
-  private Joystick rightJoystick;
 
   //All of the motor controllers for the 6 motors on the Gearbox
   private WPI_TalonSRX leftTalon1;
@@ -51,16 +46,12 @@ public class DriveSubsystem extends SubsystemBase {
     insanityFactor = DriveConstants.kDefaultValueInsanityFactor;
     sensitivityFactor = DriveConstants.kDefaultValueSensitivityFactor; 
 
-    //Joysticks for controlling driving
-    leftJoystick = factory.createJoystick(0); //Change based on ID needed
-    rightJoystick = factory.createJoystick(1); //Change based on ID needed
-
-    leftTalon1 = talonFactory.createTalon(5); //Change based on ID needed
-    leftTalon2 = talonFactory.createTalon(6); //Change based on ID needed
-    leftTalon3 = talonFactory.createTalon(7); //Change based on ID needed
-    rightTalon1 = talonFactory.createTalon(8); //Change based on ID needed
-    rightTalon2 = talonFactory.createTalon(9); //Change based on ID needed
-    rightTalon3 = talonFactory.createTalon(69); //Change based on ID needed hehehheheeheh
+    leftTalon1 = talonFactory.createTalon(DriveConstants.leftTalon1); 
+    leftTalon2 = talonFactory.createTalon(DriveConstants.leftTalon2); 
+    leftTalon3 = talonFactory.createTalon(DriveConstants.leftTalon3); 
+    rightTalon1 = talonFactory.createTalon(DriveConstants.rightTalon1); 
+    rightTalon2 = talonFactory.createTalon(DriveConstants.rightTalon1); 
+    rightTalon3 = talonFactory.createTalon(DriveConstants.rightTalon1); //Change based on ID needed
 
     //Left of the robot
     leftMotors = new SpeedControllerGroup(leftTalon1,leftTalon2, leftTalon3); 
@@ -76,8 +67,24 @@ public class DriveSubsystem extends SubsystemBase {
     sensitivityFactor = Dashboard.sensitivityFactorEntry.get();
   }
 
-  public void arcadeDrive() {
-    robotDrive.arcadeDrive(leftJoystick.getY() * insanityFactor, rightJoystick.getZ() * sensitivityFactor);
+  //Choose which drive type to use
+  public void drive() {
+
+  }
+
+  //Arcade drive is speed with one joystick, and direction with one joystick
+  public void arcadeDrive(double leftJoystickY, double rightJoystickZ) {
+    robotDrive.arcadeDrive(leftJoystickY * insanityFactor, rightJoystickZ * sensitivityFactor);
+  }
+
+  //Tank Drive is speed with both joysticks
+  public void tankDrive(double leftSpeed, double rightSpeed) {
+    robotDrive.tankDrive(leftSpeed * insanityFactor, rightSpeed * insanityFactor);
+  }
+
+  //Curvature Drive is controlling speed with one and controlling turning speed with another 
+  public void curvatureDrive(double ySpeed, double zSpeed, boolean isQuickTurn) {
+    robotDrive.curvatureDrive(ySpeed * insanityFactor, zSpeed * insanityFactor, isQuickTurn);
   }
 
   //When game ends
