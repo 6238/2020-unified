@@ -21,29 +21,29 @@ public class DriveCommand extends CommandBase {
   private Joystick leftJoystick = JoystickObjects.leftJoystick;
   private Joystick rightJoystick = JoystickObjects.rightJoystick;
 
+  //Doubles for the driving numbers
+  private double tank_leftY;
+  private double tank_rightY;
+  private double ySpeed;
+  private double zSpeed;
+
   //The subsystem for the file
   private final DriveSubsystem driveSubsystem;
 
   public DriveCommand(DriveSubsystem driveSubsystem) {
     this.driveSubsystem = driveSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-  }
-
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
+    addRequirements(driveSubsystem);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // driveSubsystem.drive();
-  }
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-
+    tank_leftY = leftJoystick.getY();
+    tank_rightY = rightJoystick.getY();
+    ySpeed = leftJoystick.getY();
+    zSpeed = rightJoystick.getZ();
+    driveSubsystem.drive(tank_leftY, tank_rightY, ySpeed, zSpeed);
   }
 
   // Returns true when the command should end.
