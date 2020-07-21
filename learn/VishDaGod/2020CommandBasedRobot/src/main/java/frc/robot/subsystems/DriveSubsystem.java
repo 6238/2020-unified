@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants.JoystickConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.shuffleboard.Dashboard;
 
@@ -35,6 +36,7 @@ public class DriveSubsystem extends SubsystemBase {
   private double sensitivityFactor;
 
   private boolean isReverse;
+  private boolean isQuickTurn;
   //Shuffleboard entry for changing the insanity factor
 
   //All of the motor controllers for the 6 motors on the Gearbox
@@ -68,6 +70,7 @@ public class DriveSubsystem extends SubsystemBase {
     insanityFactor = DriveConstants.kDefaultValueInsanityFactor;
     sensitivityFactor = DriveConstants.kDefaultValueSensitivityFactor; 
     isReverse = DriveConstants.kDefaultReverse;
+    isQuickTurn = DriveConstants.kDefaultIsQuickTurn;
 
     leftTalon1 = factory.createTalon(DriveConstants.leftTalon1); 
     leftTalon2 = factory.createTalon(DriveConstants.leftTalon2); 
@@ -112,6 +115,7 @@ public class DriveSubsystem extends SubsystemBase {
     insanityFactor = Dashboard.insanityFactorEntry.get();
     sensitivityFactor = Dashboard.sensitivityFactorEntry.get();
     isReverse = Dashboard.reverseButton.get();
+    isQuickTurn = JoystickConstants.curvatureQuickTurnButton.get();
 
     //Choose the drive mode
     driveModeSelected = driveModeChooser.getSelected();
@@ -137,7 +141,7 @@ public class DriveSubsystem extends SubsystemBase {
         case 1:
           this.arcadeDrive(-ySpeed, zSpeed);
         case 2:
-          this.curvatureDrive(-ySpeed, zSpeed, true);
+          this.curvatureDrive(-ySpeed, zSpeed);
       }
     }
     //This is the NORMAL one
@@ -148,7 +152,7 @@ public class DriveSubsystem extends SubsystemBase {
         case 1:
           this.arcadeDrive(ySpeed, zSpeed);
         case 2:
-          this.curvatureDrive(ySpeed, zSpeed, true);
+          this.curvatureDrive(ySpeed, zSpeed);
       }
     }
   }
@@ -180,7 +184,7 @@ public class DriveSubsystem extends SubsystemBase {
    * @param zSpeed The right Joystick Y axis, used for right speed for the tank drive
    * @param isQuickTurn The boolean value to turn on QuickTurn mode
    */
-  public void curvatureDrive(double ySpeed, double zSpeed, boolean isQuickTurn) {
+  public void curvatureDrive(double ySpeed, double zSpeed) {
     robotDrive.curvatureDrive(ySpeed * insanityFactor, zSpeed * insanityFactor, isQuickTurn);
   }
 

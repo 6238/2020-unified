@@ -9,7 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants.JoystickObjects;
+import frc.robot.Constants.JoystickConstants;
 import frc.robot.subsystems.DriveSubsystem;
 
 
@@ -24,8 +24,8 @@ public class DriveCommand extends CommandBase {
 
 
   // Joysticks for driving
-  private Joystick leftJoystick = JoystickObjects.leftJoystick;
-  private Joystick rightJoystick = JoystickObjects.rightJoystick;
+  private Joystick leftJoystick = JoystickConstants.leftJoystick;
+  private Joystick rightJoystick = JoystickConstants.rightJoystick;
 
   //Doubles for the driving numbers
   private double tank_leftY;

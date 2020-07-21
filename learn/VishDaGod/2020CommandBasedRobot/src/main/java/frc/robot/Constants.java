@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.Factory;
 
 
@@ -43,8 +44,10 @@ public final class Constants {
     /**
      * These are the Joystick Objects for Driving
      */
-    public static final class JoystickObjects {
+    public static final class JoystickConstants {
         public static final Joystick leftJoystick = factory.createJoystick(0); //Change based on ID needed
+        public static final JoystickButton curvatureQuickTurnButton = factory.createJoystickButton(leftJoystick, 0); //Curvature Toggle
+
         public static final Joystick rightJoystick = factory.createJoystick(0); //Change based on ID needed
     }
 
@@ -65,7 +68,8 @@ public final class Constants {
 
 		public static final int kDriveModeDefault = 1;
 
-		public static final boolean kDefaultReverse = false;
+        public static final boolean kDefaultReverse = false;
+        public static final boolean kDefaultIsQuickTurn = false;
 	}
 
     

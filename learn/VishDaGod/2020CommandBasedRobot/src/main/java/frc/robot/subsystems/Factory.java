@@ -5,6 +5,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import java.util.*;
 
@@ -26,6 +27,7 @@ public class Factory {
 	private ArrayList<Joystick> joysticks = new ArrayList<Joystick>();
 	private ArrayList<Integer> joystickIDs = new ArrayList<Integer>();
 
+	private ArrayList<JoystickButton> joystickButtons = new ArrayList<JoystickButton>();
 
 	/**
 	 * This function creates a Joystick object 
@@ -35,10 +37,15 @@ public class Factory {
 	 */
 	public final Joystick createJoystick(int joystickID) {
 		if (checkID(joystickID, joystickIDs))
-			throw new IllegalArgumentException("Repitition of CanBusID");
+			throw new IllegalArgumentException("Repetition of JoystickID");
 		joysticks.add(new Joystick(joystickID));
 		joystickIDs.add(joystickID);
 		return joysticks.get(joysticks.size() - 1);
+	}
+
+	public final JoystickButton createJoystickButton(Joystick joystick, int joystickButtonID) {
+		joystickButtons.add(new JoystickButton(joystick, joystickButtonID));
+		return joystickButtons.get(joystickButtons.size() - 1);
 	}
 
 
@@ -50,7 +57,7 @@ public class Factory {
 	 */
 	public final WPI_TalonSRX createTalon(int canBusID) {
 		if (checkID(canBusID, canBusIDs))
-			throw new IllegalArgumentException("Repitition of CanBusID");
+			throw new IllegalArgumentException("Repetition of CanBusID");
 		canBusIDs.add(canBusID);
 		talons.add(new WPI_TalonSRX(canBusID));
 		return talons.get(talons.size() - 1);
@@ -65,7 +72,7 @@ public class Factory {
 	 */
 	public final CANSparkMax createSpark(int canBusID) {
 		if (checkID(canBusID, canBusIDs))
-			throw new IllegalArgumentException("Repitition of CanBusID");
+			throw new IllegalArgumentException("Repetition of CanBusID");
 		canBusIDs.add(canBusID);
 		sparks.add(new CANSparkMax(canBusID, MotorType.kBrushless));
 		return sparks.get(sparks.size() - 1);
