@@ -7,16 +7,19 @@
 
 package frc.robot.Commands;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.JoystickObjects;
+import frc.robot.subsystems.DriveSubsystem;
 
 public class DriveCommand extends CommandBase {
   /**
    * Creates a new DriveCommand.
    */
 
-  //Joysticks for driving 
-  private Joystick leftJoystick = JoystickConstants.leftJoystick;
-  private Joystick rightJoystick = JoystickConstants.rightJoystick;
+  // Joysticks for driving
+  private Joystick leftJoystick = JoystickObjects.leftJoystick;
+  private Joystick rightJoystick = JoystickObjects.rightJoystick;
 
   //The subsystem for the file
   private final DriveSubsystem driveSubsystem;

@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.subsystems.Factory;
@@ -37,12 +38,14 @@ public final class Constants {
         public static final double kDefaultValueInsanityFactor = 1;
         public static final double kDefaultValueSensitivityFactor = 1;
 
-        public static final double leftTalon1 = 0; //Change based on ID needed
-        public static final double leftTalon2 = 1; //Change based on ID needed
-        public static final double leftTalon3 = 2; //Change based on ID needed
-        public static final double rightTalon1 = 3; //Change based on ID needed
-        public static final double rightTalon2 = 4; //Change based on ID needed
-        public static final double rightTalon3 = 5; //Change based on ID needed
+        public static final int leftTalon1 = 0; //Change based on ID needed
+        public static final int leftTalon2 = 1; //Change based on ID needed
+        public static final int leftTalon3 = 2; //Change based on ID needed
+        public static final int rightTalon1 = 3; //Change based on ID needed
+        public static final int rightTalon2 = 4; //Change based on ID needed
+        public static final int rightTalon3 = 5; //Change based on ID needed
+
+        public static final int driveModeDefault = 1;
     }
 
     //Joysticks for driving

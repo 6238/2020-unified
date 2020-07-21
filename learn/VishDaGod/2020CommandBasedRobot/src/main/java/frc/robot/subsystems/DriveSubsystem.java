@@ -7,15 +7,18 @@
 
 package frc.robot.subsystems;
 
+import java.util.ArrayList;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.Constants.DriveConstants;
-import frc.robot.shuffleboard.Dashboard;
+import frc.robot.Shuffleboard.Dashboard;
 
 //This class is for the West Coast Drive Train based on Arcade Drive
 public class DriveSubsystem extends SubsystemBase {
@@ -37,9 +40,14 @@ public class DriveSubsystem extends SubsystemBase {
   private SpeedControllerGroup leftMotors;
   private SpeedControllerGroup rightMotors;
 
-  //The type of drive that we are using
+  //The robot drive 
   private DifferentialDrive robotDrive;
 
+  //Driver can choose which robot drive to choose
+  private final SendableChooser<String> driveModeChooser = new SendableChooser<>();
+  private ArrayList<String> kDriveModeOptions = new ArrayList<String>();
+  public int driveMode = DriveConstants.driveModeDefault;
+  private String m_driveModeSelected;
 
   public DriveSubsystem(Factory talonFactory, Factory factory) { //Should implement joystick factory
     //Keeping it chill
@@ -59,6 +67,19 @@ public class DriveSubsystem extends SubsystemBase {
     rightMotors = new SpeedControllerGroup(rightTalon1, rightTalon2, rightTalon3);
 
     robotDrive = new DifferentialDrive(leftMotors, rightMotors);
+
+    //Add the options for the chooser
+    kDriveModeOptions.add("Tank");
+    kDriveModeOptions.add("Arcade");
+    kDriveModeOptions.add("Curvature");
+
+    driveModeChooser.setDefaultOption(kDriveModeOptions.get(driveMode), kDriveModeOptions.get(driveMode));
+
+    for (int i = 0; i < kDriveModeOptions.size(); i++) {
+      if (i != driveMode) {
+        driveModeChooser.addOption(kDriveModeOptions.get(i), kDriveModeOptions.get(driveMode));
+      }
+    }
   }
 
   @Override
