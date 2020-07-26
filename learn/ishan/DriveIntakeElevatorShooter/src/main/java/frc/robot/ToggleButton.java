@@ -13,26 +13,33 @@ import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
+import frc.robot.Constants.OIConstants;
+
 /**
  * Shuffleboard Boolean ToggleButton Trigger
  */
 public class ToggleButton extends Trigger {
 	private boolean value;
-	private NetworkTableEntry toggleButtonEntry;
+	private NetworkTableEntry entry;
 
-	public ToggleButton(String buttonName, boolean defaultValue) {
+	public ToggleButton(String name, boolean defaultValue) {
 		value = defaultValue;
-		toggleButtonEntry = Constants.kTab.add(buttonName, defaultValue).withWidget(BuiltInWidgets.kToggleButton)
+		entry = OIConstants.kTab.add(name, defaultValue).withWidget(BuiltInWidgets.kToggleButton)
 				.getEntry();
 	}
 
 	public NetworkTableEntry getEntry() {
-		return toggleButtonEntry;
+		return entry;
 	}
 
 	@Override
 	public boolean get() {
-		value = toggleButtonEntry.getBoolean(value);
+		value = entry.getBoolean(value);
 		return value;
+	}
+
+	public void set(boolean input) {
+		value = input;
+		entry.setBoolean(value);
 	}
 }
