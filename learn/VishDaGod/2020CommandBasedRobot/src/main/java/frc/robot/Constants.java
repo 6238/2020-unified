@@ -46,9 +46,9 @@ public final class Constants {
      */
     public static final class JoystickConstants {
         public static final Joystick leftJoystick = factory.createJoystick(0); //Change based on ID needed
-        public static final JoystickButton curvatureQuickTurnButton = factory.createJoystickButton(leftJoystick, 0); //Curvature Toggle
 
         public static final Joystick rightJoystick = factory.createJoystick(0); //Change based on ID needed
+		public static int isQuickTurnID = 1;
     }
 
     //Driving Contstants

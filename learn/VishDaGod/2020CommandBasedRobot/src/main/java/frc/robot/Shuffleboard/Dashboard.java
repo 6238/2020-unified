@@ -2,6 +2,7 @@ package frc.robot.shuffleboard;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
 import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants.OIConstants;
 
 
 /**
@@ -19,4 +20,6 @@ public class Dashboard {
     public static Slider insanityFactorEntry = new Slider("Insanity Factor", DriveConstants.kDefaultValueInsanityFactor);
     public static Slider sensitivityFactorEntry = new Slider("Sensitivty Factor", DriveConstants.kDefaultValueSensitivityFactor);
     public static ToggleButton reverseButton = new ToggleButton("Reverse Toggle", DriveConstants.kDefaultReverse);
+    public static NetworkTableEntry isQuickTurnDisplay = OIConstants.kTab.add("Curvature Quick Turn", 
+        DriveConstants.kDefaultIsQuickTurn).getEntry();
 }

@@ -115,7 +115,9 @@ public class DriveSubsystem extends SubsystemBase {
     insanityFactor = Dashboard.insanityFactorEntry.get();
     sensitivityFactor = Dashboard.sensitivityFactorEntry.get();
     isReverse = Dashboard.reverseButton.get();
-    isQuickTurn = JoystickConstants.curvatureQuickTurnButton.get();
+
+    //Set the Display
+    Dashboard.isQuickTurnDisplay.setBoolean(isQuickTurn);
 
     //Choose the drive mode
     driveModeSelected = driveModeChooser.getSelected();
@@ -186,6 +188,11 @@ public class DriveSubsystem extends SubsystemBase {
    */
   public void curvatureDrive(double ySpeed, double zSpeed) {
     robotDrive.curvatureDrive(ySpeed * insanityFactor, zSpeed * insanityFactor, isQuickTurn);
+  }
+
+
+  public void changeQuickTurn() {
+    this.isQuickTurn = !isQuickTurn;
   }
 
 }
