@@ -27,9 +27,11 @@ public class StabilizedDriveTrainTest {
         MockitoAnnotations.initMocks(this);
         when(f.getMotor(0)).thenReturn(front);
         when(f.getMotor(1)).thenReturn(back);
+
         CANEncoder mocked_encoder = mock(CANEncoder.class);
         when(mocked_encoder.getPosition()).thenReturn(10.0);
         when(front.GetEncoder()).thenReturn(mocked_encoder);
+
         when(timer.get()).thenReturn(0.0);
     }
 
