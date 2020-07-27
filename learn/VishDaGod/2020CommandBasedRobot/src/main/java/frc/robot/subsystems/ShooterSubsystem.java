@@ -13,6 +13,8 @@ import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.shuffleboard.Dashboard;
@@ -33,6 +35,9 @@ public class ShooterSubsystem extends SubsystemBase {
   //Feeder wheel
   private final WPI_TalonSRX feeder;
 
+  //Double Solenoid for Retracting and Extending
+  private final DoubleSolenoid shooterSolenoid;
+
   //Speed of Motors
   private double shooterSpeed;
   private double feederSpeed;
@@ -47,6 +52,9 @@ public class ShooterSubsystem extends SubsystemBase {
 
     feeder = factory.createTalon(ShooterConstants.feeder);
 
+    shooterSolenoid = new DoubleSolenoid(ShooterConstants.kDefaultSolenoidForwardChannel, 
+        ShooterConstants.kDefaultSolenoidReverseChannel);
+    
     //Restore to factory settings
     leftShooter.restoreFactoryDefaults();
     rightShooter.restoreFactoryDefaults();
@@ -87,8 +95,25 @@ public class ShooterSubsystem extends SubsystemBase {
     feeder.set(feederSpeed);
   }
 
+  /**
+   * Stops the feeder wheel
+   */
   public void stopFeeder() {
     feeder.set(0);
+  }
+
+  /**
+   * This extends our shooter using the solenoid
+   */
+  public void extendShooter() {
+    shooterSolenoid.set(Value.kForward);
+  }
+
+  /**
+   * This retract the shooter using the solenoid
+   */
+  public void retractShooter() { 
+    shooterSolenoid.set(Value.kReverse);
   }
 
 }
