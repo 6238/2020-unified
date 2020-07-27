@@ -34,7 +34,7 @@ public class RobotContainer {
 	public RobotContainer() {
 		factory = new Factory();
 		driveSubsystem = new DriveSubsystem(factory);
-		
+
 		// Configure the button bindings
 		configureButtonBindings();
 	}
@@ -46,9 +46,9 @@ public class RobotContainer {
 	 * {@link JoystickButton}.
 	 */
 	private void configureButtonBindings() {
-		new JoystickButton(JoystickConstants.rightJoystick, JoystickConstants.isQuickTurnID).whenPressed(() -> driveSubsystem.changeQuickTurn());
+		new JoystickButton(JoystickConstants.rightJoystick, JoystickConstants.isQuickTurnID)
+				.whenPressed(() -> driveSubsystem.changeQuickTurn());
 	}
-
 
 	/**
 	 * Use this to pass the autonomous command to the main {@link Robot} class.

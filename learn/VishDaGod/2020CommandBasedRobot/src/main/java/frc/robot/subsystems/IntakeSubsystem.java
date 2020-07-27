@@ -13,7 +13,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.IntakeConstants;
 
 /**
- * This class is for the Ball Intake Subsystem 
+ * This class is for the Ball Intake Subsystem
+ * 
  * @author Vishnu Velayuthan
  * @author vishnuvelayuthan@gmail.com
  * @version 1.0
@@ -25,20 +26,20 @@ public class IntakeSubsystem extends SubsystemBase {
 	private final WPI_TalonSRX backMagazine;
 	private final WPI_TalonSRX frontMagazine;
 
-
 	/**
 	 * This constructor initialises the talons of the subsystem
+	 * 
 	 * @param factory The factory that creates the Talon objects
 	 */
 	public IntakeSubsystem(final Factory factory) {
 		// Top feeder wheel
-		feeder = factory.createTalon(IntakeConstants.feeder); 
+		feeder = factory.createTalon(IntakeConstants.feeder);
 
 		// Back wheel for ball intake
-		backMagazine = factory.createTalon(IntakeConstants.backMagazine); 
+		backMagazine = factory.createTalon(IntakeConstants.backMagazine);
 
 		// Front wheel for ball intake
-		frontMagazine = factory.createTalon(IntakeConstants.frontMagazine); 
+		frontMagazine = factory.createTalon(IntakeConstants.frontMagazine);
 
 		// Back is a follower of front
 		backMagazine.follow(frontMagazine);
@@ -50,21 +51,17 @@ public class IntakeSubsystem extends SubsystemBase {
 		// This method will be called once per scheduler run
 	}
 
-
-	// 
+	//
 	/**
-	 * This function is run when the subsystem starts
-	 * Starts all motors
+	 * This function is run when the subsystem starts Starts all motors
 	 */
 	public void start() {
 		frontMagazine.set(0.5); // Back should move with the front
 		feeder.set(0.5);
 	}
 
-
 	/**
-	 * This function is run when the subsystem ends
-	 * Stops all motors
+	 * This function is run when the subsystem ends Stops all motors
 	 */
 	public void stop() {
 		frontMagazine.set(0.0); // Back should move with the front

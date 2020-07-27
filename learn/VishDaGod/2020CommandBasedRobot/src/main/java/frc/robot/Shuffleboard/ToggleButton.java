@@ -4,23 +4,24 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import frc.robot.Constants.OIConstants;
 
-
 /**
  * This class has all creates a button NetworkEntryTable
+ * 
  * @author Vishnu Velayuthan
  * @author vishnuvelayuthan@gmail.com
  * @version 1.0
  * @since 1.00
  */
 public class ToggleButton {
-    
-    private NetworkTableEntry button;
+
+	private NetworkTableEntry button;
 	private boolean value;
 
-
 	/**
-	 * This Constructor creates a toggle button instead of having to type that long line
-	 * @param name The name of the button
+	 * This Constructor creates a toggle button instead of having to type that long
+	 * line
+	 * 
+	 * @param name         The name of the button
 	 * @param defaultValue The boolean default value
 	 */
 	public ToggleButton(String name, boolean defaultValue) {
@@ -28,9 +29,9 @@ public class ToggleButton {
 		value = defaultValue;
 	}
 
-
 	/**
-	 * Get the button value 
+	 * Get the button value
+	 * 
 	 * @return The boolean value
 	 */
 	public boolean get() {
@@ -38,9 +39,9 @@ public class ToggleButton {
 		return value;
 	}
 
-
 	/**
 	 * Sets the button to a certain value
+	 * 
 	 * @param input Boolean value to set the button to
 	 */
 	public void set(boolean input) {
