@@ -3,7 +3,7 @@ package frc.robot;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 
-public class MockableSparkMax extends CANSparkMax implements CANSparkFunctions {
+public class MockableSparkMax extends CANSparkMax implements CANSparkMaxInterface {
     /**
      * Create a new SPARK MAX Controller
      *
@@ -15,10 +15,5 @@ public class MockableSparkMax extends CANSparkMax implements CANSparkFunctions {
     public MockableSparkMax(int deviceID, MotorType type) {
         super(deviceID, type);
 
-    }
-
-    @Override
-    public CANEncoder GetEncoder() {
-        return this.getEncoder();
     }
 }

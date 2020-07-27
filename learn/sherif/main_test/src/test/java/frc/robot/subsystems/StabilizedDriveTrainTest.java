@@ -1,36 +1,37 @@
 package frc.robot.subsystems;
 import com.revrobotics.CANEncoder;
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
-import frc.robot.CANSparkFunctions;
+import frc.robot.CANSparkMaxInterface;
 import frc.robot.helpers.PIDLoop;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
+import static org.junit.Assert.*;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
 
 public class StabilizedDriveTrainTest {
     @Mock Factory f;
-    @Mock CANSparkFunctions front;
-    @Mock CANSparkFunctions back;
+    @Mock
+    CANSparkMaxInterface front;
+    @Mock
+    CANSparkMaxInterface back;
     @Mock Timer timer;
     @Mock Gyro gyro;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        when(f.getMotor(0)).thenReturn(front);
-        when(f.getMotor(1)).thenReturn(back);
+        when(f.getSparkMotor(0)).thenReturn(front);
+        when(f.getSparkMotor(1)).thenReturn(back);
 
         CANEncoder mocked_encoder = mock(CANEncoder.class);
         when(mocked_encoder.getPosition()).thenReturn(10.0);
-        when(front.GetEncoder()).thenReturn(mocked_encoder);
+        when(front.getEncoder()).thenReturn(mocked_encoder);
+
+        when(front.get()).thenReturn(0.0);
 
         when(timer.get()).thenReturn(0.0);
     }
@@ -40,8 +41,13 @@ public class StabilizedDriveTrainTest {
     }
 
     @Test
-    public void testHack() {
-        System.out.println(front.GetEncoder().getPosition());
+    public void testEncoder() {
+        assertEquals(10, front.getEncoder().getPosition(), 0.001);
+    }
+
+    @Test
+    public void testSparkInterface() { // Tests if drive still functions(from superinterface SpeedController)
+        assertEquals(0.0, front.get(), 0.001);
     }
 
     @Test
@@ -62,7 +68,5 @@ public class StabilizedDriveTrainTest {
         dr.periodic();
 
         verify(gyro, atLeast(1)).getAngle();
-
-        System.out.println(dr.getAdjust());
     }
 }
