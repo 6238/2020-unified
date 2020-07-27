@@ -5,18 +5,21 @@ import org.junit.*;
 
 import edu.wpi.first.wpilibj.SpeedController;
 import frc.robot.subsystems.Factory;
+import org.mockito.Mock;
 
 import static org.mockito.Mockito.*;
 
 public class MainTest {
     Factory f;
 
+    @Mock CANSparkFunctions third;
+
     @Before
     public void setup() {
         this.f = mock(Factory.class);
-        SpeedController front = mock(SpeedController.class);
-        SpeedController back = mock(SpeedController.class);
-        
+        CANSparkFunctions front = mock(CANSparkFunctions.class);
+        CANSparkFunctions back = mock(CANSparkFunctions.class);
+
         when(this.f.getMotor(0)).thenReturn(front);
         when(this.f.getMotor(1)).thenReturn(back);
     }
