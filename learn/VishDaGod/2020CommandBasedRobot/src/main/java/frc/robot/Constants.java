@@ -46,8 +46,9 @@ public final class Constants {
 	public static final class JoystickConstants {
 		public static final Joystick leftJoystick = factory.createJoystick(0); // Change based on ID needed
 
-		public static final Joystick rightJoystick = factory.createJoystick(0); // Change based on ID needed
-		public static int isQuickTurnID = 1;
+        public static final Joystick rightJoystick = factory.createJoystick(0); // Change based on ID needed
+        
+		public static final int isQuickTurnID = 1; //Change base on ID needed
 	}
 
 	// Driving Contstants
@@ -78,5 +79,12 @@ public final class Constants {
 		public static final int feeder = 6; // Change based on ID Needed
 		public static final int backMagazine = 7; // Change based on ID Needed
 		public static final int frontMagazine = 8; // Change based on ID Needed
-	}
+    }
+    
+
+    public static final class ShooterConstants {
+        public static final int leftShooter = 9; // Change based on ID Needed
+        public static final int rightShooter = 10; // Change based on ID Needed
+		public static int feeder = 11; // Change based on ID Needed
+    }
 }
