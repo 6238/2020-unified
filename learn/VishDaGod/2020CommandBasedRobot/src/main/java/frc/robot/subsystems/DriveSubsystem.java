@@ -17,7 +17,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.Constants.DriveConstants;
-import frc.robot.Constants.JoystickConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.shuffleboard.Dashboard;
 

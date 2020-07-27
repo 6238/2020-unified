@@ -85,6 +85,8 @@ public final class Constants {
     public static final class ShooterConstants {
         public static final int leftShooter = 9; // Change based on ID Needed
         public static final int rightShooter = 10; // Change based on ID Needed
-		public static int feeder = 11; // Change based on ID Needed
+        public static int feeder = 11; // Change based on ID Needed
+        public static double kDefaultShooterSpeed = 0;
+        public static double kDefaultFeederSpeed = 0;
     }
 }

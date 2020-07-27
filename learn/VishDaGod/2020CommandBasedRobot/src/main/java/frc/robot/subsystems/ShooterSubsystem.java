@@ -15,6 +15,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
+import frc.robot.shuffleboard.Dashboard;
 
 public class ShooterSubsystem extends SubsystemBase {
   /**
@@ -29,11 +30,14 @@ public class ShooterSubsystem extends SubsystemBase {
   private final CANSparkMax rightShooter;
   private final CANEncoder rightShooterEncoder;
 
-
+  //Feeder wheel
   private final WPI_TalonSRX feeder;
 
-
+  //Speed of Motors
+  private double shooterSpeed;
+  private double feederSpeed;
   
+
   public ShooterSubsystem(Factory factory) {
     leftShooter = factory.createSpark(ShooterConstants.leftShooter);
     leftShooterEncoder = leftShooter.getEncoder();
@@ -48,15 +52,43 @@ public class ShooterSubsystem extends SubsystemBase {
     rightShooter.restoreFactoryDefaults();
     feeder.configFactoryDefault();
 
-
     //Set left as follower of right
     leftShooter.follow(rightShooter, true);
+
 
 
   }
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    //Get the speeds of the shooters
+    shooterSpeed = Dashboard.shooterSpeedEntry.get();
+    feederSpeed = Dashboard.feederSpeedEntry.get();
   }
+
+  /**
+   * Function run whne need to stop the shooter
+   */
+  public void stop() {
+    rightShooter.set(0);
+  }
+
+  /**
+   * Accesses the shooterSpeed variable of the class and sets shooter to that speed
+   */
+  public void start() {
+    rightShooter.set(shooterSpeed);
+  }
+
+  /**
+   * Accesses the feederSpeed variable of the class and sets feeder to that speed
+   */
+  public void runFeeder() {
+    feeder.set(feederSpeed);
+  }
+
+  public void stopFeeder() {
+    feeder.set(0);
+  }
+
 }
