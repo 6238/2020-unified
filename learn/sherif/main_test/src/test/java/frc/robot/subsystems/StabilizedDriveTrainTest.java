@@ -2,7 +2,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANEncoder;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
-import frc.robot.CANSparkMaxInterface;
+import frc.robot.interfaces.CANSparkMaxInterface;
 import frc.robot.helpers.PIDLoop;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,10 +14,8 @@ import static org.mockito.Mockito.*;
 
 public class StabilizedDriveTrainTest {
     @Mock Factory f;
-    @Mock
-    CANSparkMaxInterface front;
-    @Mock
-    CANSparkMaxInterface back;
+    @Mock CANSparkMaxInterface front;
+    @Mock CANSparkMaxInterface back;
     @Mock Timer timer;
     @Mock Gyro gyro;
 

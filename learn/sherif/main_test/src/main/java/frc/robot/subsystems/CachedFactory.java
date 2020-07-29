@@ -4,8 +4,8 @@ import java.util.HashMap;
 
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import frc.robot.CANSparkMaxInterface;
-import frc.robot.MockableSparkMax;
+import frc.robot.interfaces.CANSparkMaxInterface;
+import frc.robot.helpers.MockableSparkMax;
 
 public class CachedFactory extends Factory {
     private HashMap<Integer, CANSparkMaxInterface> _map = new HashMap<>();
