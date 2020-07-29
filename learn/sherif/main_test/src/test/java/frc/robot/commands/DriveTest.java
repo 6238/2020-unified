@@ -42,19 +42,17 @@ public class DriveTest {
         assertTrue(command.isFinished());
     }
 
-    @Test
-    public void TestMockedRobot() {
-        this.robot.robotInit();
+@Test
+public void TestMockedRobot() {
+    this.robot.robotInit();
 
-        when(controller.getDirectionRadians()).thenReturn(0.5);
-        when(controller.getThrottle()).thenReturn(0.5);
-        when(this.controller.getRawButton(Joystick.AxisType.kTwist.value)).thenReturn(true);
-        when(this.controller.getRawButton(Joystick.AxisType.kThrottle.value)).thenReturn(true);
+    when(controller.getDirectionRadians()).thenReturn(0.5);
+    when(controller.getThrottle()).thenReturn(0.5);
+    when(this.controller.getRawButton(Joystick.AxisType.kTwist.value)).thenReturn(true);
+    when(this.controller.getRawButton(Joystick.AxisType.kThrottle.value)).thenReturn(true);
 
-        when(controller.getDirectionRadians()).thenReturn(0.5);
-        when(controller.getThrottle()).thenReturn(0.5);
-        this.robot.robotPeriodic();
+    this.robot.robotPeriodic();
 
-        verify(dr, atLeast(1)).drive(0.5, 0.5);
-    }
+    verify(dr, atLeast(1)).drive(0.5, 0.5);
+}
 }
