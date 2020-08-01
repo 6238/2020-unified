@@ -27,8 +27,8 @@ public class DriveCommand extends CommandBase {
 	private Joystick rightJoystick = JoystickConstants.rightJoystick;
 
 	// Doubles for the driving numbers
-	private double tank_leftY;
-	private double tank_rightY;
+	private double tankLeftY;
+	private double tankRightY;
 	private double ySpeed;
 	private double zSpeed;
 
@@ -53,11 +53,11 @@ public class DriveCommand extends CommandBase {
 	 * drive method from the subsystem
 	 */
 	public void execute() {
-		tank_leftY = leftJoystick.getY();
-		tank_rightY = rightJoystick.getY();
+		tankLeftY = leftJoystick.getY();
+		tankRightY = rightJoystick.getY();
 		ySpeed = leftJoystick.getY();
 		zSpeed = rightJoystick.getZ();
-		driveSubsystem.drive(tank_leftY, tank_rightY, ySpeed, zSpeed);
+		driveSubsystem.drive(tankLeftY, tankRightY, ySpeed, zSpeed);
 	}
 
 	// Returns true when the command should end.
