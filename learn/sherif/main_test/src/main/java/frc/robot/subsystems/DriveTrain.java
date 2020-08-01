@@ -2,7 +2,6 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.interfaces.ControlLoop;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -14,8 +13,8 @@ public class DriveTrain extends SubsystemBase {
     private SpeedController right;
 
     public DriveTrain(Factory f) {
-        this.left = f.getMotor(FRONT_MOTOR);
-        this.right = f.getMotor(BACK_MOTOR);
+        this.left = f.getSparkMotor(FRONT_MOTOR);
+        this.right = f.getSparkMotor(BACK_MOTOR);
         this.right.getInverted();
     }
 
