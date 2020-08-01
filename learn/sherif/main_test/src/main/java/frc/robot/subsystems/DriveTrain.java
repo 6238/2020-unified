@@ -19,8 +19,8 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public void drive(double ySpeed, double xSpeed) {
-        this.right.set(round(Clip(ySpeed + xSpeed), 2));
-        this.left.set(round(Clip(ySpeed - xSpeed), 2));
+        this.right.set((Clip(ySpeed + xSpeed)));
+        this.left.set((Clip(ySpeed - xSpeed)));
     }
 
     public void brake() {
@@ -34,15 +34,7 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public static double Clip(double value) {
-        if (value < -1f) return 0f;
-        return Math.min(value, 1f);
-    }
-
-    public static double round(double value, int places) {
-        if (places < 0) throw new IllegalArgumentException();
-
-        BigDecimal bd = BigDecimal.valueOf(value);
-        bd = bd.setScale(places, RoundingMode.HALF_UP);
-        return bd.doubleValue();
+        if (value < -1.0) return -1.0;
+        return Math.min(value, 1.0);
     }
 }

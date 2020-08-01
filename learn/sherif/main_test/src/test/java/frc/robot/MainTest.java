@@ -1,10 +1,12 @@
 package frc.robot;
 
+import frc.robot.interfaces.CANSparkMaxInterface;
 import frc.robot.subsystems.DriveTrain;
 import org.junit.*;
 
 import frc.robot.subsystems.Factory;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 
 import static org.mockito.Mockito.*;
 
@@ -37,7 +39,7 @@ public class MainTest {
     @Test
     public void testDrive() {
         var driveSystem = new DriveTrain(this.f);
-        driveSystem.drive(0.5f, 0.3f);
+        driveSystem.drive(0.5, 0.3);
 
         verify(f.getSparkMotor(0)).set(0.2);
         verify(f.getSparkMotor(1)).set(0.8);
