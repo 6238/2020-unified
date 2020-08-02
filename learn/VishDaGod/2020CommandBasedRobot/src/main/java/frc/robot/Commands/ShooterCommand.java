@@ -8,18 +8,16 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Factory;
 import frc.robot.subsystems.ShooterSubsystem;
 
-public class ShootingCommand extends CommandBase {
+public class ShooterCommand extends CommandBase {
   /**
    * Creates a new ShootingCommand.
    */
-  private ShooterSubsystem shootingSubsystem;
-  private Factory factory;
+  private ShooterSubsystem shooterSubsystem;
 
-  public ShootingCommand() {
-    shootingSubsystem = new ShooterSubsystem(factory);
+  public ShooterCommand(ShooterSubsystem shooterSubsystem) {
+    this.shooterSubsystem = shooterSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -31,8 +29,8 @@ public class ShootingCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shootingSubsystem.runFeeder();
-    shootingSubsystem.start();
+    shooterSubsystem.runFeeder();
+    shooterSubsystem.start();
   }
 
   // Called once the command ends or is interrupted.

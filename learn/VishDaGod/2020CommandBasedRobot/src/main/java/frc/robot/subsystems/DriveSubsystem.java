@@ -78,8 +78,8 @@ public class DriveSubsystem extends SubsystemBase {
 		leftTalon2 = factory.createTalon(DriveConstants.leftTalon2);
 		leftTalon3 = factory.createTalon(DriveConstants.leftTalon3);
 		rightTalon1 = factory.createTalon(DriveConstants.rightTalon1);
-		rightTalon2 = factory.createTalon(DriveConstants.rightTalon1);
-		rightTalon3 = factory.createTalon(DriveConstants.rightTalon1); // Change based on ID needed
+		rightTalon2 = factory.createTalon(DriveConstants.rightTalon2);
+		rightTalon3 = factory.createTalon(DriveConstants.rightTalon3); // Change based on ID needed
 
 		// Left of the robot
 		leftMotors = new SpeedControllerGroup(leftTalon1, leftTalon2, leftTalon3);

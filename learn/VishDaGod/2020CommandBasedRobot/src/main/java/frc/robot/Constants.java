@@ -45,7 +45,7 @@ public final class Constants {
 	public static final class JoystickConstants {
 		public static final Joystick leftJoystick = factory.createJoystick(0); // Change based on ID needed
 
-        public static final Joystick rightJoystick = factory.createJoystick(0); // Change based on ID needed
+        public static final Joystick rightJoystick = factory.createJoystick(1); // Change based on ID needed
         
 		public static final int isQuickTurnID = 1; //Change base on ID needed
 	}
@@ -58,12 +58,12 @@ public final class Constants {
 		public static final double kDefaultValueInsanityFactor = 1;
 		public static final double kDefaultValueSensitivityFactor = 1;
 
-		public static final int leftTalon1 = 0; // Change based on ID needed
-		public static final int leftTalon2 = 1; // Change based on ID needed
-		public static final int leftTalon3 = 2; // Change based on ID needed
-		public static final int rightTalon1 = 3; // Change based on ID needed
-		public static final int rightTalon2 = 4; // Change based on ID needed
-		public static final int rightTalon3 = 5; // Change based on ID needed
+		public static final int leftTalon1 = 34; // Change based on ID needed
+		public static final int leftTalon2 = 35; // Change based on ID needed
+		public static final int leftTalon3 = 36; // Change based on ID needed
+		public static final int rightTalon1 = 22; // Change based on ID needed
+		public static final int rightTalon2 = 23; // Change based on ID needed
+		public static final int rightTalon3 = 24; // Change based on ID needed
 
 		public static final int kDriveModeDefault = 1;
 
@@ -72,15 +72,21 @@ public final class Constants {
 	}
 
 	/**
-	 * These are ID numbers for the Intake Subsystem
+	 * These are ID numbers for the Elevator Subsystem
 	 */
-	public static final class IntakeConstants {
+	public static final class ElevatorConstants {
 		public static final int feeder = 6; // Change based on ID Needed
 		public static final int backMagazine = 7; // Change based on ID Needed
 		public static final int frontMagazine = 8; // Change based on ID Needed
-    }
+	}
+	
+	public static final class IntakeConstants {
+		
+	}
     
-
+	/**
+	 * These are numbers for the Shooter Subsystem
+	 */
     public static final class ShooterConstants {
         public static final int leftShooter = 9; // Change based on ID Needed
         public static final int rightShooter = 10; // Change based on ID Needed

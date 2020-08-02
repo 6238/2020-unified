@@ -19,7 +19,6 @@ public class Dashboard {
 	/**
 	 * Drive Subsystem NetworkEntries
 	 */
-
 	public static Slider insanityFactorEntry = new Slider("Insanity Factor",
 			DriveConstants.kDefaultValueInsanityFactor);
 			

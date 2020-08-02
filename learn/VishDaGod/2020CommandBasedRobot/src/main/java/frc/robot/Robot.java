@@ -10,6 +10,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.DriveCommand;
+import frc.robot.commands.ElevatorCommand;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -20,6 +22,9 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  */
 public class Robot extends TimedRobot {
 	private Command m_autonomousCommand;
+	
+	private DriveCommand driveCommand;
+	private ElevatorCommand intakeCommand;
 
 	private RobotContainer m_robotContainer;
 
@@ -97,6 +102,8 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
+
+
 	}
 
 	/**
@@ -104,6 +111,11 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		driveCommand = m_robotContainer.getDriveCommand();
+		driveCommand.schedule();
+
+		intakeCommand = m_robotContainer.getIntakeCommand();
+		intakeCommand.schedule();
 	}
 
 	@Override
