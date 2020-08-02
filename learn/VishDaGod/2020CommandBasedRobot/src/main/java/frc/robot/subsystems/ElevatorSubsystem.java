@@ -31,7 +31,7 @@ public class ElevatorSubsystem extends SubsystemBase {
 	 * 
 	 * @param factory The factory that creates the Talon objects
 	 */
-	public ElevatorSubsystem(final Factory factory) {
+	public ElevatorSubsystem(Factory factory) {
 		// // Top feeder wheel
 		// feeder = factory.createTalon(IntakeConstants.feeder);
 

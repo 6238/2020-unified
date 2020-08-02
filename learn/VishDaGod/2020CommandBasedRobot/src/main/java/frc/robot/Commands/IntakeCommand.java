@@ -8,24 +8,25 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 
 /**
- * This class is the Shooter Command called by the Scheduler
+ * This class is the Intake Command called by the Scheduler
  * 
  * @author Vishnu Velayuthan
  * @author vishnuvelayuthan@gmail.com
  * @version 1.0
  * @since 1.00
  */
-public class ShooterCommand extends CommandBase {
+public class IntakeCommand extends CommandBase {
   /**
-   * Creates a new ShootingCommand.
+   * Creates a new IntakeCommand.
    */
-  private ShooterSubsystem shooterSubsystem;
 
-  public ShooterCommand(ShooterSubsystem shooterSubsystem) {
-    this.shooterSubsystem = shooterSubsystem;
+   private IntakeSubsystem intakeSubsystem;
+
+  public IntakeCommand(IntakeSubsystem intakeSubsystem) {
+    this.intakeSubsystem = intakeSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -37,8 +38,7 @@ public class ShooterCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooterSubsystem.runFeeder();
-    shooterSubsystem.start();
+    intakeSubsystem.start();
   }
 
   // Called once the command ends or is interrupted.

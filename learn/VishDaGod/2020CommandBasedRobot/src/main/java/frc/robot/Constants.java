@@ -81,7 +81,12 @@ public final class Constants {
 	}
 	
 	public static final class IntakeConstants {
-		
+
+		public static int intakeOuter;
+		public static int intakeLeft;
+		public static int intakeRight;
+		public static double kIntakeSpeed;
+
 	}
     
 	/**

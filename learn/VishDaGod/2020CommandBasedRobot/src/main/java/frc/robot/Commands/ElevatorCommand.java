@@ -10,6 +10,14 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ElevatorSubsystem;
 
+/**
+ * This class is the Elevator Command called by the Scheduler
+ * 
+ * @author Vishnu Velayuthan
+ * @author vishnuvelayuthan@gmail.com
+ * @version 1.0
+ * @since 1.00
+ */
 public class ElevatorCommand extends CommandBase {
   /**
    * Creates a new IntakeCommand.
