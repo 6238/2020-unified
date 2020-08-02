@@ -1,9 +1,9 @@
-package frc.robot;
+package frc.robot.helpers;
 
-import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
+import frc.robot.interfaces.CANSparkMaxInterface;
 
-public class mockablespark extends CANSparkMax implements CANSparkFunctions {
+public class MockableSparkMax extends CANSparkMax implements CANSparkMaxInterface {
     /**
      * Create a new SPARK MAX Controller
      *
@@ -12,13 +12,8 @@ public class mockablespark extends CANSparkMax implements CANSparkFunctions {
      *                 must be connected to their matching color and the hall sensor
      *                 plugged in. Brushed motors must be connected to the Red and
      */
-    public mockablespark(int deviceID, MotorType type) {
+    public MockableSparkMax(int deviceID, MotorType type) {
         super(deviceID, type);
 
-    }
-
-    @Override
-    public CANEncoder GetEncoder() {
-        return this.getEncoder();
     }
 }

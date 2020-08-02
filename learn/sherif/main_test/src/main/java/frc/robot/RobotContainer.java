@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -26,14 +27,22 @@ import static frc.robot.Constants.*;
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
     private Factory m_f = new Factory();
-    private DriveTrain m_drivetrain = new DriveTrain(m_f);
-    private XboxController m_controller = new XboxController(CONTROLLER);
+    private DriveTrain m_drivetrain;
+    private Joystick m_controller;
 
     /**
      * The container for the robot.  Contains subsystems, OI devices, and commands.
      */
     public RobotContainer() {
         // Configure the button bindings
+        configureButtonBindings();
+    }
+
+    // Allows for a (mock) controller to be injected
+    public RobotContainer(Joystick controller, DriveTrain train) {
+        this.m_controller = controller;
+        this.m_drivetrain = train;
+
         configureButtonBindings();
     }
 
@@ -45,8 +54,9 @@ public class RobotContainer {
      * verify(f.getMotor(1)).set(0.8); * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
-        new JoystickButton(m_controller, XboxController.Button.kStickLeft.value)
-                .whenActive(new Drive(this.m_drivetrain, m_controller.getY(GenericHID.Hand.kLeft), m_controller.getX(GenericHID.Hand.kRight)));
+        new JoystickButton(m_controller, Joystick.AxisType.kThrottle.value)
+                .or(new JoystickButton(m_controller, Joystick.AxisType.kTwist.value))
+                .whenActive(new Drive(this.m_drivetrain, m_controller));
     }
 
 
