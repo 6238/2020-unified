@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
+import frc.robot.helpers.RobotInjection;
 import frc.robot.helpers.TestableCommand;
 import frc.robot.subsystems.DriveTrain;
 import static org.junit.Assert.*;
@@ -29,7 +30,10 @@ public class DriveTest {
         when(this.controller.getDirectionRadians()).thenReturn(0.0);
         TestableCommand.activateTestMode();
 
-        this.container = new RobotContainer(this.controller, dr);
+        var injection = new RobotInjection();
+        injection.joystick = this.controller;
+        injection.driveTrain = this.dr;
+        this.container = new RobotContainer(injection);
         this.robot = new Robot(this.container);
     }
 

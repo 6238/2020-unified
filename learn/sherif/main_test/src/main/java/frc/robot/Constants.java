@@ -18,6 +18,11 @@ package frc.robot;
 public final class Constants {
     public static final int FRONT_MOTOR = 0;
     public static final int BACK_MOTOR = 1;
-    public static final int CONTROLLER = 10;
-    public static final int LEFT_STICK_BUTTON = 1;
+
+
+    // Elevator ID's
+    public static final int THROAT_LEFT = 5;
+    public static final int THROAT_RIGHT = 6;
+    public static final int ELEVATOR_LEFT = 7;
+    public static final int ELEVATOR_RIGHT = 8;
 }

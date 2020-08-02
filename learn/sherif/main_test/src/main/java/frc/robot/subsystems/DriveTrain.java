@@ -9,8 +9,8 @@ import java.math.RoundingMode;
 import static frc.robot.Constants.*;
 
 public class DriveTrain extends SubsystemBase {
-    private SpeedController left;
-    private SpeedController right;
+    private final SpeedController left;
+    private final SpeedController right;
 
     public DriveTrain(Factory f) {
         this.left = f.getSparkMotor(FRONT_MOTOR);

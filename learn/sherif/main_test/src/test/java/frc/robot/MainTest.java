@@ -13,8 +13,7 @@ import static org.mockito.Mockito.*;
 public class MainTest {
     Factory f;
 
-    @Mock
-    CANSparkMaxInterface third;
+    @Mock CANSparkMaxInterface third;
 
     @Before
     public void setup() {
