@@ -17,21 +17,22 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  * Shuffleboard Boolean ToggleButton Trigger
  */
 public class ToggleButton extends Trigger {
-    private boolean value;
-    private NetworkTableEntry toggleButtonEntry;
+	private boolean value;
+	private NetworkTableEntry toggleButtonEntry;
 
-    public ToggleButton(String buttonName, boolean defaultValue) {
-        value = defaultValue;
-        toggleButtonEntry = Constants.kTab.add(buttonName, defaultValue).withWidget(BuiltInWidgets.kToggleButton).getEntry();
-    }
+	public ToggleButton(String buttonName, boolean defaultValue) {
+		value = defaultValue;
+		toggleButtonEntry = Constants.kTab.add(buttonName, defaultValue).withWidget(BuiltInWidgets.kToggleButton)
+				.getEntry();
+	}
 
-    public NetworkTableEntry getEntry() {
-        return toggleButtonEntry;
-    }
+	public NetworkTableEntry getEntry() {
+		return toggleButtonEntry;
+	}
 
-    @Override
-    public boolean get() {
-        value = toggleButtonEntry.getBoolean(value);
-        return value;
-    }
+	@Override
+	public boolean get() {
+		value = toggleButtonEntry.getBoolean(value);
+		return value;
+	}
 }

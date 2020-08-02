@@ -4,6 +4,8 @@ import json
 import sys
 import time
 
+import numpy
+
 import cv2 as cv
 import numpy as np
 from networktables import NetworkTablesInstance

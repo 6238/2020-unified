@@ -1,7 +1,7 @@
-package frc.robot;
+package frc.robot.helpers;
 
-import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
+import frc.robot.interfaces.CANSparkMaxInterface;
 
 public class MockableSparkMax extends CANSparkMax implements CANSparkMaxInterface {
     /**

@@ -19,4 +19,5 @@ public final class Constants {
     public static final int FRONT_MOTOR = 0;
     public static final int BACK_MOTOR = 1;
     public static final int CONTROLLER = 10;
+    public static final int LEFT_STICK_BUTTON = 1;
 }
