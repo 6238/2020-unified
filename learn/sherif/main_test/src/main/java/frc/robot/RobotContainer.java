@@ -70,7 +70,8 @@ public class RobotContainer {
         if (this.m_drivetrain != null) {
             new JoystickButton(m_controller, Joystick.AxisType.kThrottle.value)
                     .or(new JoystickButton(m_controller, Joystick.AxisType.kTwist.value))
-                    .whenActive(new Drive(this.m_drivetrain, m_controller));
+                    .whenActive(new Drive(this.m_drivetrain, m_controller))
+                    .whenInactive(new Drive(this.m_drivetrain, 0, 0));
         }
         if (this.m_intake != null) {
             new JoystickButton(m_controller, Joystick.ButtonType.kTop.value)
