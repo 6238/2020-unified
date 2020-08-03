@@ -7,15 +7,11 @@
 
 package frc.robot.subsystems;
 
-import java.util.Map;
-
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Slider;
 import frc.robot.Constants.Intake;
-import frc.robot.Constants.OIConstants;
 
 public class IntakeSubsystem extends SubsystemBase {
 	WPI_TalonSRX m_left;
@@ -25,10 +21,8 @@ public class IntakeSubsystem extends SubsystemBase {
 	private double innerSpeed = Intake.kStartingInnerSpeed;
 	private double outerSpeed = Intake.kStartingOuterSpeed;
 
-	private final NetworkTableEntry kInnerSpeedEntry = OIConstants.kTab.add("innerSpeed", innerSpeed)
-			.withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", -1, "max", 1)).getEntry();
-	private final NetworkTableEntry kOuterSpeedEntry = OIConstants.kTab.add("outerSpeed", outerSpeed)
-			.withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", -1, "max", 1)).getEntry();
+	private final Slider kInnerSpeedSlider = new Slider("innerSpeed", innerSpeed, -1, 1);
+	private final Slider kOuterSpeedSlider = new Slider("outerSpeed", outerSpeed, -1, 1);
 
 	public IntakeSubsystem(Factory f) {
 		m_left = f.createTalon(Intake.kIntakeLeftTalon);
@@ -45,8 +39,8 @@ public class IntakeSubsystem extends SubsystemBase {
 
 	@Override
 	public void periodic() {
-		innerSpeed = kInnerSpeedEntry.getDouble(innerSpeed);
-		outerSpeed = kOuterSpeedEntry.getDouble(outerSpeed);
+		innerSpeed = kInnerSpeedSlider.get();
+		outerSpeed = kOuterSpeedSlider.get();
 	}
 
 	public void in() {
