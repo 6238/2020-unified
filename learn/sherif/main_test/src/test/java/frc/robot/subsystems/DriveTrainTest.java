@@ -42,7 +42,7 @@ public class DriveTrainTest {
     public void TestDrive() {
         this.driveTrain.drive(0.5, 0.2);
 
-        verify(left_front).set(0.3);
-        verify(right_front).set(0.7);
+        verify(left_front).set(0.5);
+        verify(right_front).set(0.3);
     }
 }

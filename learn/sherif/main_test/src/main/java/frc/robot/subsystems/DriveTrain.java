@@ -39,7 +39,7 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public void drive(double xSpeed, double rot) {
-        this.differentialDrive.tankDrive(xSpeed-rot, xSpeed+rot, false);
+        this.differentialDrive.arcadeDrive(xSpeed, rot, false);
     }
 
     public void brake() {
