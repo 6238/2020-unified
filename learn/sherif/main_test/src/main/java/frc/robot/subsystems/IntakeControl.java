@@ -1,20 +1,22 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.PWMTalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class IntakeControl extends SubsystemBase {
-    private final PWMTalonSRX m_throat_left;
-    private final PWMTalonSRX m_throat_right;
-    private final PWMTalonSRX m_elevator_left;
-    private final PWMTalonSRX m_elevator_right;
+    private final WPI_TalonSRX m_throat_left;
+    private final WPI_TalonSRX m_throat_right;
+    private final WPI_TalonSRX m_elevator_left;
+    private final WPI_TalonSRX m_elevator_right;
 
     public IntakeControl(Factory f) {
-        this.m_throat_left = f.getTalonMotor(Constants.THROAT_LEFT);
-        this.m_throat_right = f.getTalonMotor(Constants.THROAT_RIGHT);
-        this.m_elevator_left = f.getTalonMotor(Constants.ELEVATOR_LEFT);
-        this.m_elevator_right = f.getTalonMotor(Constants.ELEVATOR_RIGHT);
+        this.m_throat_left = f.getTalonMotor(Constants.THROAT_FRONT);
+        this.m_throat_right = f.getTalonMotor(Constants.THROAT_BACK);
+        this.m_elevator_left = f.getTalonMotor(Constants.ELEVATOR_FRONT);
+        this.m_elevator_right = f.getTalonMotor(Constants.ELEVATOR_BACK);
     }
 
     public void setThroatSpeed(double speed) {

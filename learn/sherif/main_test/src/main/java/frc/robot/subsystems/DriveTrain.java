@@ -7,31 +7,33 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import static frc.robot.Constants.*;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 public class DriveTrain extends SubsystemBase {
-    private final SpeedController leftFront;
-    private final SpeedController leftMid;
-    private final SpeedController leftEnd;
+    private final WPI_TalonSRX leftA;
+    private final WPI_TalonSRX leftB;
+    private final WPI_TalonSRX leftC;
 
     private final SpeedControllerGroup left;
 
-    private final SpeedController rightFront;
-    private final SpeedController rightMid;
-    private final SpeedController rightEnd;
+    private final WPI_TalonSRX rightA;
+    private final WPI_TalonSRX rightB;
+    private final WPI_TalonSRX rightC;
 
     private final SpeedControllerGroup right;
 
     private final DifferentialDrive differentialDrive;
 
     public DriveTrain(Factory f) {
-        this.leftFront = f.getTalonMotor(LEFT_FRONT);
-        this.leftMid = f.getTalonMotor(LEFT_MID);
-        this.leftEnd = f.getTalonMotor(LEFT_END);
-        this.left = new SpeedControllerGroup(this.leftFront, this.leftMid, this.leftEnd);
+        this.leftA = f.getTalonMotor(LEFT_MOTOR_A);
+        this.leftB = f.getTalonMotor(LEFT_MOTOR_B);
+        this.leftC = f.getTalonMotor(LEFT_MOTOR_C);
+        this.left = new SpeedControllerGroup(this.leftA, this.leftB, this.leftC);
 
-        this.rightFront = f.getTalonMotor(RIGHT_FRONT);
-        this.rightMid = f.getTalonMotor(RIGHT_MID);
-        this.rightEnd = f.getTalonMotor(RIGHT_END);
-        this.right = new SpeedControllerGroup(this.rightFront, this.rightMid, this.rightEnd);
+        this.rightA = f.getTalonMotor(RIGHT_MOTOR_A);
+        this.rightB = f.getTalonMotor(RIGHT_MOTOR_B);
+        this.rightC = f.getTalonMotor(RIGHT_MOTOR_C);
+        this.right = new SpeedControllerGroup(this.rightA, this.rightB, this.rightC);
         this.right.setInverted(true);
 
         this.differentialDrive = new DifferentialDrive(this.left, this.right);

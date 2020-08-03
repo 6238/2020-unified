@@ -7,23 +7,26 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.*;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import frc.robot.Constants;
 
 public class IntakeControlTest {
     @Mock Factory f;
-    @Mock PWMTalonSRX er;
-    @Mock PWMTalonSRX el;
-    @Mock PWMTalonSRX tr;
-    @Mock PWMTalonSRX tl;
+    @Mock WPI_TalonSRX er;
+    @Mock WPI_TalonSRX el;
+    @Mock WPI_TalonSRX tr;
+    @Mock WPI_TalonSRX tl;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
 
-        when(f.getTalonMotor(Constants.THROAT_RIGHT)).thenReturn(tr);
-        when(f.getTalonMotor(Constants.THROAT_LEFT)).thenReturn(tl);
-        when(f.getTalonMotor(Constants.ELEVATOR_RIGHT)).thenReturn(er);
-        when(f.getTalonMotor(Constants.ELEVATOR_LEFT)).thenReturn(el);
+        when(f.getTalonMotor(Constants.THROAT_BACK)).thenReturn(tr);
+        when(f.getTalonMotor(Constants.THROAT_FRONT)).thenReturn(tl);
+        when(f.getTalonMotor(Constants.ELEVATOR_BACK)).thenReturn(er);
+        when(f.getTalonMotor(Constants.ELEVATOR_FRONT)).thenReturn(el);
     }
 
     @Test
