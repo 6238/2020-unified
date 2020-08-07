@@ -1,11 +1,10 @@
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMaxLowLevel;
-import edu.wpi.first.wpilibj.PWMTalonSRX;
-import frc.robot.interfaces.CANSparkMaxInterface;
-import frc.robot.helpers.MockableSparkMax;
-import com.ctre.phoenix.*;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.CANSparkMaxLowLevel;
+import edu.wpi.first.wpilibj.Solenoid;
+import frc.robot.helpers.MockableSparkMax;
+import frc.robot.interfaces.CANSparkMaxInterface;
 
 public class Factory {
     /**
@@ -24,5 +23,9 @@ public class Factory {
      */
     public WPI_TalonSRX getTalonMotor(int busID) {
         return new WPI_TalonSRX(busID);
+    }
+
+    public Solenoid getSolenoid(int busID) {
+        return new Solenoid(busID);
     }
 }

@@ -17,17 +17,18 @@ package frc.robot;
  */
 public final class Constants {
     // Drive Motors
-    public static final int LEFT_MOTOR_A = 0;
-    public static final int LEFT_MOTOR_B = 1;
-    public static final int LEFT_MOTOR_C = 2;
+    public static final int DRIVE_LEFT_MOTOR_A = 0;
+    public static final int DRIVE_LEFT_MOTOR_B = 1;
+    public static final int DRIVE_LEFT_MOTOR_C = 2;
 
-    public static final int RIGHT_MOTOR_A = 20;
-    public static final int RIGHT_MOTOR_B = 21;
-    public static final int RIGHT_MOTOR_C = 22;
+    public static final int DRIVE_RIGHT_MOTOR_A = 20;
+    public static final int DRIVE_RIGHT_MOTOR_B = 21;
+    public static final int DRIVE_RIGHT_MOTOR_C = 22;
 
     // Elevator ID's
     public static final int THROAT_FRONT = 5;
     public static final int THROAT_BACK = 6;
     public static final int ELEVATOR_FRONT = 7;
     public static final int ELEVATOR_BACK = 8;
+    public static final int INTAKE_SOLENOID = 10;
 }

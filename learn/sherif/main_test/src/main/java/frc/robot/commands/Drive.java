@@ -1,7 +1,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.helpers.TestableCommand;
 import frc.robot.subsystems.DriveTrain;
 
@@ -14,7 +13,7 @@ public class Drive extends TestableCommand {
     private boolean m_finished = false;
     private double m_speed;
     private double m_rot;
-    private Joystick controller;
+    private Joystick m_controller;
 
     /**
      * Takes in a speed and a rotation for a one time command
@@ -40,7 +39,7 @@ public class Drive extends TestableCommand {
     public Drive(DriveTrain dr, Joystick controller) {
 
         m_driveTrain = dr;
-        this.controller = controller;
+        this.m_controller = controller;
 
 
         addRequirements(dr);
@@ -48,9 +47,9 @@ public class Drive extends TestableCommand {
 
     @Override
     public void execute() {
-        if (controller != null) {
-            m_speed = controller.getThrottle();
-            m_rot = controller.getDirectionRadians();
+        if (m_controller != null) {
+            m_speed = m_controller.getThrottle();
+            m_rot = m_controller.getDirectionRadians();
         }
         m_driveTrain.drive(m_speed, m_rot);
         m_finished = true;
@@ -58,6 +57,6 @@ public class Drive extends TestableCommand {
 
     @Override
     public boolean isFinished() {
-        return m_finished;
+        return m_finished && (this.m_controller == null);
     }
 }
