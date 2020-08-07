@@ -8,7 +8,7 @@ Run `./update` in the root (2020-unified) directory to update all submodules (ma
 1. [Installations](#installations)
 2. [Setup for Vision](#setup-for-vision)
 3. [Sample Repositories](#sample-repositories)
-3. [Using WPILib and Visual Studio Code](#using-wpilib-and-visual-studio-code)
+4. [Using WPILib and Visual Studio Code](#using-wpilib-and-visual-studio-code)
 
 
 ## Installations
