@@ -5,6 +5,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.helpers.TestableCommand;
 import frc.robot.subsystems.DriveTrain;
 
+/**
+ * Drive command for a two motor system
+ * @author sherif
+ */
 public class Drive extends TestableCommand {
     private final DriveTrain m_driveTrain;
     private boolean m_finished = false;
@@ -12,6 +16,12 @@ public class Drive extends TestableCommand {
     private double m_rot;
     private Joystick controller;
 
+    /**
+     * Takes in a speed and a rotation for a one time command
+     * @param dr The robot's drivetrain
+     * @param speed The speed to move at
+     * @param rot The rotation to use
+     */
     public Drive(DriveTrain dr, double speed, double rot) {
 
         m_driveTrain = dr;
@@ -22,6 +32,11 @@ public class Drive extends TestableCommand {
         addRequirements(dr);
     }
 
+    /**
+     * Takes in a speed
+     * @param dr The robot's drivetrain
+     * @param controller The joystick controller to use
+     */
     public Drive(DriveTrain dr, Joystick controller) {
 
         m_driveTrain = dr;

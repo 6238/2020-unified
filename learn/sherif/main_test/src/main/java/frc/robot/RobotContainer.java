@@ -9,14 +9,16 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Drive;
+import frc.robot.commands.Intake;
+import frc.robot.helpers.RobotInjection;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Factory;
-
-import static frc.robot.Constants.*;
+import frc.robot.subsystems.IntakeControl;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -26,25 +28,36 @@ import static frc.robot.Constants.*;
  */
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
-    private Factory m_f = new Factory();
-    private DriveTrain m_drivetrain;
-    private Joystick m_controller;
+    public Factory factory = new Factory();
+    private DriveTrain m_drivetrain = null;
+    private Joystick m_controller = null;
+    private IntakeControl m_intake = null;
 
     /**
      * The container for the robot.  Contains subsystems, OI devices, and commands.
      */
     public RobotContainer() {
         // Configure the button bindings
+        this.m_drivetrain = new DriveTrain(factory);
+        this.m_controller = new Joystick(0);
         configureButtonBindings();
     }
 
     // Allows for a (mock) controller to be injected
-    public RobotContainer(Joystick controller, DriveTrain train) {
-        this.m_controller = controller;
-        this.m_drivetrain = train;
+    public RobotContainer(RobotInjection injection) {
+        if (injection.joystick != null) {
+            this.m_controller = injection.joystick;
+        }
+        if (injection.driveTrain != null) {
+            this.m_drivetrain = injection.driveTrain;
+        }
+        if (injection.intakeControl != null) {
+            this.m_intake = injection.intakeControl;
+        }
 
         configureButtonBindings();
     }
+
 
     /**
      * Use this method to define your button->command mappings.  Buttons can be created by
@@ -54,9 +67,16 @@ public class RobotContainer {
      * verify(f.getMotor(1)).set(0.8); * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
-        new JoystickButton(m_controller, Joystick.AxisType.kThrottle.value)
-                .or(new JoystickButton(m_controller, Joystick.AxisType.kTwist.value))
-                .whenActive(new Drive(this.m_drivetrain, m_controller));
+        if (this.m_drivetrain != null) {
+            new JoystickButton(m_controller, Joystick.AxisType.kThrottle.value)
+                    .or(new JoystickButton(m_controller, Joystick.AxisType.kTwist.value))
+                    .whenActive(new Drive(this.m_drivetrain, m_controller))
+                    .whenInactive(new Drive(this.m_drivetrain, 0, 0));
+        }
+        if (this.m_intake != null) {
+            new JoystickButton(m_controller, Joystick.ButtonType.kTop.value)
+                    .whenPressed(new Intake(this.m_intake, new Timer()));
+        }
     }
 
 

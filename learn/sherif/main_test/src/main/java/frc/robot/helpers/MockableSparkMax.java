@@ -14,6 +14,5 @@ public class MockableSparkMax extends CANSparkMax implements CANSparkMaxInterfac
      */
     public MockableSparkMax(int deviceID, MotorType type) {
         super(deviceID, type);
-
     }
 }
