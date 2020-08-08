@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Drive;
 import frc.robot.commands.Intake;
@@ -34,6 +35,8 @@ public class RobotContainer {
     @Nullable private final DriveTrain m_drivetrain;
     @Nullable private final Joystick m_controller;
     @Nullable private final IntakeControl m_intake;
+
+    @Nullable private Drive m_drive_command = null;
 
     /**
      * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -80,6 +83,16 @@ public class RobotContainer {
         }
     }
 
+    public void startDrive() {
+        if (this.m_drivetrain != null) {
+            this.m_drive_command =new Drive(this.m_drivetrain, this.m_controller);
+            CommandScheduler.getInstance().schedule(this.m_drive_command);
+        }
+    }
+
+    public void stopDrive() {
+        CommandScheduler.getInstance().cancel(this.m_drive_command);
+    }
 
     /**
      * Use this to pass the autonomous command to the main {@link Robot} class.

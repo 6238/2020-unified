@@ -11,24 +11,24 @@ public class IntakeControl extends SubsystemBase {
     private final WPI_TalonSRX m_throat_right;
     private final WPI_TalonSRX m_elevator_left;
     private final WPI_TalonSRX m_elevator_right;
-    private final Solenoid m_solenoid;
+    private double m_throat_speed = 0.0;
+    private double m_elevator_speed = 0.0;
+    private final Solenoid m_solenoid = null;
 
     public IntakeControl(Factory f) {
         this.m_throat_left = f.getTalonMotor(Constants.THROAT_FRONT);
         this.m_throat_right = f.getTalonMotor(Constants.THROAT_BACK);
         this.m_elevator_left = f.getTalonMotor(Constants.ELEVATOR_FRONT);
         this.m_elevator_right = f.getTalonMotor(Constants.ELEVATOR_BACK);
-        this.m_solenoid = f.getSolenoid(Constants.INTAKE_SOLENOID);
+//        this.m_solenoid = f.getSolenoid(Constants.INTAKE_SOLENOID);
     }
 
     public void setThroatSpeed(double speed) {
-        this.m_throat_left.set(speed);
-        this.m_throat_right.set(-speed);
+        this.m_throat_speed = speed;
     }
 
     public void setElevatorSpeed(double speed) {
-        this.m_elevator_left.set(speed);
-        this.m_elevator_right.set(speed);
+        this.m_elevator_speed = speed;
     }
 
     public void activateSolenoid() {
@@ -42,5 +42,14 @@ public class IntakeControl extends SubsystemBase {
     public void stop() {
         this.setThroatSpeed(0.0);
         this.setElevatorSpeed(0.0);
+    }
+
+    @Override
+    public void periodic() {
+        this.m_throat_left.set(this.m_throat_speed);
+        this.m_throat_right.set(-this.m_throat_speed);
+
+        this.m_elevator_left.set(this.m_elevator_speed);
+        this.m_elevator_right.set(this.m_elevator_speed);
     }
 }

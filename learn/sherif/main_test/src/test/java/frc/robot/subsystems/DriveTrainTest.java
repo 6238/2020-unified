@@ -7,8 +7,8 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.AdditionalMatchers.*;
+import static org.mockito.Mockito.*;
 
 public class DriveTrainTest {
     @Mock Factory f;
@@ -40,12 +40,13 @@ public class DriveTrainTest {
     @Test
     public void TestDrive() {
         this.driveTrain.drive(0.5, 0.2);
-
-        verify(left_front).set(0.5);
-        verify(right_front).set(0.3);
+        left_front.set(and(leq(0.51), geq(0.49)));
+        right_front.set(and(leq(-0.29), geq(-0.31)));
+        reset(this.left_front);
+        reset(this.right_front);
 
         this.driveTrain.brake();
         verify(left_front).set(0.0);
-        verify(right_front).set(0.0);
+        verify(right_front).set(-0.0);
     }
 }

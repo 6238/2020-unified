@@ -22,6 +22,9 @@ public class DriveTrain extends SubsystemBase {
 
     private final DifferentialDrive differentialDrive;
 
+    private double m_x_speed = 0.0;
+    private double m_rot = 0.0;
+
     public DriveTrain(Factory f) {
         this.m_left_a = f.getTalonMotor(DRIVE_LEFT_MOTOR_A);
         this.m_left_b = f.getTalonMotor(DRIVE_LEFT_MOTOR_B);
@@ -32,17 +35,23 @@ public class DriveTrain extends SubsystemBase {
         this.m_right_b = f.getTalonMotor(DRIVE_RIGHT_MOTOR_B);
         this.m_right_c = f.getTalonMotor(DRIVE_RIGHT_MOTOR_C);
         this.right = new SpeedControllerGroup(this.m_right_a, this.m_right_b, this.m_right_c);
-        this.right.setInverted(true);
+//        this.right.setInverted(true);
 
         this.differentialDrive = new DifferentialDrive(this.left, this.right);
-        this.differentialDrive.setDeadband(0.0);
+//        this.differentialDrive.setDeadband(0.0);
     }
 
     public void drive(double xSpeed, double rot) {
-        this.differentialDrive.arcadeDrive(xSpeed, rot, false);
+        this.m_x_speed = xSpeed;
+        this.m_rot = rot;
+    }
+
+    @Override
+    public void periodic() {
+        this.differentialDrive.arcadeDrive(this.m_x_speed,this.m_rot, false);
     }
 
     public void brake() {
-        this.differentialDrive.tankDrive(0, 0, false);
+        this.differentialDrive.tankDrive(0.0, 0.0, false);
     }
 }

@@ -41,6 +41,9 @@ public class Drive extends TestableCommand {
         m_driveTrain = dr;
         this.m_controller = controller;
 
+        this.m_speed = 0.0;
+        this.m_rot = 0.0;
+
 
         addRequirements(dr);
     }
