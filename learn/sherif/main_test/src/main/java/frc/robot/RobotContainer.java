@@ -31,9 +31,9 @@ import javax.annotation.Nullable;
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
     public Factory factory = new Factory();
-    @Nullable private DriveTrain m_drivetrain;
-    @Nullable private Joystick m_controller;
-    @Nullable private IntakeControl m_intake;
+    @Nullable private final DriveTrain m_drivetrain;
+    @Nullable private final Joystick m_controller;
+    @Nullable private final IntakeControl m_intake;
 
     /**
      * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -41,7 +41,7 @@ public class RobotContainer {
     public RobotContainer() {
         // Configure the button bindings
         this.m_drivetrain = new DriveTrain(factory);
-        this.m_controller = new Joystick(0);
+        this.m_controller = new Joystick(Constants.JOYSTICK_A);
         this.m_intake = new IntakeControl(factory);
 
         configureButtonBindings();

@@ -1,14 +1,14 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import frc.robot.Constants;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.mockito.Mockito.*;
-
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class DriveTrainTest {
     @Mock Factory f;
@@ -43,5 +43,9 @@ public class DriveTrainTest {
 
         verify(left_front).set(0.5);
         verify(right_front).set(0.3);
+
+        this.driveTrain.brake();
+        verify(left_front).set(0.0);
+        verify(right_front).set(0.0);
     }
 }

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="api-java-5.18.31">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/WPLIB/maven/com/ctre/phoenix/api-java/5.18.3/api-java-5.18.3.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/WPLIB/maven/com/ctre/phoenix/api-java/5.18.3/api-java-5.18.3-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/WPLIB/maven/com/ctre/phoenix/api-java/5.18.3/api-java-5.18.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
