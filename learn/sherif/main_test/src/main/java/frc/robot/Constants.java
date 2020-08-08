@@ -17,19 +17,19 @@ package frc.robot;
  */
 public final class Constants {
     // Drive Motors
-    public static final int DRIVE_LEFT_MOTOR_A = 0;
-    public static final int DRIVE_LEFT_MOTOR_B = 1;
-    public static final int DRIVE_LEFT_MOTOR_C = 2;
+    public static final int DRIVE_LEFT_MOTOR_A = 34;
+    public static final int DRIVE_LEFT_MOTOR_B = 35;
+    public static final int DRIVE_LEFT_MOTOR_C = 36;
 
-    public static final int DRIVE_RIGHT_MOTOR_A = 20;
-    public static final int DRIVE_RIGHT_MOTOR_B = 21;
-    public static final int DRIVE_RIGHT_MOTOR_C = 22;
+    public static final int DRIVE_RIGHT_MOTOR_A = 22;
+    public static final int DRIVE_RIGHT_MOTOR_B = 23;
+    public static final int DRIVE_RIGHT_MOTOR_C = 24;
 
     // Elevator ID's
-    public static final int THROAT_FRONT = 5;
-    public static final int THROAT_BACK = 6;
-    public static final int ELEVATOR_FRONT = 7;
-    public static final int ELEVATOR_BACK = 8;
+    public static final int THROAT_FRONT = 20;
+    public static final int THROAT_BACK = 30;
+    public static final int ELEVATOR_FRONT = 32;
+    public static final int ELEVATOR_BACK = 33;
     public static final int INTAKE_SOLENOID = 10;
 
     // Joysticks
