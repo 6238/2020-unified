@@ -20,6 +20,8 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Factory;
 import frc.robot.subsystems.IntakeControl;
 
+import javax.annotation.Nullable;
+
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -29,9 +31,9 @@ import frc.robot.subsystems.IntakeControl;
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
     public Factory factory = new Factory();
-    private DriveTrain m_drivetrain = null;
-    private Joystick m_controller = null;
-    private IntakeControl m_intake = null;
+    @Nullable private final DriveTrain m_drivetrain;
+    @Nullable private final Joystick m_controller;
+    @Nullable private final IntakeControl m_intake;
 
     /**
      * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -39,21 +41,17 @@ public class RobotContainer {
     public RobotContainer() {
         // Configure the button bindings
         this.m_drivetrain = new DriveTrain(factory);
-        this.m_controller = new Joystick(0);
+        this.m_controller = new Joystick(Constants.JOYSTICK_A);
+        this.m_intake = new IntakeControl(factory);
+
         configureButtonBindings();
     }
 
     // Allows for a (mock) controller to be injected
     public RobotContainer(RobotInjection injection) {
-        if (injection.joystick != null) {
-            this.m_controller = injection.joystick;
-        }
-        if (injection.driveTrain != null) {
-            this.m_drivetrain = injection.driveTrain;
-        }
-        if (injection.intakeControl != null) {
-            this.m_intake = injection.intakeControl;
-        }
+        this.m_controller = injection.joystick;
+        this.m_drivetrain = injection.driveTrain;
+        this.m_intake = injection.intakeControl;
 
         configureButtonBindings();
     }
@@ -67,12 +65,15 @@ public class RobotContainer {
      * verify(f.getMotor(1)).set(0.8); * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
+        if (this.m_controller == null) return;
+
         if (this.m_drivetrain != null) {
             new JoystickButton(m_controller, Joystick.AxisType.kThrottle.value)
                     .or(new JoystickButton(m_controller, Joystick.AxisType.kTwist.value))
                     .whenActive(new Drive(this.m_drivetrain, m_controller))
                     .whenInactive(new Drive(this.m_drivetrain, 0, 0));
         }
+
         if (this.m_intake != null) {
             new JoystickButton(m_controller, Joystick.ButtonType.kTop.value)
                     .whenPressed(new Intake(this.m_intake, new Timer()));

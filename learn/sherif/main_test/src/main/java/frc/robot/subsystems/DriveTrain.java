@@ -1,6 +1,6 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.SpeedController;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -8,30 +8,30 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static frc.robot.Constants.*;
 
 public class DriveTrain extends SubsystemBase {
-    private final SpeedController leftFront;
-    private final SpeedController leftMid;
-    private final SpeedController leftEnd;
+    private final WPI_TalonSRX m_left_a;
+    private final WPI_TalonSRX m_left_b;
+    private final WPI_TalonSRX m_left_c;
 
     private final SpeedControllerGroup left;
 
-    private final SpeedController rightFront;
-    private final SpeedController rightMid;
-    private final SpeedController rightEnd;
+    private final WPI_TalonSRX m_right_a;
+    private final WPI_TalonSRX m_right_b;
+    private final WPI_TalonSRX m_right_c;
 
     private final SpeedControllerGroup right;
 
     private final DifferentialDrive differentialDrive;
 
     public DriveTrain(Factory f) {
-        this.leftFront = f.getTalonMotor(LEFT_FRONT);
-        this.leftMid = f.getTalonMotor(LEFT_MID);
-        this.leftEnd = f.getTalonMotor(LEFT_END);
-        this.left = new SpeedControllerGroup(this.leftFront, this.leftMid, this.leftEnd);
+        this.m_left_a = f.getTalonMotor(DRIVE_LEFT_MOTOR_A);
+        this.m_left_b = f.getTalonMotor(DRIVE_LEFT_MOTOR_B);
+        this.m_left_c = f.getTalonMotor(DRIVE_LEFT_MOTOR_C);
+        this.left = new SpeedControllerGroup(this.m_left_a, this.m_left_b, this.m_left_c);
 
-        this.rightFront = f.getTalonMotor(RIGHT_FRONT);
-        this.rightMid = f.getTalonMotor(RIGHT_MID);
-        this.rightEnd = f.getTalonMotor(RIGHT_END);
-        this.right = new SpeedControllerGroup(this.rightFront, this.rightMid, this.rightEnd);
+        this.m_right_a = f.getTalonMotor(DRIVE_RIGHT_MOTOR_A);
+        this.m_right_b = f.getTalonMotor(DRIVE_RIGHT_MOTOR_B);
+        this.m_right_c = f.getTalonMotor(DRIVE_RIGHT_MOTOR_C);
+        this.right = new SpeedControllerGroup(this.m_right_a, this.m_right_b, this.m_right_c);
         this.right.setInverted(true);
 
         this.differentialDrive = new DifferentialDrive(this.left, this.right);
