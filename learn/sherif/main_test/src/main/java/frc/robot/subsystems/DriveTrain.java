@@ -42,6 +42,8 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public void drive(double xSpeed, double rot) {
+//        System.out.print("Recieved updated command from command ");
+//        System.out.println("Inputs: xSpeed: " + xSpeed + " rot: " + rot );
         this.m_x_speed = xSpeed;
         this.m_rot = rot;
     }

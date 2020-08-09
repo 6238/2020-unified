@@ -51,15 +51,16 @@ public class Drive extends TestableCommand {
     @Override
     public void execute() {
         if (m_controller != null) {
-            m_speed = m_controller.getThrottle();
-            m_rot = m_controller.getDirectionRadians();
+            m_speed = -m_controller.getY();
+            m_rot = m_controller.getTwist();
         }
+//        System.out.println("Robot Speed is: " + m_speed);
+//        System.out.println("Robot Rotation is: " + m_rot);
         m_driveTrain.drive(m_speed, m_rot);
-        m_finished = true;
     }
 
     @Override
     public boolean isFinished() {
-        return m_finished && (this.m_controller == null);
+        return false;
     }
 }

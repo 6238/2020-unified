@@ -37,7 +37,7 @@ public class IntakeTest {
 
     @Test
     public void TestIntake() {
-        var intake = new Intake(intakeControl, timer);
+        var intake = new Intake(intakeControl, null);
 
         when(timer.get()).thenReturn(0.0);
         intake.execute();
