@@ -7,7 +7,8 @@ Run `./update` in the root (2020-unified) directory to update all submodules (ma
 ## Table of Contents
 1. [Installations](#installations)
 2. [Setup for Vision](#setup-for-vision)
-3. [Using WPILib and Visual Studio Code](#using-wpilib-and-visual-studio-code)
+3. [Sample Repositories](#sample-repositories)
+4. [Using WPILib and Visual Studio Code](#using-wpilib-and-visual-studio-code)
 
 
 ## Installations
@@ -66,6 +67,14 @@ https://docs.wpilib.org/en/latest/docs/software/wpilib-overview/3rd-party-librar
 #### (Windows only, optional)
 Necessary to configure Spark MAX's.
 https://www.revrobotics.com/sparkmax-software/#spark-max-client-application
+
+## Sample Repositories
+List of repositories with example code:
+- http://github.com/wpilibsuite/frc-docs
+- http://github.com/wpilibsuite/allwpilib
+- http://github.com/REVrobotics/SPARK-MAX-Examples
+- http://github.com/REVrobotics/Color-Sensor-v3-Examples
+- http://github.com/CrossTheRoadElec/Phoenix-Examples-Languages
 
 ## Setup for Vision
 The recommended method to run vision code is on a Raspberry Pi. However, if this is not a viable option, it is possible to run your code on a Mac or PC. To setup run environments, continue to the section corresponding to your use case.

@@ -35,17 +35,17 @@ public class DriveTrain extends SubsystemBase {
         this.m_right_b = f.getTalonMotor(DRIVE_RIGHT_MOTOR_B);
         this.m_right_c = f.getTalonMotor(DRIVE_RIGHT_MOTOR_C);
         this.right = new SpeedControllerGroup(this.m_right_a, this.m_right_b, this.m_right_c);
-//        this.right.setInverted(true);
 
         this.differentialDrive = new DifferentialDrive(this.left, this.right);
-//        this.differentialDrive.setDeadband(0.0);
     }
 
     public void drive(double xSpeed, double rot) {
-//        System.out.print("Recieved updated command from command ");
-//        System.out.println("Inputs: xSpeed: " + xSpeed + " rot: " + rot );
         this.m_x_speed = xSpeed;
         this.m_rot = rot;
+    }
+
+    public void setMaxSpeed(double maxSpeed) {
+        this.differentialDrive.setMaxOutput(maxSpeed);
     }
 
     @Override
