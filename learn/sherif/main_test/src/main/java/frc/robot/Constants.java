@@ -31,7 +31,14 @@ public final class Constants {
     public static final int ELEVATOR_FRONT = 32;
     public static final int ELEVATOR_BACK = 33;
     public static final int INTAKE_SOLENOID = 10;
+    public static final int FEEDER = 21;
 
     // Joysticks
     public static final int JOYSTICK_A = 0;
+
+    // Joystick buttons
+    public static final int JOYSTICK_BUTTON_3 = 3;
+    public static final int JOYSTICK_BUTTON_4 = 4;
+    public static final int JOYSTICK_BUTTON_5 = 5;
+    public static final int JOYSTICK_BUTTON_6 = 6;
 }

@@ -1,19 +1,26 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.helpers.TestableCommand;
 import frc.robot.subsystems.IntakeControl;
+
+import static frc.robot.Constants.*;
 
 /**
  * The command to intake a ball
  * @author sherif
  */
 public class Intake extends TestableCommand {
-    public static final double THROAT_SPEED = 0.5;
-    public static final double ELEVATOR_SPEED = 0.5;
+    public static final double THROAT_SPEED = 1.0;
+    public static final double ELEVATOR_SPEED = -1.0;
+    public static final double FEEDER_SPEED = 1.0;
+    public boolean elevatorLeft = false;
+    public boolean elevatorRight = false;
+    public boolean throat = false;
+    public boolean feeder = false;
 
     private final IntakeControl m_intakeControl;
-    private final Timer m_timer;
+    private final Joystick m_joystick;
 
     private int m_state = 0;
     private double m_nextTime = 0;
@@ -21,53 +28,31 @@ public class Intake extends TestableCommand {
     /**
      * Creates and starts an intake
      * @param intakeControl the IntakeControl subsystem
-     * @param timer a timer to keep track of time
      */
-    public Intake(IntakeControl intakeControl, Timer timer) {
-        this.m_timer = timer;
-        this.m_timer.reset();
-        this.m_timer.start();
+    public Intake(IntakeControl intakeControl, Joystick joystick) {
 
         this.m_intakeControl = intakeControl;
+        this.m_joystick = joystick;
         addRequirements(intakeControl);
     }
 
     @Override
     public void execute() {
-        switch (this.m_state) {
-            // Initial state, activate the throat to intake
-            case 0: {
-                if (m_timer.get() >= m_nextTime) {
-                    m_intakeControl.setThroatSpeed(THROAT_SPEED);
-                    m_nextTime = 0.5;
-                    m_state++;
-                }
-                break;
-            }
-            // Proceed to take the ball up the elevator
-            case 1: {
-                if (m_timer.get() >= m_nextTime) {
-                    m_intakeControl.setElevatorSpeed(ELEVATOR_SPEED);
-                    m_nextTime = 1.0;
-                    m_state++;
-                }
-                break;
-            }
-            // Final state, de-activate and finish the command
-            case 2: {
-                if (m_timer.get() >= m_nextTime) {
-                    m_intakeControl.stop();
-                    m_state++;
-                }
-                break;
-            }
-            default:
-                break;
-        }
+        System.out.println("executed");
+        this.elevatorLeft = this.m_joystick.getRawButton(JOYSTICK_BUTTON_3);
+        this.elevatorRight = this.m_joystick.getRawButton(JOYSTICK_BUTTON_4);
+        this.throat = this.m_joystick.getRawButton(JOYSTICK_BUTTON_5);
+        this.feeder = this.m_joystick.getRawButton(JOYSTICK_BUTTON_6);
+
+        System.out.println("feeder: " + this.feeder);
+
+        this.m_intakeControl.setElevatorSpeed(this.elevatorLeft || this.elevatorRight ? ELEVATOR_SPEED : 0);
+        this.m_intakeControl.setThroatSpeed(this.throat ? THROAT_SPEED : 0);
+        this.m_intakeControl.setFeederSpeed(this.feeder ? FEEDER_SPEED : 0);
     }
 
     @Override
     public boolean isFinished() {
-        return this.m_state == 3;
+        return false;
     }
 }
