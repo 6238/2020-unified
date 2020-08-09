@@ -55,7 +55,7 @@ public class ElevatorSubsystem extends SubsystemBase {
 	/**
 	 * This function is run when the subsystem starts Starts all motors
 	 */
-	public void start() {
+	public void run() {
 		frontMagazine.set(0.5); // Back should move with the front
 		// feeder.set(0.5);
 	}

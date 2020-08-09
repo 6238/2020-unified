@@ -32,12 +32,13 @@ public class ElevatorCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    intakeSubsystem.run();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intakeSubsystem.start();
+    
   }
 
   // Called once the command ends or is interrupted.
