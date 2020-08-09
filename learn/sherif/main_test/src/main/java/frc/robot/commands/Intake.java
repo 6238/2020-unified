@@ -1,7 +1,7 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.helpers.TestableCommand;
+import frc.robot.helpers.TestableJoystick;
 import frc.robot.subsystems.IntakeControl;
 
 import static frc.robot.Constants.*;
@@ -20,7 +20,7 @@ public class Intake extends TestableCommand {
     public boolean feeder = false;
 
     private final IntakeControl m_intakeControl;
-    private final Joystick m_joystick;
+    private final TestableJoystick m_joystick;
 
     private int m_state = 0;
     private double m_nextTime = 0;
@@ -29,7 +29,7 @@ public class Intake extends TestableCommand {
      * Creates and starts an intake
      * @param intakeControl the IntakeControl subsystem
      */
-    public Intake(IntakeControl intakeControl, Joystick joystick) {
+    public Intake(IntakeControl intakeControl, TestableJoystick joystick) {
 
         this.m_intakeControl = intakeControl;
         this.m_joystick = joystick;
@@ -39,10 +39,10 @@ public class Intake extends TestableCommand {
     @Override
     public void execute() {
         System.out.println("executed");
-        this.elevatorLeft = this.m_joystick.getRawButton(JOYSTICK_BUTTON_3);
-        this.elevatorRight = this.m_joystick.getRawButton(JOYSTICK_BUTTON_4);
-        this.throat = this.m_joystick.getRawButton(JOYSTICK_BUTTON_5);
-        this.feeder = this.m_joystick.getRawButton(JOYSTICK_BUTTON_6);
+        this.elevatorLeft = this.m_joystick.getRawButton(ELEVATOR_LEFT_BUTTON);
+        this.elevatorRight = this.m_joystick.getRawButton(ELEVATOR_RIGHT_BUTTON);
+        this.throat = this.m_joystick.getRawButton(THROAT_BUTTON);
+        this.feeder = this.m_joystick.getRawButton(FEEDER_BUTTON);
 
         System.out.println("feeder: " + this.feeder);
 

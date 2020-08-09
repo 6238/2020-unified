@@ -8,13 +8,13 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.Drive;
 import frc.robot.commands.Intake;
 import frc.robot.helpers.RobotInjection;
+import frc.robot.helpers.TestableJoystick;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Factory;
 import frc.robot.subsystems.IntakeControl;
@@ -31,8 +31,13 @@ public class RobotContainer {
     // The robot's subsystems and commands are defined here...
     public Factory factory = new Factory();
     @Nullable private final DriveTrain m_drivetrain;
-    @Nullable private final Joystick m_controller;
+    @Nullable private final TestableJoystick m_controller;
     @Nullable private final IntakeControl m_intake;
+
+    @Nullable
+    public Drive getDriveCommand() {
+        return m_drive_command;
+    }
 
     @Nullable private Drive m_drive_command = null;
     @Nullable private Intake m_intake_command = null;
@@ -43,7 +48,7 @@ public class RobotContainer {
     public RobotContainer() {
         // Configure the button bindings
         this.m_drivetrain = new DriveTrain(factory);
-        this.m_controller = new Joystick(Constants.JOYSTICK_A);
+        this.m_controller = new TestableJoystick(Constants.JOYSTICK_A);
         this.m_intake = new IntakeControl(factory);
 
         configureButtonBindings();
@@ -71,7 +76,7 @@ public class RobotContainer {
 
 //        if (this.m_drivetrain != null) {
 //            new JoystickButton(m_controller, Joystick.AxisType.kThrottle.value)
-//                    .or(new JoystickButton(m_controller, Joystick.AxisType.kTwist.value))
+//                    .or(new TestableJoystickButton(m_controller, Joystick.AxisType.kTwist.value))
 //                    .whenActive(new Drive(this.m_drivetrain, m_controller))
 //                    .whenInactive(new Drive(this.m_drivetrain, 0, 0));
 //        }
@@ -100,7 +105,7 @@ public class RobotContainer {
         CommandScheduler.getInstance().cancel(this.m_intake_command);
     }
 
-    public void logJoystick() {
+    public void logTestableJoystick() {
         if (this.m_controller == null) return;
         System.out.println("GetX: " + this.m_controller.getX());
         System.out.println("GetY: " + this.m_controller.getY());

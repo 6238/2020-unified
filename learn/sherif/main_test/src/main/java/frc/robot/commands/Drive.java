@@ -1,7 +1,7 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.helpers.TestableCommand;
+import frc.robot.helpers.TestableJoystick;
 import frc.robot.subsystems.DriveTrain;
 
 /**
@@ -13,7 +13,7 @@ public class Drive extends TestableCommand {
     private boolean m_finished = false;
     private double m_speed;
     private double m_rot;
-    private Joystick m_controller;
+    private TestableJoystick m_controller;
 
     /**
      * Takes in a speed and a rotation for a one time command
@@ -36,7 +36,7 @@ public class Drive extends TestableCommand {
      * @param dr The robot's drivetrain
      * @param controller The joystick controller to use
      */
-    public Drive(DriveTrain dr, Joystick controller) {
+    public Drive(DriveTrain dr, TestableJoystick controller) {
 
         m_driveTrain = dr;
         this.m_controller = controller;
