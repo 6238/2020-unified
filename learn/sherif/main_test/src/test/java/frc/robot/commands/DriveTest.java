@@ -25,7 +25,7 @@ public class DriveTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        when(this.controller.getY()).thenReturn(0.0);
+        when(this.controller.getAxisY()).thenReturn(0.0);
         when(this.controller.getTwist()).thenReturn(0.0);
         TestableCommand.activateTestMode();
 
@@ -51,7 +51,7 @@ public class DriveTest {
 
         // Test Command runs
         when(controller.getTwist()).thenReturn(0.5);
-        when(controller.getY()).thenReturn(0.5);
+        when(controller.getAxisY()).thenReturn(0.5);
         when(this.controller.getRawButton(Joystick.AxisType.kTwist.value)).thenReturn(true);
         when(this.controller.getRawButton(Joystick.AxisType.kY.value)).thenReturn(true);
 
@@ -61,7 +61,7 @@ public class DriveTest {
 
         // Test you can change speed/turn
         when(controller.getTwist()).thenReturn(0.7);
-        when(controller.getY()).thenReturn(0.2);
+        when(controller.getAxisY()).thenReturn(0.2);
 
         this.container.getDriveCommand().execute();
 
@@ -69,7 +69,7 @@ public class DriveTest {
 
         // Test you can stop the robot
         when(controller.getTwist()).thenReturn(0.0);
-        when(controller.getY()).thenReturn(0.0);
+        when(controller.getAxisY()).thenReturn(0.0);
         when(this.controller.getRawButton(Joystick.AxisType.kTwist.value)).thenReturn(false);
         when(this.controller.getRawButton(Joystick.AxisType.kY.value)).thenReturn(false);
 
@@ -78,7 +78,7 @@ public class DriveTest {
         verify(dr, times(1)).drive(-0.0, 0.0);
 
         when(controller.getTwist()).thenReturn(0.5);
-        when(controller.getY()).thenReturn(0.5);
+        when(controller.getAxisY()).thenReturn(0.5);
         when(this.controller.getRawButton(Joystick.AxisType.kTwist.value)).thenReturn(true);
         when(this.controller.getRawButton(Joystick.AxisType.kY.value)).thenReturn(true);
 

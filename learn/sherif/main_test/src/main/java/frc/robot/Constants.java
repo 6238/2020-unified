@@ -33,6 +33,9 @@ public final class Constants {
     public static final int INTAKE_SOLENOID = 10;
     public static final int FEEDER = 21;
 
+    // ShuffleBoard
+    public static final String DEFAULT_TAB = "telemetry";
+
     // Joysticks
     public static final int JOYSTICK_A = 0;
 

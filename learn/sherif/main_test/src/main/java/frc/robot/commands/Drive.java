@@ -25,8 +25,7 @@ public class Drive extends TestableCommand {
 
         m_driveTrain = dr;
 
-        m_speed = speed;
-        m_rot = rot;
+        m_speed = speed; m_rot = rot;
 
         addRequirements(dr);
     }
@@ -51,7 +50,7 @@ public class Drive extends TestableCommand {
     @Override
     public void execute() {
         if (m_controller != null) {
-            m_speed = -m_controller.getY();
+            m_speed = -m_controller.getAxisY();
             m_rot = m_controller.getTwist();
         }
 //        System.out.println("Robot Speed is: " + m_speed);

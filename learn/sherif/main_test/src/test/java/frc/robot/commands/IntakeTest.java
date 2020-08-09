@@ -8,6 +8,8 @@ import frc.robot.RobotContainer;
 import frc.robot.helpers.RobotInjection;
 import frc.robot.helpers.TestableCommand;
 import frc.robot.helpers.TestableJoystick;
+import frc.robot.io.Slider;
+import frc.robot.subsystems.Factory;
 import frc.robot.subsystems.IntakeControl;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,6 +22,8 @@ public class IntakeTest {
     @Mock IntakeControl intakeControl;
     @Mock Timer timer;
     @Mock TestableJoystick m_controller;
+    @Mock Factory f;
+    @Mock Slider throat_slider;
     RobotContainer container;
     Robot robot;
 
@@ -40,7 +44,20 @@ public class IntakeTest {
         var intake = new Intake(intakeControl, m_controller);
         when(m_controller.getRawButton(Constants.FEEDER_BUTTON)).thenReturn(true);
         intake.execute();
-        verify(intakeControl).setFeederSpeed(Intake.FEEDER_SPEED);
+        verify(intakeControl).setFeederSpeed(1.0);
+    }
+
+    @Test
+    public void TestSliderIntake() {
+        when(f.getSlider("Throat Speed", 1.0, -1.0, 1.0)).thenReturn(throat_slider);
+        when(throat_slider.getDouble(1.0)).thenReturn(0.3);
+
+        when(m_controller.getRawButton(Constants.THROAT_BUTTON)).thenReturn(true);
+        var intake = new Intake(f, intakeControl, m_controller);
+
+        intake.execute();
+
+        verify(intakeControl).setThroatSpeed(0.3);
     }
 
     @Test
@@ -52,6 +69,6 @@ public class IntakeTest {
 
         robot.robotPeriodic();
 
-        verify(this.intakeControl, times(1)).setThroatSpeed(Intake.THROAT_SPEED);
+        verify(this.intakeControl, times(1)).setThroatSpeed(1.0);
     }
 }
