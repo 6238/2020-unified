@@ -1,8 +1,12 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.helpers.TestableCommand;
+import frc.robot.helpers.TestableJoystick;
+import frc.robot.io.Slider;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Factory;
+
+import javax.annotation.Nullable;
 
 /**
  * Drive command for a two motor system
@@ -13,7 +17,9 @@ public class Drive extends TestableCommand {
     private boolean m_finished = false;
     private double m_speed;
     private double m_rot;
-    private Joystick m_controller;
+    private double m_max_speed = 1.0;
+    @Nullable private Slider m_max_speed_slider = null;
+    private TestableJoystick m_controller;
 
     /**
      * Takes in a speed and a rotation for a one time command
@@ -25,8 +31,7 @@ public class Drive extends TestableCommand {
 
         m_driveTrain = dr;
 
-        m_speed = speed;
-        m_rot = rot;
+        m_speed = speed; m_rot = rot;
 
         addRequirements(dr);
     }
@@ -36,7 +41,7 @@ public class Drive extends TestableCommand {
      * @param dr The robot's drivetrain
      * @param controller The joystick controller to use
      */
-    public Drive(DriveTrain dr, Joystick controller) {
+    public Drive(DriveTrain dr, TestableJoystick controller) {
 
         m_driveTrain = dr;
         this.m_controller = controller;
@@ -44,14 +49,26 @@ public class Drive extends TestableCommand {
         this.m_speed = 0.0;
         this.m_rot = 0.0;
 
-
         addRequirements(dr);
+    }
+
+    public void useShuffleboard(Factory f) {
+        this.m_max_speed_slider = f.getSlider("Max Speed", 1.0, 0.0, 1.0);
+    }
+
+    private void readSliders() {
+        if (this.m_max_speed_slider == null) return;
+
+        this.m_max_speed = this.m_max_speed_slider.getDouble(m_max_speed);
+        this.m_driveTrain.setMaxSpeed(this.m_max_speed);
     }
 
     @Override
     public void execute() {
+        this.readSliders();
+
         if (m_controller != null) {
-            m_speed = -m_controller.getY();
+            m_speed = -m_controller.getAxisY();
             m_rot = m_controller.getTwist();
         }
 //        System.out.println("Robot Speed is: " + m_speed);

@@ -17,6 +17,7 @@ public class IntakeControlTest {
     @Mock WPI_TalonSRX el;
     @Mock WPI_TalonSRX tr;
     @Mock WPI_TalonSRX tl;
+    @Mock WPI_TalonSRX fe;
     @Mock Solenoid sol;
 
     @Before
@@ -28,6 +29,7 @@ public class IntakeControlTest {
         when(f.getTalonMotor(Constants.ELEVATOR_BACK)).thenReturn(er);
         when(f.getTalonMotor(Constants.ELEVATOR_FRONT)).thenReturn(el);
         when(f.getSolenoid(Constants.INTAKE_SOLENOID)).thenReturn(sol);
+        when(f.getTalonMotor(Constants.FEEDER)).thenReturn(fe);
     }
 
     @Test
@@ -52,13 +54,13 @@ public class IntakeControlTest {
         controller.setElevatorSpeed(0.3);
         controller.periodic();
 
-        verify(er).set(0.3);
+        verify(er).set(-0.3);
         verify(el).set(0.3);
 
         controller.stop();
         controller.periodic();
 
-        verify(er).set(0.0);
+        verify(er).set(-0.0);
         verify(el).set(0.0);
     }
 

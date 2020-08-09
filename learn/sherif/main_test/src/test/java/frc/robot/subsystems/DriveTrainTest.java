@@ -40,10 +40,12 @@ public class DriveTrainTest {
     @Test
     public void TestDrive() {
         this.driveTrain.drive(0.5, 0.2);
-        left_front.set(and(leq(0.51), geq(0.49)));
-        right_front.set(and(leq(-0.29), geq(-0.31)));
-        reset(this.left_front);
-        reset(this.right_front);
+        this.driveTrain.periodic();
+        // These count as sets
+        verify(left_front).set(and(leq(0.52), geq(0.48)));
+        verify(right_front).set(and(leq(-0.28), geq(-0.32)));
+        reset(left_front);
+        reset(right_front);
 
         this.driveTrain.brake();
         verify(left_front).set(0.0);

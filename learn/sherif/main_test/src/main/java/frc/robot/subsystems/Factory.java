@@ -5,6 +5,7 @@ import com.revrobotics.CANSparkMaxLowLevel;
 import edu.wpi.first.wpilibj.Solenoid;
 import frc.robot.helpers.MockableSparkMax;
 import frc.robot.interfaces.CANSparkMaxInterface;
+import frc.robot.io.Slider;
 
 public class Factory {
     /**
@@ -27,5 +28,21 @@ public class Factory {
 
     public Solenoid getSolenoid(int busID) {
         return new Solenoid(busID);
+    }
+
+    public Slider getSlider(String name, double defaultValue) {
+        return new Slider(name, defaultValue);
+    }
+
+    public Slider getSlider(String name, double defaultValue, double min, double max) {
+        return new Slider(name, defaultValue, min, max);
+    }
+
+    public Slider getSlider(String name, double defaultValue, int x, int y, int w, int h) {
+        return new Slider(name, defaultValue, x, y, w, h);
+    }
+
+    public Slider getSlider(String name, double defaultValue, double min, double max, int x, int y, int w, int h) {
+        return new Slider(name, defaultValue, min, max, x, y, w, h);
     }
 }
