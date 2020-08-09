@@ -39,13 +39,13 @@ public class MainTest {
         when(this.m_rightJoystick.getJoyZ()).thenReturn(0.0);
 
         var injection = new RobotInjection();
-        injection.drive = m_drive;
-        injection.elevator = m_elevator;
-        injection.intake = m_intake;
-        injection.shooter = m_shooter;
-        injection.leftJoystick = m_leftJoystick;
-        injection.rightJoystick = m_rightJoystick;
-        injection.driveCommand = m_driveCommand;
+        injection.m_drive = m_drive;
+        injection.m_elevator = m_elevator;
+        injection.m_intake = m_intake;
+        injection.m_shooter = m_shooter;
+        injection.m_leftJoystick = m_leftJoystick;
+        injection.m_rightJoystick = m_rightJoystick;
+        injection.m_driveCommand = m_driveCommand;
 
         this.container = new RobotContainer(injection);
         this.robot = new Robot(container);

@@ -35,13 +35,13 @@ public class DriveSubsystemTest {
     public void setup() {
         MockitoAnnotations.openMocks(this);
 
-        when(f.createTalon(Drive.kLeftTalon1)).thenReturn(m_leftTalon1);
-        when(f.createTalon(Drive.kLeftTalon2)).thenReturn(m_leftTalon2);
-        when(f.createTalon(Drive.kLeftTalon3)).thenReturn(m_leftTalon3);
+        when(f.createTalon(Drive.DRIVE_LEFT_TALON_1_ID)).thenReturn(m_leftTalon1);
+        when(f.createTalon(Drive.DRIVE_LEFT_TALON_2_ID)).thenReturn(m_leftTalon2);
+        when(f.createTalon(Drive.DRIVE_LEFT_TALON_3_ID)).thenReturn(m_leftTalon3);
         
-        when(f.createTalon(Drive.kRightTalon1)).thenReturn(m_rightTalon1);
-        when(f.createTalon(Drive.kRightTalon2)).thenReturn(m_rightTalon2);
-        when(f.createTalon(Drive.kRightTalon3)).thenReturn(m_rightTalon3);
+        when(f.createTalon(Drive.DRIVE_RIGHT_TALON_1_ID)).thenReturn(m_rightTalon1);
+        when(f.createTalon(Drive.DRIVE_RIGHT_TALON_2_ID)).thenReturn(m_rightTalon2);
+        when(f.createTalon(Drive.DRIVE_RIGHT_TALON_3_ID)).thenReturn(m_rightTalon3);
 
         when(f.getIMU()).thenReturn(kIMU);
 

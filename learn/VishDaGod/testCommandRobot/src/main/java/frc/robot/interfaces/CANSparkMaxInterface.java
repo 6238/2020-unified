@@ -10,5 +10,5 @@ public interface CANSparkMaxInterface extends SpeedController {
     CANEncoder getEncoder();
 	CANPIDController getPIDController();
 
-	CANError follow(CANSparkMaxInterface m_shooterLeft, boolean b);
+	CANError follow(CANSparkMaxInterface leader, boolean invert);
 }

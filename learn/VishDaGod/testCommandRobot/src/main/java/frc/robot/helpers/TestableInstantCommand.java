@@ -10,19 +10,19 @@ import edu.wpi.first.wpilibj2.command.Subsystem;
  * @author sherif
  */
 public class TestableInstantCommand extends InstantCommand {
-    private static boolean m_test_mode = false;
+    private static boolean testMode = false;
 
     @Override
     public boolean runsWhenDisabled() {
-        return TestableInstantCommand.m_test_mode;
+        return TestableInstantCommand.testMode;
     }
 
     public static void activateTestMode() {
-        TestableInstantCommand.m_test_mode = true;
+        TestableInstantCommand.testMode = true;
     }
 
     public static void deactivateTestMode() {
-        TestableInstantCommand.m_test_mode = false;
+        TestableInstantCommand.testMode = false;
     }
 
     /**

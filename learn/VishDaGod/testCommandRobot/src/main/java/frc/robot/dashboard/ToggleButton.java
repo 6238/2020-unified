@@ -24,7 +24,7 @@ public class ToggleButton extends Trigger {
 	public ToggleButton(String name, boolean defaultValue) {
         this.value = defaultValue;
         this.name = name;
-		entry = OIConstants.kTab.add(name, defaultValue).withWidget(BuiltInWidgets.kToggleButton)
+		entry = OIConstants.SHUFFLEBOARD_TAB.add(name, defaultValue).withWidget(BuiltInWidgets.kToggleButton)
 				.getEntry();
 	}
 

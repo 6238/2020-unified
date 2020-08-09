@@ -33,7 +33,9 @@ public class DriveSubsystem extends SubsystemBase {
 
     private final DifferentialDrive m_drive;
 
-    private final ADIS16470_IMU kIMU;
+    private final ADIS16470_IMU m_IMU;
+
+    private final boolean arcadeSquaredInputs = false;
 
     private double insanityFactor = 0.5;
     private double sensitivity = 0.75;
@@ -44,34 +46,34 @@ public class DriveSubsystem extends SubsystemBase {
     private Slider insanityFactorSlider;
     private Slider sensitivitySlider;
 
-    private NetworkTableEntry leftEncoderEntry = OIConstants.kTab.add("leftEncoder", 0).getEntry();
-    private NetworkTableEntry rightEncoderEntry = OIConstants.kTab.add("rightEncoder", 0).getEntry();
+    private NetworkTableEntry leftEncoderEntry = OIConstants.SHUFFLEBOARD_TAB.add("leftEncoder", 0).getEntry();
+    private NetworkTableEntry rightEncoderEntry = OIConstants.SHUFFLEBOARD_TAB.add("rightEncoder", 0).getEntry();
 
     private ToggleButton curvatureDriveButton;
     private ToggleButton curvatureDriveQuickTurnButton;
 
     public DriveSubsystem(Factory f, Dashboard d) {
-        m_leftTalon1 = f.createTalon(Drive.kLeftTalon1);
-        m_leftTalon2 = f.createTalon(Drive.kLeftTalon2);
-        m_leftTalon3 = f.createTalon(Drive.kLeftTalon3);
+        m_leftTalon1 = f.createTalon(Drive.DRIVE_LEFT_TALON_1_ID);
+        m_leftTalon2 = f.createTalon(Drive.DRIVE_LEFT_TALON_2_ID);
+        m_leftTalon3 = f.createTalon(Drive.DRIVE_LEFT_TALON_3_ID);
 
-        m_rightTalon1 = f.createTalon(Drive.kRightTalon1);
-        m_rightTalon2 = f.createTalon(Drive.kRightTalon2);
-        m_rightTalon3 = f.createTalon(Drive.kRightTalon3);
+        m_rightTalon1 = f.createTalon(Drive.DRIVE_RIGHT_TALON_1_ID);
+        m_rightTalon2 = f.createTalon(Drive.DRIVE_RIGHT_TALON_2_ID);
+        m_rightTalon3 = f.createTalon(Drive.DRIVE_RIGHT_TALON_3_ID);
 
         m_leftDrive = new SpeedControllerGroup(m_leftTalon1, m_leftTalon2, m_leftTalon3);
         m_rightDrive = new SpeedControllerGroup(m_rightTalon1, m_rightTalon2, m_rightTalon3);
 
         m_drive = new DifferentialDrive(m_leftDrive, m_rightDrive);
 
-        m_leftTalon1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Drive.kPIDLoopIdx,
-                Constants.kTimeoutMs);
-        m_rightTalon1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Drive.kPIDLoopIdx,
-                Constants.kTimeoutMs);
+        m_leftTalon1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Drive.DRIVE_PID_LOOP_IDX,
+                Constants.TIMEOUT_MS);
+        m_rightTalon1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Drive.DRIVE_PID_LOOP_IDX,
+                Constants.TIMEOUT_MS);
 
-        kIMU = f.getIMU();
-        kIMU.setYawAxis(IMUAxis.kZ);
-        OIConstants.kTab.add("IMU", kIMU);
+        m_IMU = f.getIMU();
+        m_IMU.setYawAxis(IMUAxis.kZ);
+        OIConstants.SHUFFLEBOARD_TAB.add("IMU", m_IMU);
 
         insanityFactorSlider = d.getSlider("insanityFactor", insanityFactor);
         sensitivitySlider = d.getSlider("sensitivity", sensitivity);
@@ -95,7 +97,7 @@ public class DriveSubsystem extends SubsystemBase {
         if (curvatureDrive) {
             m_drive.curvatureDrive(ySpeed * insanityFactor, zSpeed * sensitivity, curvatureDriveQuickTurn);
         } else {
-            m_drive.arcadeDrive(ySpeed * insanityFactor, zSpeed * sensitivity, false);
+            m_drive.arcadeDrive(ySpeed * insanityFactor, zSpeed * sensitivity, arcadeSquaredInputs);
         }
     }
 

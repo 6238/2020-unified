@@ -8,13 +8,13 @@ import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class RobotInjection {
-    public DriveSubsystem drive;
-    public ElevatorSubsystem elevator;
-    public IntakeSubsystem intake;
-    public ShooterSubsystem shooter;
+    public DriveSubsystem m_drive;
+    public ElevatorSubsystem m_elevator;
+    public IntakeSubsystem m_intake;
+    public ShooterSubsystem m_shooter;
 
-    public TestableJoystick leftJoystick;
-    public TestableJoystick rightJoystick;
+    public TestableJoystick m_leftJoystick;
+    public TestableJoystick m_rightJoystick;
 
-    public DriveCommand driveCommand;
+    public DriveCommand m_driveCommand;
 }

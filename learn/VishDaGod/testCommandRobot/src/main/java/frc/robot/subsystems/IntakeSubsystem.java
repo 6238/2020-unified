@@ -20,16 +20,16 @@ public class IntakeSubsystem extends SubsystemBase {
 	WPI_TalonSRX m_right;
 	WPI_TalonSRX m_outer;
 
-	private double innerSpeed = Intake.kStartingInnerSpeed;
-	private double outerSpeed = Intake.kStartingOuterSpeed;
+	private double innerSpeed = Intake.INTAKE_STARTING_INNER_SPEED;
+	private double outerSpeed = Intake.INTAKE_STARTING_OUTER_SPEED;
 
-	private final Slider kInnerSpeedSlider;
-	private final Slider kOuterSpeedSlider;
+	private final Slider innerSpeedSlider;
+	private final Slider outerSpeedSlider;
 
 	public IntakeSubsystem(Factory f, Dashboard d) {
-		m_left = f.createTalon(Intake.kIntakeLeftTalon);
-		m_right = f.createTalon(Intake.kIntakeRightTalon);
-		m_outer = f.createTalon(Intake.kIntakeOuterTalon);
+		m_left = f.createTalon(Intake.INTAKE_LEFT_TALON_ID);
+		m_right = f.createTalon(Intake.INTAKE_RIGHT_TALON_ID);
+		m_outer = f.createTalon(Intake.INTAKE_OUTER_TALON_ID);
 
 		m_left.setInverted(false);
 		
@@ -38,14 +38,14 @@ public class IntakeSubsystem extends SubsystemBase {
 		
         m_outer.setInverted(false);
         
-        kInnerSpeedSlider = d.getSlider("innerSpeed", innerSpeed, -1, 1);
-        kOuterSpeedSlider = d.getSlider("outerSpeed", outerSpeed, -1, 1);
+        innerSpeedSlider = d.getSlider("innerSpeed", innerSpeed, -1, 1);
+        outerSpeedSlider = d.getSlider("outerSpeed", outerSpeed, -1, 1);
 	}
 
 	@Override
 	public void periodic() {
-		innerSpeed = kInnerSpeedSlider.get();
-		outerSpeed = kOuterSpeedSlider.get();
+		innerSpeed = innerSpeedSlider.get();
+		outerSpeed = outerSpeedSlider.get();
 	}
 
 	public void in() {

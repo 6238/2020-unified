@@ -2,6 +2,9 @@ package frc.robot.commands;
 
 import org.junit.*;
 import org.mockito.*;
+
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+
 import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.*;
 
@@ -36,7 +39,7 @@ public class DriveCommandTest {
     @Mock TestableJoystick m_leftJoystick;
     @Mock TestableJoystick m_rightJoystick;
 
-    @Mock ADIS16470_IMU kIMU;
+    @Mock ADIS16470_IMU imu;
 
     @Mock Slider insanityFactorSlider;
     @Mock Slider sensitivitySlider;
@@ -47,20 +50,20 @@ public class DriveCommandTest {
     @Before
     public void setup() {
         MockitoAnnotations.openMocks(this);
-        when(this.factory.getIMU()).thenReturn(kIMU);
+        when(this.factory.getIMU()).thenReturn(imu);
         when(this.dashboard.getSlider("insanityFactor", 0.5)).thenReturn(insanityFactorSlider);
         when(this.dashboard.getSlider("sensitivity", 0.75)).thenReturn(sensitivitySlider);
         when(this.m_leftJoystick.getJoyY()).thenReturn(0.0);
         when(this.m_rightJoystick.getJoyZ()).thenReturn(0.0);
         
         var injection = new RobotInjection();
-        injection.drive = m_drive;
-        injection.elevator = m_elevator;
-        injection.intake = m_intake;
-        injection.shooter = m_shooter;
-        injection.leftJoystick = m_leftJoystick;
-        injection.rightJoystick = m_rightJoystick;
-        injection.driveCommand = m_driveCommand;
+        injection.m_drive = m_drive;
+        injection.m_elevator = m_elevator;
+        injection.m_intake = m_intake;
+        injection.m_shooter = m_shooter;
+        injection.m_leftJoystick = m_leftJoystick;
+        injection.m_rightJoystick = m_rightJoystick;
+        injection.m_driveCommand = m_driveCommand;
         
         this.container = new RobotContainer(injection);
         this.robot = new Robot(container);
@@ -86,8 +89,8 @@ public class DriveCommandTest {
 
     @Test
     public void testDrivingFullRobotCode() {
-        this.robot.robotInit();
-
+        this.robot.teleopInit();
+        
         verify(m_drive).setDefaultCommand(m_driveCommand);
 
         when(insanityFactorSlider.get()).thenReturn(0.5);

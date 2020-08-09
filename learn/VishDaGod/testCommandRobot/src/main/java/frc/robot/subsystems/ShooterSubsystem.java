@@ -32,15 +32,15 @@ public class ShooterSubsystem extends SubsystemBase {
 	NetworkTableEntry kPEntry, kIEntry, kDEntry, kIzEntry, kFFEntry, rpmEntry;
 	Slider kMaxOutputEntry, kMinOutputEntry, targetRPMEntry;
 
-	private double speed = Shooter.kStartingSpeed;
+	private double speed = Shooter.SHOOTER_STARTING_SPEED;
 	private final Slider kSpeedEntry;
 
 	boolean pidToggle = false;
 	ToggleButton pidToggleButton = new ToggleButton("pidToggle", pidToggle);
 
 	public ShooterSubsystem(Factory f, Dashboard d) {
-		m_shooterLeft = f.createSpark(Shooter.kLeftShooterSpark);
-		m_shooterRight = f.createSpark(Shooter.kRightShooterSpark);
+		m_shooterLeft = f.createSpark(Shooter.SHOOTER_LEFT_SPARK_ID);
+		m_shooterRight = f.createSpark(Shooter.SHOOTER_RIGHT_SPARK_ID);
 		m_shooterLeft.setInverted(true);
 		m_shooterRight.follow(m_shooterLeft, true);
 
@@ -51,15 +51,15 @@ public class ShooterSubsystem extends SubsystemBase {
 		kMinOutput = -1;
 		targetRPM = 5700;
 
-		kPEntry = OIConstants.kTab.add("kP", kP).getEntry();
-		kIEntry = OIConstants.kTab.add("kI", kI).getEntry();
-		kDEntry = OIConstants.kTab.add("kD", kD).getEntry();
-		kIzEntry = OIConstants.kTab.add("kIz", kIz).getEntry();
-		kFFEntry = OIConstants.kTab.add("kFF", kFF).getEntry();
+		kPEntry = OIConstants.SHUFFLEBOARD_TAB.add("kP", kP).getEntry();
+		kIEntry = OIConstants.SHUFFLEBOARD_TAB.add("kI", kI).getEntry();
+		kDEntry = OIConstants.SHUFFLEBOARD_TAB.add("kD", kD).getEntry();
+		kIzEntry = OIConstants.SHUFFLEBOARD_TAB.add("kIz", kIz).getEntry();
+		kFFEntry = OIConstants.SHUFFLEBOARD_TAB.add("kFF", kFF).getEntry();
 		kMaxOutputEntry = d.getSlider("kMaxOutput", kMaxOutput, -1, 1);
 		kMinOutputEntry = d.getSlider("kMinOutput", kMinOutput, -1, 1);
 		targetRPMEntry = d.getSlider("targetRPM", targetRPM, 0, 5700);
-        rpmEntry = OIConstants.kTab.add("rpm", rpm).withWidget(BuiltInWidgets.kGraph).getEntry();
+        rpmEntry = OIConstants.SHUFFLEBOARD_TAB.add("rpm", rpm).withWidget(BuiltInWidgets.kGraph).getEntry();
         
         kSpeedEntry = d.getSlider("shooterSpeed", speed, -1, 1);
 

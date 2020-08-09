@@ -20,16 +20,16 @@ public class ElevatorSubsystem extends SubsystemBase {
 	WPI_TalonSRX m_back;
 	WPI_TalonSRX m_feeder;
 
-	private double speed = Elevator.kStartingSpeed;
-	private double feederSpeed = Elevator.kStartingFeederSpeed;
+	private double speed = Elevator.ELEVATOR_STARTING_SPEED;
+	private double feederSpeed = Elevator.FEEDER_STARTING_SPEED;
 
-	private final Slider kSpeedSlider;
-	private final Slider kFeederSpeedSlider;
+	private final Slider speedSlider;
+	private final Slider feederSpeedSlider;
 
 	public ElevatorSubsystem(Factory f, Dashboard d) {
-		m_front = f.createTalon(Elevator.kFrontElevatorTalon);
-		m_back = f.createTalon(Elevator.kRearElevatorTalon);
-		m_feeder = f.createTalon(Elevator.kFeederTalon);
+		m_front = f.createTalon(Elevator.ELEVATOR_FRONT_TALON_ID);
+		m_back = f.createTalon(Elevator.ELEVATOR_REAR_TALON_ID);
+		m_feeder = f.createTalon(Elevator.FEEDER_TALON_ID);
 
 		m_front.setInverted(false);
 
@@ -38,14 +38,14 @@ public class ElevatorSubsystem extends SubsystemBase {
 
         m_feeder.setInverted(false);
         
-        kSpeedSlider = d.getSlider("elevatorSpeed", speed, -1, 1);
-        kFeederSpeedSlider = d.getSlider("feederSpeed", speed, -1, 1);
+        speedSlider = d.getSlider("elevatorSpeed", speed, -1, 1);
+        feederSpeedSlider = d.getSlider("feederSpeed", speed, -1, 1);
 	}
 
 	@Override
 	public void periodic() {
-		speed = kSpeedSlider.get();
-		feederSpeed = kFeederSpeedSlider.get();
+		speed = speedSlider.get();
+		feederSpeed = feederSpeedSlider.get();
 	}
 
 	public void up() {

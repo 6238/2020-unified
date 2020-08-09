@@ -30,7 +30,7 @@ public class MockableSparkMax extends CANSparkMax implements CANSparkMaxInterfac
      *
      * @return CANError Set to CANError.kOK if successful
      */
-    public CANError follow(final CANSparkMaxInterface leader, boolean invert) {
+    public CANError follow(CANSparkMaxInterface leader, boolean invert) {
         return super.follow((CANSparkMax) leader, invert);
     }
 }

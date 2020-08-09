@@ -8,18 +8,18 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
  * @author sherif
  */
 public class TestableCommand extends CommandBase {
-    private static boolean m_test_mode = false;
+    private static boolean testMode = false;
 
     @Override
     public boolean runsWhenDisabled() {
-        return TestableCommand.m_test_mode;
+        return TestableCommand.testMode;
     }
 
     public static void activateTestMode() {
-        TestableCommand.m_test_mode = true;
+        TestableCommand.testMode = true;
     }
 
     public static void deactivateTestMode() {
-        TestableCommand.m_test_mode = false;
+        TestableCommand.testMode = false;
     }
 }
