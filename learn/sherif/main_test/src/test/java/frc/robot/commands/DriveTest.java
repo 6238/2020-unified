@@ -46,6 +46,11 @@ public class DriveTest {
     }
 
     @Test
+    public void TestShuffleBoard() {
+
+    }
+
+    @Test
     public void TestMockedRobot() {
         this.robot.teleopInit();
 

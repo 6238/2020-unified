@@ -2,7 +2,11 @@ package frc.robot.commands;
 
 import frc.robot.helpers.TestableCommand;
 import frc.robot.helpers.TestableJoystick;
+import frc.robot.io.Slider;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Factory;
+
+import javax.annotation.Nullable;
 
 /**
  * Drive command for a two motor system
@@ -13,6 +17,8 @@ public class Drive extends TestableCommand {
     private boolean m_finished = false;
     private double m_speed;
     private double m_rot;
+    private double m_max_speed = 1.0;
+    @Nullable private Slider m_max_speed_slider = null;
     private TestableJoystick m_controller;
 
     /**
@@ -43,12 +49,24 @@ public class Drive extends TestableCommand {
         this.m_speed = 0.0;
         this.m_rot = 0.0;
 
-
         addRequirements(dr);
+    }
+
+    public void useShuffleboard(Factory f) {
+        this.m_max_speed_slider = f.getSlider("Max Speed", 1.0, 0.0, 1.0);
+    }
+
+    private void readSliders() {
+        if (this.m_max_speed_slider == null) return;
+
+        this.m_max_speed = this.m_max_speed_slider.getDouble(m_max_speed);
+        this.m_driveTrain.setMaxSpeed(this.m_max_speed);
     }
 
     @Override
     public void execute() {
+        this.readSliders();
+
         if (m_controller != null) {
             m_speed = -m_controller.getAxisY();
             m_rot = m_controller.getTwist();
