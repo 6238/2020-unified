@@ -5,9 +5,6 @@ import org.mockito.*;
 import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.*;
 
-import edu.wpi.first.hal.HAL;
-import edu.wpi.first.hal.sim.DriverStationSim;
-
 import com.analog.adis16470.frc.ADIS16470_IMU;
 
 import frc.robot.helpers.RobotInjection;
@@ -70,12 +67,6 @@ public class DriveCommandTest {
 
         TestableCommand.activateTestMode();
         TestableInstantCommand.activateTestMode();
-
-        HAL.initialize(500, 0);
-        DriverStationSim dsSim = new DriverStationSim();
-        dsSim.setDsAttached(true);
-        dsSim.setAutonomous(false);
-        dsSim.setEnabled(true);
     }
 
     @Test

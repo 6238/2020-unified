@@ -4,9 +4,6 @@ import org.junit.*;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import edu.wpi.first.hal.HAL;
-import edu.wpi.first.hal.sim.DriverStationSim;
-
 import static org.mockito.Mockito.*;
 
 import frc.robot.commands.DriveCommand;
@@ -52,13 +49,6 @@ public class MainTest {
 
         this.container = new RobotContainer(injection);
         this.robot = new Robot(container);
-        
-        HAL.initialize(500, 0);
-        DriverStationSim dsSim = new DriverStationSim();
-        dsSim.setDsAttached(true);
-        dsSim.setAutonomous(false);
-        dsSim.setEnabled(true);
-        dsSim.setTest(true);
     }
 
 }
