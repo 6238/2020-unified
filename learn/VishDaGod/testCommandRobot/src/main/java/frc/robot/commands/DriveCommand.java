@@ -1,10 +1,10 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.helpers.TestableCommand;
 import frc.robot.helpers.TestableJoystick;
 import frc.robot.subsystems.DriveSubsystem;
 
-public class DriveCommand extends CommandBase {
+public class DriveCommand extends TestableCommand {
 	private final DriveSubsystem m_drive;
 
 	private final TestableJoystick m_leftJoystick;

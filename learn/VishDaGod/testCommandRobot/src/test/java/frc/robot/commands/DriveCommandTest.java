@@ -2,16 +2,17 @@ package frc.robot.commands;
 
 import org.junit.*;
 import org.mockito.*;
+import static org.junit.Assert.assertFalse;
+import static org.mockito.Mockito.*;
 
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.hal.sim.DriverStationSim;
 
-import static org.junit.Assert.assertFalse;
-import static org.mockito.Mockito.*;
-
 import com.analog.adis16470.frc.ADIS16470_IMU;
 
 import frc.robot.helpers.RobotInjection;
+import frc.robot.helpers.TestableCommand;
+import frc.robot.helpers.TestableInstantCommand;
 import frc.robot.helpers.TestableJoystick;
 import frc.robot.dashboard.Dashboard;
 import frc.robot.dashboard.Slider;
@@ -66,6 +67,9 @@ public class DriveCommandTest {
         
         this.container = new RobotContainer(injection);
         this.robot = new Robot(container);
+
+        TestableCommand.activateTestMode();
+        TestableInstantCommand.activateTestMode();
 
         HAL.initialize(500, 0);
         DriverStationSim dsSim = new DriverStationSim();
