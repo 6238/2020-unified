@@ -3,14 +3,14 @@ package frc.robot.subsystems;
 import org.junit.*;
 import org.mockito.*;
 
-import frc.robot.Constants.Drive;
-import frc.robot.dashboard.Dashboard;
-
 import static org.mockito.Mockito.*;
 import static org.mockito.AdditionalMatchers.*;
 
 import com.analog.adis16470.frc.ADIS16470_IMU;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import frc.robot.Constants.Drive;
+import frc.robot.dashboard.Dashboard;
 
 public class DriveSubsystemTest {
     @Mock Factory f;

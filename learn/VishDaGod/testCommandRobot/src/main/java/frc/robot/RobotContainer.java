@@ -10,6 +10,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import frc.robot.Constants.OIConstants;
 
@@ -25,16 +27,13 @@ import frc.robot.commands.ShooterStopCommand;
 
 import frc.robot.dashboard.Dashboard;
 import frc.robot.helpers.RobotInjection;
+import frc.robot.helpers.TestableJoystick;
 
+import frc.robot.subsystems.Factory;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
-
-import frc.robot.subsystems.Factory;
-
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -53,7 +52,7 @@ public class RobotContainer {
 
     private DriveCommand m_driveCommand;
 
-    private final Joystick[] joysticks;
+    private final TestableJoystick[] joysticks;
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -64,9 +63,9 @@ public class RobotContainer {
         m_intake = new IntakeSubsystem(factory, dashboard);
         m_shooter = new ShooterSubsystem(factory, dashboard);
 
-        joysticks = new Joystick[2];
-        joysticks[0] = new Joystick(OIConstants.kLeftJoystickPort);
-        joysticks[1] = new Joystick(OIConstants.kRightJoystickPort);
+        joysticks = new TestableJoystick[2];
+        joysticks[0] = new TestableJoystick(OIConstants.kLeftJoystickPort);
+        joysticks[1] = new TestableJoystick(OIConstants.kRightJoystickPort);
 
         m_driveCommand = new DriveCommand(m_drive, joysticks[0], joysticks[1]);
         m_drive.setDefaultCommand(m_driveCommand);
@@ -78,13 +77,13 @@ public class RobotContainer {
      * The container for the robot. Contains subsystems, OI devices, and commands.
      * Allows for a (mock) controller to be injected.
      */
-    public RobotContainer(RobotInjection injection) {
+    public RobotContainer(final RobotInjection injection) {
         m_drive = injection.drive;
         m_elevator = injection.elevator;
         m_intake = injection.intake;
         m_shooter = injection.shooter;
 
-        joysticks = new Joystick[2];
+        joysticks = new TestableJoystick[2];
         joysticks[0] = injection.leftJoystick;
         joysticks[1] = injection.rightJoystick;
 

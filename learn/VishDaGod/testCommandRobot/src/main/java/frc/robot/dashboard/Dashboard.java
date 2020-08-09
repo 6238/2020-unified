@@ -6,14 +6,7 @@ public class Dashboard {
     private final ArrayList<Slider> sliders = new ArrayList<Slider>();
     private final ArrayList<ToggleButton> toggleButtons = new ArrayList<ToggleButton>();
 
-    public static int instanceCount = 0;
-
-    public Dashboard() {
-        if (instanceCount > 0) {
-            throw new RuntimeException("Only one Dashboard is allowed per robot.");
-        }
-        instanceCount++;
-    }
+    public Dashboard() {}
 
     public Slider getSlider(String name, double defaultValue) {
         for (Slider slider : sliders) {

@@ -1,9 +1,9 @@
 package frc.robot.commands;
 
-import frc.robot.helpers.TestableInstantCommand;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.IntakeSubsystem;
 
-public class IntakeStopCommand extends TestableInstantCommand {
+public class IntakeStopCommand extends InstantCommand {
 	public IntakeStopCommand(IntakeSubsystem intake) {
 		super(intake::stop, intake);
 	}

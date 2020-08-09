@@ -8,9 +8,7 @@
 package frc.robot.dashboard;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
-
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
-
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import frc.robot.Constants.OIConstants;

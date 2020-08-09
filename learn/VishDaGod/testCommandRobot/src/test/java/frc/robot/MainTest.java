@@ -3,20 +3,22 @@ package frc.robot;
 import org.junit.*;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import edu.wpi.first.hal.HAL;
+import edu.wpi.first.hal.sim.DriverStationSim;
+
 import static org.mockito.Mockito.*;
 
-import edu.wpi.first.wpilibj.Joystick;
+import frc.robot.commands.DriveCommand;
+
+import frc.robot.helpers.RobotInjection;
+import frc.robot.helpers.TestableJoystick;
 
 import frc.robot.subsystems.Factory;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
-
-import frc.robot.commands.DriveCommand;
-import frc.robot.helpers.RobotInjection;
-import frc.robot.helpers.TestableCommand;
-import frc.robot.helpers.TestableInstantCommand;
 
 public class MainTest {
     @Mock Factory factory = new Factory();
@@ -27,8 +29,8 @@ public class MainTest {
 
     @Mock DriveCommand m_driveCommand;
 
-    @Mock Joystick m_leftJoystick;
-    @Mock Joystick m_rightJoystick;
+    @Mock TestableJoystick m_leftJoystick;
+    @Mock TestableJoystick m_rightJoystick;
 
     RobotContainer container;
     Robot robot;
@@ -36,10 +38,8 @@ public class MainTest {
     @Before
     public void setup() {
         MockitoAnnotations.openMocks(this);
-        when(this.m_leftJoystick.getY()).thenReturn(0.0);
-        when(this.m_rightJoystick.getZ()).thenReturn(0.0);
-        TestableCommand.activateTestMode();
-        TestableInstantCommand.activateTestMode();
+        when(this.m_leftJoystick.getJoyY()).thenReturn(0.0);
+        when(this.m_rightJoystick.getJoyZ()).thenReturn(0.0);
 
         var injection = new RobotInjection();
         injection.drive = m_drive;
@@ -52,6 +52,13 @@ public class MainTest {
 
         this.container = new RobotContainer(injection);
         this.robot = new Robot(container);
+        
+        HAL.initialize(500, 0);
+        DriverStationSim dsSim = new DriverStationSim();
+        dsSim.setDsAttached(true);
+        dsSim.setAutonomous(false);
+        dsSim.setEnabled(true);
+        dsSim.setTest(true);
     }
 
 }

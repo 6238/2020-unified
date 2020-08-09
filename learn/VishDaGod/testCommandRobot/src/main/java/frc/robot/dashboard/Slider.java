@@ -10,7 +10,6 @@ package frc.robot.dashboard;
 import java.util.Map;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
-
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 
 import frc.robot.Constants.OIConstants;

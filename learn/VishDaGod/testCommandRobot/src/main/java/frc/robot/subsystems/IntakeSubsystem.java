@@ -11,10 +11,9 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+import frc.robot.Constants.Intake;
 import frc.robot.dashboard.Dashboard;
 import frc.robot.dashboard.Slider;
-
-import frc.robot.Constants.Intake;
 
 public class IntakeSubsystem extends SubsystemBase {
 	WPI_TalonSRX m_left;

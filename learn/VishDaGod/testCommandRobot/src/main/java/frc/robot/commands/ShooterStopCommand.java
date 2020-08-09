@@ -1,9 +1,9 @@
 package frc.robot.commands;
 
-import frc.robot.helpers.TestableInstantCommand;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.ShooterSubsystem;
 
-public class ShooterStopCommand extends TestableInstantCommand {
+public class ShooterStopCommand extends InstantCommand {
 	public ShooterStopCommand(ShooterSubsystem shooter) {
 		super(shooter::stop, shooter);
 	}

@@ -20,7 +20,6 @@ import frc.robot.Constants.Shooter;
 import frc.robot.dashboard.Dashboard;
 import frc.robot.dashboard.Slider;
 import frc.robot.dashboard.ToggleButton;
-
 import frc.robot.interfaces.CANSparkMaxInterface;
 
 public class ShooterSubsystem extends SubsystemBase {

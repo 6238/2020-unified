@@ -1,9 +1,9 @@
 package frc.robot.commands;
 
-import frc.robot.helpers.TestableInstantCommand;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.ElevatorSubsystem;
 
-public class ElevatorDownCommand extends TestableInstantCommand {
+public class ElevatorDownCommand extends InstantCommand {
 	public ElevatorDownCommand(ElevatorSubsystem elevator) {
 		super(elevator::down, elevator);
 	}
