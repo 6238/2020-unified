@@ -1,17 +1,26 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.helpers.TestableCommand;
 import frc.robot.subsystems.DriveTrain;
 
+/**
+ * Drive command for a two motor system
+ * @author sherif
+ */
 public class Drive extends TestableCommand {
     private final DriveTrain m_driveTrain;
     private boolean m_finished = false;
     private double m_speed;
     private double m_rot;
-    private Joystick controller;
+    private Joystick m_controller;
 
+    /**
+     * Takes in a speed and a rotation for a one time command
+     * @param dr The robot's drivetrain
+     * @param speed The speed to move at
+     * @param rot The rotation to use
+     */
     public Drive(DriveTrain dr, double speed, double rot) {
 
         m_driveTrain = dr;
@@ -22,10 +31,18 @@ public class Drive extends TestableCommand {
         addRequirements(dr);
     }
 
+    /**
+     * Takes in a speed
+     * @param dr The robot's drivetrain
+     * @param controller The joystick controller to use
+     */
     public Drive(DriveTrain dr, Joystick controller) {
 
         m_driveTrain = dr;
-        this.controller = controller;
+        this.m_controller = controller;
+
+        this.m_speed = 0.0;
+        this.m_rot = 0.0;
 
 
         addRequirements(dr);
@@ -33,16 +50,17 @@ public class Drive extends TestableCommand {
 
     @Override
     public void execute() {
-        if (controller != null) {
-            m_speed = controller.getThrottle();
-            m_rot = controller.getDirectionRadians();
+        if (m_controller != null) {
+            m_speed = -m_controller.getY();
+            m_rot = m_controller.getTwist();
         }
+//        System.out.println("Robot Speed is: " + m_speed);
+//        System.out.println("Robot Rotation is: " + m_rot);
         m_driveTrain.drive(m_speed, m_rot);
-        m_finished = true;
     }
 
     @Override
     public boolean isFinished() {
-        return m_finished;
+        return false;
     }
 }

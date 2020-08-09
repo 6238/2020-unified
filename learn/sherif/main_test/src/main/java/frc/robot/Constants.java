@@ -16,8 +16,29 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    public static final int FRONT_MOTOR = 0;
-    public static final int BACK_MOTOR = 1;
-    public static final int CONTROLLER = 10;
-    public static final int LEFT_STICK_BUTTON = 1;
+    // Drive Motors
+    public static final int DRIVE_LEFT_MOTOR_A = 34;
+    public static final int DRIVE_LEFT_MOTOR_B = 35;
+    public static final int DRIVE_LEFT_MOTOR_C = 36;
+
+    public static final int DRIVE_RIGHT_MOTOR_A = 22;
+    public static final int DRIVE_RIGHT_MOTOR_B = 23;
+    public static final int DRIVE_RIGHT_MOTOR_C = 24;
+
+    // Elevator ID's
+    public static final int THROAT_FRONT = 20;
+    public static final int THROAT_BACK = 30;
+    public static final int ELEVATOR_FRONT = 32;
+    public static final int ELEVATOR_BACK = 33;
+    public static final int INTAKE_SOLENOID = 10;
+    public static final int FEEDER = 21;
+
+    // Joysticks
+    public static final int JOYSTICK_A = 0;
+
+    // Joystick buttons
+    public static final int JOYSTICK_BUTTON_3 = 3;
+    public static final int JOYSTICK_BUTTON_4 = 4;
+    public static final int JOYSTICK_BUTTON_5 = 5;
+    public static final int JOYSTICK_BUTTON_6 = 6;
 }

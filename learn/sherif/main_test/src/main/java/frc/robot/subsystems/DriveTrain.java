@@ -1,40 +1,59 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.SpeedController;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 import static frc.robot.Constants.*;
 
 public class DriveTrain extends SubsystemBase {
-    private SpeedController left;
-    private SpeedController right;
+    private final WPI_TalonSRX m_left_a;
+    private final WPI_TalonSRX m_left_b;
+    private final WPI_TalonSRX m_left_c;
+
+    private final SpeedControllerGroup left;
+
+    private final WPI_TalonSRX m_right_a;
+    private final WPI_TalonSRX m_right_b;
+    private final WPI_TalonSRX m_right_c;
+
+    private final SpeedControllerGroup right;
+
+    private final DifferentialDrive differentialDrive;
+
+    private double m_x_speed = 0.0;
+    private double m_rot = 0.0;
 
     public DriveTrain(Factory f) {
-        this.left = f.getSparkMotor(FRONT_MOTOR);
-        this.right = f.getSparkMotor(BACK_MOTOR);
-        this.right.getInverted();
+        this.m_left_a = f.getTalonMotor(DRIVE_LEFT_MOTOR_A);
+        this.m_left_b = f.getTalonMotor(DRIVE_LEFT_MOTOR_B);
+        this.m_left_c = f.getTalonMotor(DRIVE_LEFT_MOTOR_C);
+        this.left = new SpeedControllerGroup(this.m_left_a, this.m_left_b, this.m_left_c);
+
+        this.m_right_a = f.getTalonMotor(DRIVE_RIGHT_MOTOR_A);
+        this.m_right_b = f.getTalonMotor(DRIVE_RIGHT_MOTOR_B);
+        this.m_right_c = f.getTalonMotor(DRIVE_RIGHT_MOTOR_C);
+        this.right = new SpeedControllerGroup(this.m_right_a, this.m_right_b, this.m_right_c);
+//        this.right.setInverted(true);
+
+        this.differentialDrive = new DifferentialDrive(this.left, this.right);
+//        this.differentialDrive.setDeadband(0.0);
     }
 
-    public void drive(double ySpeed, double xSpeed) {
-        this.right.set((Clip(ySpeed + xSpeed)));
-        this.left.set((Clip(ySpeed - xSpeed)));
+    public void drive(double xSpeed, double rot) {
+//        System.out.print("Recieved updated command from command ");
+//        System.out.println("Inputs: xSpeed: " + xSpeed + " rot: " + rot );
+        this.m_x_speed = xSpeed;
+        this.m_rot = rot;
+    }
+
+    @Override
+    public void periodic() {
+        this.differentialDrive.arcadeDrive(this.m_x_speed,this.m_rot, false);
     }
 
     public void brake() {
-        this.right.set(0.0);
-        this.left.set(0.0);
-    }
-
-    public static double Clip(double value, double min, double max) {
-        if (value < min) return min;
-        return Math.min(value, max);
-    }
-
-    public static double Clip(double value) {
-        if (value < -1.0) return -1.0;
-        return Math.min(value, 1.0);
+        this.differentialDrive.tankDrive(0.0, 0.0, false);
     }
 }

@@ -61,6 +61,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+      this.m_robotContainer.stopDrive();
   }
 
   @Override
@@ -96,6 +97,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    this.m_robotContainer.startDrive();
   }
 
   /**
@@ -103,12 +105,15 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+//      this.m_robotContainer.logJoystick();
+//      this.m_robotContainer.logIntake();
   }
 
   @Override
   public void testInit() {
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
+    this.m_robotContainer.stopDrive();
   }
 
   /**
@@ -116,5 +121,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+//      this.m_robotContainer.logIntake();
+//      this.m_robotContainer.logJoystick();
   }
 }
