@@ -43,9 +43,12 @@ public class DriveTrainTest {
         this.driveTrain.periodic();
         // These count as sets
         verify(left_front).set(and(leq(0.52), geq(0.48)));
+        verify(left_mid).set(and(leq(0.52), geq(0.48)));
+        verify(left_end).set(and(leq(0.52), geq(0.48)));
+
         verify(right_front).set(and(leq(-0.28), geq(-0.32)));
-        reset(left_front);
-        reset(right_front);
+        verify(right_mid).set(and(leq(-0.28), geq(-0.32)));
+        verify(right_end).set(and(leq(-0.28), geq(-0.32)));
 
         this.driveTrain.brake();
         verify(left_front).set(0.0);

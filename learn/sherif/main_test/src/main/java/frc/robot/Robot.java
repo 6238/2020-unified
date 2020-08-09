@@ -18,16 +18,16 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  * project.
  */
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand;
+  private Command autonomousCommand;
 
-  private RobotContainer m_robotContainer = null;
+  private RobotContainer robotContainer = null;
 
   public Robot() {
-    this.m_robotContainer = new RobotContainer();
+    this.robotContainer = new RobotContainer();
   }
 
   public Robot(RobotContainer container) {
-    this.m_robotContainer = container;
+    this.robotContainer = container;
   }
 
   /**
@@ -61,7 +61,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
-      this.m_robotContainer.stopDrive();
+      this.robotContainer.stopDrive();
   }
 
   @Override
@@ -73,11 +73,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    autonomousCommand = robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
+    if (autonomousCommand != null) {
+      autonomousCommand.schedule();
     }
   }
 
@@ -94,10 +94,10 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
+    if (autonomousCommand != null) {
+      autonomousCommand.cancel();
     }
-    this.m_robotContainer.startDrive();
+    this.robotContainer.startDrive();
   }
 
   /**
@@ -113,7 +113,7 @@ public class Robot extends TimedRobot {
   public void testInit() {
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
-    this.m_robotContainer.stopDrive();
+    this.robotContainer.stopDrive();
   }
 
   /**
