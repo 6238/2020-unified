@@ -8,6 +8,7 @@ import java.util.Map;
 
 public class Slider {
     private final SimpleWidget value;
+    private double lastDouble;
     public Slider(String name, double defaultValue) {
         this(name, defaultValue, 0, 1.0);
     }
@@ -17,6 +18,7 @@ public class Slider {
                 .add(name, defaultValue)
                 .withWidget(BuiltInWidgets.kNumberSlider)
                 .withProperties(Map.of("min", min, "max", max));
+        this.lastDouble = defaultValue;
     }
 
     public Slider(String name, double defaultValue, int x, int y, int w, int h) {
@@ -36,7 +38,13 @@ public class Slider {
     }
 
     public double getDouble(double def) {
-        return this.getEntry()
-                .getDouble(def);
+         var res = this.getEntry()
+                            .getDouble(def);
+         this.lastDouble = res;
+         return res;
+    }
+
+    public double getDouble() {
+        return this.getDouble(this.lastDouble);
     }
 }

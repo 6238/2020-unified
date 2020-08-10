@@ -25,13 +25,17 @@ public final class Constants {
     public static final int DRIVE_RIGHT_MOTOR_B = 23;
     public static final int DRIVE_RIGHT_MOTOR_C = 24;
 
-    // Elevator ID's
+    // Intake ID's
     public static final int THROAT_FRONT = 20;
     public static final int THROAT_BACK = 30;
     public static final int ELEVATOR_FRONT = 32;
     public static final int ELEVATOR_BACK = 33;
     public static final int INTAKE_SOLENOID = 10;
     public static final int FEEDER = 21;
+
+    // Shooter ID's
+    public static final int SHOOTER_LEFT = 8;
+    public static final int SHOOTER_RIGHT = 9;
 
     // ShuffleBoard
     public static final String DEFAULT_TAB = "telemetry";

@@ -14,26 +14,8 @@ import javax.annotation.Nullable;
  */
 public class Drive extends TestableCommand {
     private final DriveTrain driveTrain;
-    private double speed;
-    private double rot;
-    private double maxSpeed = 1.0;
     @Nullable private Slider maxSpeedSlider = null;
-    private TestableJoystick controller;
-
-    /**
-     * Takes in a speed and a rotation for a one time command
-     * @param dr The robot's drivetrain
-     * @param speed The speed to move at
-     * @param rot The rotation to use
-     */
-    public Drive(DriveTrain dr, double speed, double rot) {
-
-        driveTrain = dr;
-
-        this.speed = speed; this.rot = rot;
-
-        addRequirements(dr);
-    }
+    private final TestableJoystick controller;
 
     /**
      * Takes in a speed
@@ -45,8 +27,6 @@ public class Drive extends TestableCommand {
         driveTrain = dr;
         this.controller = controller;
 
-        this.speed = 0.0;
-        this.rot = 0.0;
 
         addRequirements(dr);
     }
@@ -59,10 +39,12 @@ public class Drive extends TestableCommand {
     @Override
     public void execute() {
         if (this.maxSpeedSlider != null) {
-            this.maxSpeed = this.maxSpeedSlider.getDouble(maxSpeed);
-            this.driveTrain.setMaxSpeed(this.maxSpeed);
+            var maxSpeed = this.maxSpeedSlider.getDouble();
+            this.driveTrain.setMaxSpeed(maxSpeed);
         }
 
+        double speed = 0.0;
+        double rot = 0.0;
         if (controller != null) {
             speed = -controller.getAxisY();
             rot = controller.getTwist();
