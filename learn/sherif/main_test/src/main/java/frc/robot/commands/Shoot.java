@@ -1,13 +1,13 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.helpers.TestableCommand;
 import frc.robot.io.Slider;
 import frc.robot.subsystems.Factory;
 import frc.robot.subsystems.ShooterController;
 
 import javax.annotation.Nullable;
 
-public class Shoot extends CommandBase {
+public class Shoot extends TestableCommand {
     private final ShooterController shooterController;
     @Nullable private Slider speedSlider = null;
 
@@ -24,6 +24,8 @@ public class Shoot extends CommandBase {
         if (this.speedSlider != null) {
             var newSpeed = this.speedSlider.getDouble();
             this.shooterController.setSpeed(newSpeed);
+        } else {
+            this.shooterController.setSpeed(0.5);
         }
     }
 }

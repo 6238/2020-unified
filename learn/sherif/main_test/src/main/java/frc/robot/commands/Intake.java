@@ -16,7 +16,7 @@ public class Intake extends TestableCommand {
     public static final int THROAT_SPEED = 0;
     public static final int ELEVATOR_SPEED = 1;
     public static final int FEEDER_SPEED = 2;
-    public double speeds[] = {1.0, -1.0, 1.0};
+    public double[] speeds = {1.0, -1.0, 1.0};
     public boolean elevatorLeft = false;
     public boolean elevatorRight = false;
     public boolean throat = false;
@@ -24,7 +24,7 @@ public class Intake extends TestableCommand {
 
     private final IntakeControl intakeControl;
     private final TestableJoystick joystick;
-    private Slider sliders[] = {null, null, null};
+    private final Slider[] sliders = {null, null, null};
 
 
     /**

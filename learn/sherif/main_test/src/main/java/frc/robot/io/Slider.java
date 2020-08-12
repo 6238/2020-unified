@@ -9,6 +9,7 @@ import java.util.Map;
 public class Slider {
     private final SimpleWidget value;
     private double lastDouble;
+
     public Slider(String name, double defaultValue) {
         this(name, defaultValue, 0, 1.0);
     }

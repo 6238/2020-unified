@@ -13,11 +13,13 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.Drive;
 import frc.robot.commands.Intake;
+import frc.robot.commands.Shoot;
 import frc.robot.helpers.RobotInjection;
 import frc.robot.helpers.TestableJoystick;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Factory;
 import frc.robot.subsystems.IntakeControl;
+import frc.robot.subsystems.ShooterController;
 
 import javax.annotation.Nullable;
 
@@ -33,6 +35,7 @@ public class RobotContainer {
     @Nullable private final DriveTrain driveTrain;
     @Nullable private final TestableJoystick joystick;
     @Nullable private final IntakeControl intakeControl;
+    @Nullable private final ShooterController shooterController;
 
     @Nullable
     public Drive getDriveCommand() {
@@ -41,6 +44,7 @@ public class RobotContainer {
 
     @Nullable private Drive driveCommand = null;
     @Nullable private Intake intakeCommand = null;
+    @Nullable private Shoot shootCommand = null;
 
     /**
      * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -50,6 +54,7 @@ public class RobotContainer {
         this.driveTrain = new DriveTrain(factory);
         this.joystick = new TestableJoystick(Constants.JOYSTICK_A);
         this.intakeControl = new IntakeControl(factory);
+        this.shooterController = new ShooterController(factory, true);
 
         configureButtonBindings();
     }
@@ -59,6 +64,7 @@ public class RobotContainer {
         this.joystick = injection.joystick;
         this.driveTrain = injection.driveTrain;
         this.intakeControl = injection.intakeControl;
+        this.shooterController = injection.shooterController;
 
         configureButtonBindings();
     }
@@ -93,16 +99,21 @@ public class RobotContainer {
             CommandScheduler.getInstance().schedule(this.driveCommand);
         }
 
-        System.out.println(this.intakeControl != null);
         if (this.intakeControl != null) {
             this.intakeCommand = new Intake(this.intakeControl, this.joystick);
             CommandScheduler.getInstance().schedule(this.intakeCommand);
+        }
+
+        if (this.shooterController != null) {
+            this.shootCommand = new Shoot(this.shooterController);
+            CommandScheduler.getInstance().schedule(this.shootCommand);
         }
     }
 
     public void stopDrive() {
         CommandScheduler.getInstance().cancel(this.driveCommand);
         CommandScheduler.getInstance().cancel(this.intakeCommand);
+        CommandScheduler.getInstance().cancel(this.shootCommand);
     }
 
     public void logTestableJoystick() {
