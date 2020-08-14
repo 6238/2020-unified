@@ -38,13 +38,13 @@ public class IntakeControl extends SubsystemBase {
         this.feederSpeed = speed;
     }
 
-    public void activateSolenoid() {
-        this.solenoid.set(true);
-    }
+//    public void activateSolenoid() {
+//        this.solenoid.set(true);
+//    }
 
-    public void deactivateSolenoid() {
-        this.solenoid.set(false);
-    }
+//    public void deactivateSolenoid() {
+//        this.solenoid.set(false);
+//    }
 
     public void stop() {
         this.setThroatSpeed(0.0);

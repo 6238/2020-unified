@@ -8,8 +8,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class IntakeControlTest {
     @Mock Factory f;
@@ -62,6 +61,21 @@ public class IntakeControlTest {
 
         verify(er).set(-0.0);
         verify(el).set(0.0);
+    }
+
+    @Test
+    public void testFeeder() {
+        var controller = new IntakeControl(this.f);
+        controller.setFeederSpeed(0.3);
+        controller.periodic();
+
+        verify(fe).set(0.3);
+
+        controller.setFeederSpeed(0.0);
+        controller.periodic();
+
+        verify(fe).set(0.0);
+        verifyNoMoreInteractions(fe);
     }
 
 //    @Test
