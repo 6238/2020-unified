@@ -39,17 +39,14 @@ public class Drive extends TestableCommand {
     @Override
     public void execute() {
         if (this.maxSpeedSlider != null) {
-            var maxSpeed = this.maxSpeedSlider.getDouble();
-            this.driveTrain.setMaxSpeed(maxSpeed);
+            this.driveTrain.setMaxSpeed(this.maxSpeedSlider.getDouble());
         }
 
-        double speed = 0.0;
-        double rot = 0.0;
         if (controller != null) {
-            speed = -controller.getAxisY();
-            rot = controller.getTwist();
+            driveTrain.drive(-controller.getAxisY(), controller.getTwist());
+        } else {
+            driveTrain.drive(0, 0);
         }
-        driveTrain.drive(speed, rot);
     }
 
     @Override

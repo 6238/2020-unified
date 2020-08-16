@@ -24,7 +24,7 @@ public class ShooterControllerTest {
     }
 
     @Test
-    public void TestSpeed() {
+    public void testSpeed() {
         var shooterController = new ShooterController(this.f);
         shooterController.setSpeed(0.5);
         shooterController.periodic();

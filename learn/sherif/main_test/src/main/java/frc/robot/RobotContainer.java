@@ -54,6 +54,7 @@ public class RobotContainer {
         this.driveTrain = new DriveTrain(factory);
         this.joystick = new TestableJoystick(Constants.JOYSTICK_A);
         this.intakeControl = new IntakeControl(factory);
+//        this.shooterController = null;
         this.shooterController = new ShooterController(factory, true);
 
         configureButtonBindings();
@@ -96,16 +97,18 @@ public class RobotContainer {
     public void startDrive() {
         if (this.driveTrain != null) {
             this.driveCommand = new Drive(this.driveTrain, this.joystick);
+            this.driveCommand.useShuffleboard(this.factory);
             CommandScheduler.getInstance().schedule(this.driveCommand);
         }
 
         if (this.intakeControl != null) {
-            this.intakeCommand = new Intake(this.intakeControl, this.joystick);
+            this.intakeCommand = new Intake(this.factory, this.intakeControl, this.joystick);
             CommandScheduler.getInstance().schedule(this.intakeCommand);
         }
 
         if (this.shooterController != null) {
             this.shootCommand = new Shoot(this.shooterController);
+            this.shootCommand.useSlider(this.factory);
             CommandScheduler.getInstance().schedule(this.shootCommand);
         }
     }

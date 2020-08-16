@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import frc.robot.Constants;
 import frc.robot.helpers.TestableCommand;
 import frc.robot.io.Slider;
 import frc.robot.subsystems.Factory;
@@ -16,16 +17,15 @@ public class Shoot extends TestableCommand {
     }
 
     public void useSlider(Factory f) {
-        this.speedSlider = f.getSlider("Shooter speed: ", 1.0, 0.0, 1.0);
+        this.speedSlider = f.getSlider("Shooter speed: ", Constants.INITIAL_SHOOTER, 0.0, 1.0);
     }
 
     @Override
     public void execute() {
         if (this.speedSlider != null) {
-            var newSpeed = this.speedSlider.getDouble();
-            this.shooterController.setSpeed(newSpeed);
+            this.shooterController.setSpeed(this.speedSlider.getDouble());
         } else {
-            this.shooterController.setSpeed(0.5);
+            this.shooterController.setSpeed(Constants.INITIAL_SHOOTER);
         }
     }
 }

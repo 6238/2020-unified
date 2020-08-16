@@ -9,6 +9,7 @@ public class ShooterController extends SubsystemBase {
     private final CANSparkMaxInterface leftSide;
     private final CANSparkMaxInterface rightSide;
     private final boolean useFollower;
+    private double speed = Constants.INITIAL_SHOOTER;
 
     public double getSpeed() {
         return speed;
@@ -18,7 +19,6 @@ public class ShooterController extends SubsystemBase {
         this.speed = speed;
     }
 
-    private double speed = 1.0;
 
     public ShooterController(Factory f) {
         this(f, false);

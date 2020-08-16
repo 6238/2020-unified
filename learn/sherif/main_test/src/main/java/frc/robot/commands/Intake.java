@@ -18,13 +18,14 @@ public class Intake extends TestableCommand {
     public static final int FEEDER_SPEED = 2;
     public double[] speeds = {1.0, -1.0, 1.0};
     public boolean elevatorLeft = false;
-    public boolean elevatorRight = false;
+    public boolean elevatorReverse = false;
     public boolean throat = false;
     public boolean feeder = false;
 
     private final IntakeControl intakeControl;
     private final TestableJoystick joystick;
-    private final Slider[] sliders = {null, null, null};
+    private Slider[] sliders = {null, null, null};
+    private boolean feederReverse;
 
 
     /**
@@ -39,9 +40,13 @@ public class Intake extends TestableCommand {
 
     public Intake(Factory f, IntakeControl intakeControl, TestableJoystick joystick) {
         this(intakeControl, joystick);
+        useSlider(f);
+    }
+
+    public void useSlider(Factory f) {
         this.sliders[0] = f.getSlider("Throat Speed", 1.0, -1.0, 1.0);
         this.sliders[1] = f.getSlider("Elevator Speed", 1.0, -1.0, 1.0);
-        this.sliders[2] = f.getSlider("Elevator Speed", 1.0, -1.0, 1.0);
+        this.sliders[2] = f.getSlider("Feeder Speed", 1.0, -1.0, 1.0);
     }
 
     private void readSliders() {
@@ -58,17 +63,16 @@ public class Intake extends TestableCommand {
     @Override
     public void execute() {
         readSliders();
-        System.out.println("executed");
         this.elevatorLeft = this.joystick.getRawButton(ELEVATOR_LEFT_BUTTON);
-        this.elevatorRight = this.joystick.getRawButton(ELEVATOR_RIGHT_BUTTON);
-        this.throat = this.joystick.getRawButton(THROAT_BUTTON);
+        this.elevatorReverse = this.joystick.getRawButton(THROAT_BUTTON);
         this.feeder = this.joystick.getRawButton(FEEDER_BUTTON);
+        this.feederReverse = this.joystick.getRawButton(ELEVATOR_RIGHT_BUTTON);
 
-        System.out.println("feeder: " + this.feeder);
+        var elevatorSpeed = this.elevatorReverse ? -this.speeds[ELEVATOR_SPEED] : this.speeds[ELEVATOR_SPEED];
+        var feederSpeed = this.feederReverse ? -this.speeds[FEEDER_SPEED] : this.speeds[FEEDER_SPEED];
 
-        this.intakeControl.setElevatorSpeed(this.elevatorLeft || this.elevatorRight ? this.speeds[ELEVATOR_SPEED] : 0);
-        this.intakeControl.setThroatSpeed(this.throat ? this.speeds[THROAT_SPEED] : 0);
-        this.intakeControl.setFeederSpeed(this.feeder ? this.speeds[FEEDER_SPEED] : 0);
+        this.intakeControl.setElevatorSpeed(this.elevatorLeft || this.elevatorReverse ? elevatorSpeed: 0);
+        this.intakeControl.setFeederSpeed(this.feeder || this.feederReverse ? feederSpeed: 0);
     }
 
     @Override

@@ -22,6 +22,8 @@ public class DriveTrain extends SubsystemBase {
 
     private final DifferentialDrive differentialDrive;
 
+    private double maxSpeed = 1.0;
+
     private double xSpeed = 0.0;
     private double rot = 0.0;
 
@@ -44,13 +46,29 @@ public class DriveTrain extends SubsystemBase {
         this.rot = rot;
     }
 
+    public void rotate(double rot) {
+        this.xSpeed = 0.0;
+        this.rot = rot;
+    }
+
     public void setMaxSpeed(double maxSpeed) {
+        this.maxSpeed = maxSpeed;
         this.differentialDrive.setMaxOutput(maxSpeed);
     }
 
     @Override
     public void periodic() {
-        this.differentialDrive.arcadeDrive(this.xSpeed,this.rot, false);
+        if (Math.abs(this.xSpeed) >= ROTATE_THRESHOLD) {
+            this.differentialDrive.arcadeDrive(this.xSpeed, this.rot, false);
+        } else {
+            if (Math.abs(rot) < 0.05) {
+                brake();
+            } else {
+                this.differentialDrive.setMaxOutput(1.0);
+                this.differentialDrive.tankDrive(Math.max(rot, 0.3), -Math.max(rot, 0.3), false);
+                this.differentialDrive.setMaxOutput(this.maxSpeed);
+            }
+        }
     }
 
     public void brake() {
