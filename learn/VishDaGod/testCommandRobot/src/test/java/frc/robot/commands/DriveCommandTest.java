@@ -3,8 +3,6 @@ package frc.robot.commands;
 import org.junit.*;
 import org.mockito.*;
 
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
 import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.*;
 
