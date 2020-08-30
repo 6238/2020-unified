@@ -53,8 +53,7 @@ public class Intake extends TestableCommand {
         int i = 0;
         for (Slider slider: sliders) {
             if (slider != null) {
-                double speed = slider.getDouble(speeds[i]);
-                speeds[i] = speed;
+                speeds[i] = slider.getDouble();
             }
             i++;
         }
@@ -63,10 +62,10 @@ public class Intake extends TestableCommand {
     @Override
     public void execute() {
         readSliders();
-        this.elevatorLeft = this.joystick.getRawButton(ELEVATOR_LEFT_BUTTON);
-        this.elevatorReverse = this.joystick.getRawButton(THROAT_BUTTON);
+        this.elevatorLeft = this.joystick.getRawButton(ELEVATOR_BUTTON);
+        this.elevatorReverse = this.joystick.getRawButton(ELEVATOR_REVERSE_BUTTON);
         this.feeder = this.joystick.getRawButton(FEEDER_BUTTON);
-        this.feederReverse = this.joystick.getRawButton(ELEVATOR_RIGHT_BUTTON);
+        this.feederReverse = this.joystick.getRawButton(FEEDER_REVERSE_BUTTON);
 
         var elevatorSpeed = this.elevatorReverse ? -this.speeds[ELEVATOR_SPEED] : this.speeds[ELEVATOR_SPEED];
         var feederSpeed = this.feederReverse ? -this.speeds[FEEDER_SPEED] : this.speeds[FEEDER_SPEED];

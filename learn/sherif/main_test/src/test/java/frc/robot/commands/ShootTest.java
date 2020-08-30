@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.helpers.RobotInjection;
@@ -24,7 +25,7 @@ public class ShootTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         TestableCommand.activateTestMode();
-        when(f.getSlider("Shooter speed: ", 1.0, 0.0, 1.0)).thenReturn(this.slider);
+        when(f.getSlider("Shooter speed: ", Constants.INITIAL_SHOOTER, 0.0, 1.0)).thenReturn(this.slider);
         when(this.slider.getDouble()).thenReturn(0.8);
     }
 

@@ -51,8 +51,8 @@ public final class Constants {
     public static final int JOYSTICK_A = 0;
 
     // Joystick buttons
-    public static final int ELEVATOR_LEFT_BUTTON = 3;
-    public static final int ELEVATOR_RIGHT_BUTTON = 4;
-    public static final int THROAT_BUTTON = 5;
+    public static final int ELEVATOR_BUTTON = 3;
+    public static final int FEEDER_REVERSE_BUTTON = 4;
+    public static final int ELEVATOR_REVERSE_BUTTON = 5;
     public static final int FEEDER_BUTTON = 6;
 }

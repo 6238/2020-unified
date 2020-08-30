@@ -5,6 +5,7 @@ import com.revrobotics.CANSparkMaxLowLevel;
 import edu.wpi.first.wpilibj.Solenoid;
 import frc.robot.helpers.MockableSparkMax;
 import frc.robot.interfaces.CANSparkMaxInterface;
+import frc.robot.io.Info;
 import frc.robot.io.Slider;
 
 public class Factory {
@@ -16,6 +17,7 @@ public class Factory {
     public CANSparkMaxInterface getSparkMotor(int busID) {
         return new MockableSparkMax(busID, CANSparkMaxLowLevel.MotorType.kBrushless);
     }
+
 
     /**
      * Creates a Talon Motor
@@ -47,5 +49,9 @@ public class Factory {
 
     public Slider getSlider(String name, double defaultValue, double min, double max, int x, int y, int w, int h) {
         return new Slider(name, defaultValue, min, max, x, y, w, h);
+    }
+
+    public Info getInfo(String name, double defaultValue) {
+        return new Info(name, defaultValue);
     }
 }

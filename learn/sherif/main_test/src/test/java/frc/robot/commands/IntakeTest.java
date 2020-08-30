@@ -47,15 +47,15 @@ public class IntakeTest {
 
     @Test
     public void TestSliderIntake() {
-        when(f.getSlider("Throat Speed", 1.0, -1.0, 1.0)).thenReturn(throat_slider);
-        when(throat_slider.getDouble(1.0)).thenReturn(0.3);
+        when(f.getSlider("Elevator Speed", 1.0, -1.0, 1.0)).thenReturn(throat_slider);
+        when(throat_slider.getDouble()).thenReturn(0.3);
 
-        when(controller.getRawButton(Constants.THROAT_BUTTON)).thenReturn(true);
+        when(controller.getRawButton(Constants.ELEVATOR_REVERSE_BUTTON)).thenReturn(true);
         var intake = new Intake(f, intakeControl, controller);
 
         intake.execute();
 
-        verify(intakeControl).setThroatSpeed(0.3);
+        verify(intakeControl).setElevatorSpeed(-0.3);
     }
 
     @Test
@@ -63,10 +63,10 @@ public class IntakeTest {
         robot.robotInit();
         robot.teleopInit();
 
-        when(this.controller.getRawButton(Constants.THROAT_BUTTON)).thenReturn(true);
+        when(this.controller.getRawButton(Constants.ELEVATOR_REVERSE_BUTTON)).thenReturn(true);
 
         robot.robotPeriodic();
 
-        verify(this.intakeControl, times(1)).setThroatSpeed(1.0);
+        verify(this.intakeControl, times(1)).setElevatorSpeed(-1.0);
     }
 }

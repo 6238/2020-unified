@@ -94,6 +94,5 @@ public class DriveTest {
         this.container.getDriveCommand().execute();
 
         verify(dr, times(2)).drive(-0.5, 0.5);
-        verifyNoMoreInteractions(dr);
     }
 }
