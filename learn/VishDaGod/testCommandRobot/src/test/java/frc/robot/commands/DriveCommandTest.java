@@ -48,11 +48,11 @@ public class DriveCommandTest {
     @Before
     public void setup() {
         MockitoAnnotations.openMocks(this);
-        when(this.factory.getIMU()).thenReturn(imu);
-        when(this.dashboard.getSlider("insanityFactor", 0.5)).thenReturn(insanityFactorSlider);
-        when(this.dashboard.getSlider("sensitivity", 0.75)).thenReturn(sensitivitySlider);
-        when(this.m_leftJoystick.getJoyY()).thenReturn(0.0);
-        when(this.m_rightJoystick.getJoyZ()).thenReturn(0.0);
+        when(factory.getIMU()).thenReturn(imu);
+        when(dashboard.getSlider("insanityFactor", 0.5)).thenReturn(insanityFactorSlider);
+        when(dashboard.getSlider("sensitivity", 0.75)).thenReturn(sensitivitySlider);
+        when(m_leftJoystick.getJoyY()).thenReturn(0.0);
+        when(m_rightJoystick.getJoyZ()).thenReturn(0.0);
         
         var injection = new RobotInjection();
         injection.m_drive = m_drive;
@@ -63,8 +63,8 @@ public class DriveCommandTest {
         injection.m_rightJoystick = m_rightJoystick;
         injection.m_driveCommand = m_driveCommand;
         
-        this.container = new RobotContainer(injection);
-        this.robot = new Robot(container);
+        container = new RobotContainer(injection);
+        robot = new Robot(container);
 
         TestableCommand.activateTestMode();
         TestableInstantCommand.activateTestMode();
@@ -77,8 +77,8 @@ public class DriveCommandTest {
 
         verify(m_drive).drive(0.0, 0.0);
 
-        when(this.m_leftJoystick.getJoyY()).thenReturn(0.5);
-        when(this.m_rightJoystick.getJoyZ()).thenReturn(0.25);
+        when(m_leftJoystick.getJoyY()).thenReturn(0.5);
+        when(m_rightJoystick.getJoyZ()).thenReturn(0.25);
         command.execute();
 
         verify(m_drive).drive(0.5, 0.25);
@@ -87,44 +87,44 @@ public class DriveCommandTest {
 
     @Test
     public void testDrivingFullRobotCode() {
-        this.robot.teleopInit();
+        robot.teleopInit();
         
         verify(m_drive).setDefaultCommand(m_driveCommand);
 
         when(insanityFactorSlider.get()).thenReturn(0.5);
         when(sensitivitySlider.get()).thenReturn(0.75);
 
-        when(this.m_leftJoystick.getJoyY()).thenReturn(0.5);
-        when(this.m_rightJoystick.getJoyZ()).thenReturn(0.5);
-        when(this.m_leftJoystick.getRawButton(TestableJoystick.AxisType.kY.value)).thenReturn(true);
-        when(this.m_rightJoystick.getRawButton(TestableJoystick.AxisType.kZ.value)).thenReturn(true);
+        when(m_leftJoystick.getJoyY()).thenReturn(0.5);
+        when(m_rightJoystick.getJoyZ()).thenReturn(0.5);
+        when(m_leftJoystick.getRawButton(TestableJoystick.AxisType.kY.value)).thenReturn(true);
+        when(m_rightJoystick.getRawButton(TestableJoystick.AxisType.kZ.value)).thenReturn(true);
 
-        this.robot.robotPeriodic();
+        robot.robotPeriodic();
 
         verify(m_drive, times(1)).drive(0.5, 0.5);
 
-        when(this.m_leftJoystick.getJoyY()).thenReturn(0.7);
-        when(this.m_rightJoystick.getJoyZ()).thenReturn(0.2);
+        when(m_leftJoystick.getJoyY()).thenReturn(0.7);
+        when(m_rightJoystick.getJoyZ()).thenReturn(0.2);
 
-        this.robot.robotPeriodic();
+        robot.robotPeriodic();
 
         verify(m_drive, times(1)).drive(0.2, 0.7);
 
-        when(this.m_leftJoystick.getJoyY()).thenReturn(0.0);
-        when(this.m_rightJoystick.getJoyZ()).thenReturn(0.0);
-        when(this.m_leftJoystick.getRawButton(TestableJoystick.AxisType.kY.value)).thenReturn(false);
-        when(this.m_rightJoystick.getRawButton(TestableJoystick.AxisType.kZ.value)).thenReturn(false);
+        when(m_leftJoystick.getJoyY()).thenReturn(0.0);
+        when(m_rightJoystick.getJoyZ()).thenReturn(0.0);
+        when(m_leftJoystick.getRawButton(TestableJoystick.AxisType.kY.value)).thenReturn(false);
+        when(m_rightJoystick.getRawButton(TestableJoystick.AxisType.kZ.value)).thenReturn(false);
 
-        this.robot.robotPeriodic();
+        robot.robotPeriodic();
 
         verify(m_drive, times(1)).drive(0.0, 0.0);
 
-        when(this.m_leftJoystick.getJoyY()).thenReturn(0.5);
-        when(this.m_rightJoystick.getJoyZ()).thenReturn(0.5);
-        when(this.m_leftJoystick.getRawButton(TestableJoystick.AxisType.kTwist.value)).thenReturn(true);
-        when(this.m_rightJoystick.getRawButton(TestableJoystick.AxisType.kThrottle.value)).thenReturn(true);
+        when(m_leftJoystick.getJoyY()).thenReturn(0.5);
+        when(m_rightJoystick.getJoyZ()).thenReturn(0.5);
+        when(m_leftJoystick.getRawButton(TestableJoystick.AxisType.kTwist.value)).thenReturn(true);
+        when(m_rightJoystick.getRawButton(TestableJoystick.AxisType.kThrottle.value)).thenReturn(true);
 
-        this.robot.robotPeriodic();
+        robot.robotPeriodic();
 
         verify(m_drive, times(2)).drive(0.5, 0.5);
     }

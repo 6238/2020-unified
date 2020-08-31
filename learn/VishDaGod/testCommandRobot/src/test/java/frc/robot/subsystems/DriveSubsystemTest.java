@@ -45,32 +45,32 @@ public class DriveSubsystemTest {
 
         when(f.getIMU()).thenReturn(kIMU);
 
-        this.m_drive = new DriveSubsystem(f, d);
+        m_drive = new DriveSubsystem(f, d);
     }
 
     @Test
     public void testDriving() {
-        this.m_drive.drive(0.5, 0.1);
-        insanityFactor = this.m_drive.getInsanityFactor();
-        sensitivity = this.m_drive.getSensitivity();
+        m_drive.drive(0.5, 0.1);
+        insanityFactor = m_drive.getInsanityFactor();
+        sensitivity = m_drive.getSensitivity();
         verify(m_leftTalon1).set(and(leq(0.5 * insanityFactor + 0.02), geq(0.5 * insanityFactor - 0.02)));
         verify(m_rightTalon1).set(and(leq(-0.5 * insanityFactor + 0.1 * sensitivity + 0.02), geq(-0.5 * insanityFactor + 0.1 * sensitivity - 0.02)));
         
-        this.m_drive.drive(0.7, -0.5);
-        insanityFactor = this.m_drive.getInsanityFactor();
-        sensitivity = this.m_drive.getSensitivity();
+        m_drive.drive(0.7, -0.5);
+        insanityFactor = m_drive.getInsanityFactor();
+        sensitivity = m_drive.getSensitivity();
         verify(m_leftTalon1).set(and(leq(0.7 * insanityFactor - 0.5 * sensitivity + 0.02), geq(0.5 * insanityFactor - 0.5 * sensitivity - 0.02)));
         verify(m_rightTalon1).set(and(leq(-0.7 * insanityFactor + 0.02), geq(-0.7 * insanityFactor - 0.02)));
         
-        this.m_drive.drive(1, 0.3);
-        insanityFactor = this.m_drive.getInsanityFactor();
-        sensitivity = this.m_drive.getSensitivity();
+        m_drive.drive(1, 0.3);
+        insanityFactor = m_drive.getInsanityFactor();
+        sensitivity = m_drive.getSensitivity();
         verify(m_leftTalon1).set(and(leq(1 * insanityFactor + 0.02), geq(1 * insanityFactor - 0.02)));
         verify(m_rightTalon1).set(and(leq(-1 * insanityFactor + 0.3 * sensitivity + 0.02), geq(-1 * insanityFactor + 0.3 * sensitivity - 0.02)));
         
-        this.m_drive.drive(0.0, 0.0);
-        insanityFactor = this.m_drive.getInsanityFactor();
-        sensitivity = this.m_drive.getSensitivity();
+        m_drive.drive(0.0, 0.0);
+        insanityFactor = m_drive.getInsanityFactor();
+        sensitivity = m_drive.getSensitivity();
         verify(m_leftTalon1).set(and(leq(0.02), geq(-0.02)));
         verify(m_rightTalon1).set(and(leq(0.02), geq(-0.02)));
     }

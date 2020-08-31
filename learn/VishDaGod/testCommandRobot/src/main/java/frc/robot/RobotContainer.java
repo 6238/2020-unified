@@ -103,18 +103,18 @@ public class RobotContainer {
      * {@link JoystickButton}.
      */
     private void configureButtonBindings() {
-        if (this.joysticks[0] == null || this.joysticks[1] == null) {
+        if (joysticks[0] == null || joysticks[1] == null) {
             return;
         }
 
-        if (this.m_drive != null) {
+        if (m_drive != null) {
             new JoystickButton(joysticks[OIConstants.CURVATURE_DRIVE_QUICK_TURN_TOGGLE[0]],
                     OIConstants.CURVATURE_DRIVE_QUICK_TURN_TOGGLE[1])
                             .whenPressed(() -> m_drive.setCurvatureDriveQuickTurn(true))
                             .whenReleased(() -> m_drive.setCurvatureDriveQuickTurn(false));
         }
 
-        if (this.m_elevator != null) {
+        if (m_elevator != null) {
             new JoystickButton(joysticks[OIConstants.ELEVATOR_TOGGLE[0]], OIConstants.ELEVATOR_TOGGLE[1])
                     .whenPressed(new ElevatorUpCommand(m_elevator)).whenReleased(new ElevatorStopCommand(m_elevator));
 
@@ -122,7 +122,7 @@ public class RobotContainer {
                     .whenPressed(new ElevatorDownCommand(m_elevator)).whenReleased(new ElevatorStopCommand(m_elevator));
         }
 
-        if (this.m_intake != null) {
+        if (m_intake != null) {
             new JoystickButton(joysticks[OIConstants.INTAKE_TOGGLE[0]], OIConstants.INTAKE_TOGGLE[1])
                     .whenPressed(new IntakeInCommand(m_intake)).whenReleased(new IntakeStopCommand(m_intake));
 
@@ -130,7 +130,7 @@ public class RobotContainer {
                     .whenPressed(new IntakeOutCommand(m_intake)).whenReleased(new IntakeStopCommand(m_intake));
         }
 
-        if (this.m_shooter != null) {
+        if (m_shooter != null) {
             new JoystickButton(joysticks[OIConstants.SHOOTER_TOGGLE[0]], OIConstants.SHOOTER_TOGGLE[1])
                     .whenPressed(new ShooterCommand(m_shooter)).whenReleased(new ShooterStopCommand(m_shooter));
         }

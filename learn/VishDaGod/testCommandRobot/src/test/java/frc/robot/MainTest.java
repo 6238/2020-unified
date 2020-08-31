@@ -35,8 +35,8 @@ public class MainTest {
     @Before
     public void setup() {
         MockitoAnnotations.openMocks(this);
-        when(this.m_leftJoystick.getJoyY()).thenReturn(0.0);
-        when(this.m_rightJoystick.getJoyZ()).thenReturn(0.0);
+        when(m_leftJoystick.getJoyY()).thenReturn(0.0);
+        when(m_rightJoystick.getJoyZ()).thenReturn(0.0);
 
         var injection = new RobotInjection();
         injection.m_drive = m_drive;
@@ -47,8 +47,8 @@ public class MainTest {
         injection.m_rightJoystick = m_rightJoystick;
         injection.m_driveCommand = m_driveCommand;
 
-        this.container = new RobotContainer(injection);
-        this.robot = new Robot(container);
+        container = new RobotContainer(injection);
+        robot = new Robot(container);
     }
 
 }

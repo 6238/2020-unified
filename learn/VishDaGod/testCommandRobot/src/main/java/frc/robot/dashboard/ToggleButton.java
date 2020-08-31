@@ -22,8 +22,8 @@ public class ToggleButton extends Trigger {
 	private NetworkTableEntry entry;
 
 	public ToggleButton(String name, boolean defaultValue) {
-        this.value = defaultValue;
-        this.name = name;
+        value = defaultValue;
+        name = name;
 		entry = OIConstants.SHUFFLEBOARD_TAB.add(name, defaultValue).withWidget(BuiltInWidgets.kToggleButton)
 				.getEntry();
 	}

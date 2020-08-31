@@ -23,29 +23,29 @@ public class Slider {
 	private NetworkTableEntry entry;
 
 	public Slider(String name, double defaultValue) {
-        this.value = defaultValue;
-        this.name = name;
+        value = defaultValue;
+        name = name;
 		entry = OIConstants.SHUFFLEBOARD_TAB.add(name, defaultValue).withWidget(BuiltInWidgets.kNumberSlider)
 				.withProperties(Map.of("min", 0, "max", 1)).getEntry();
 	}
 
 	public Slider(String name, double defaultValue, double min, double max) {
-		this.value = defaultValue;
-        this.name = name;
+		value = defaultValue;
+        name = name;
 		entry = OIConstants.SHUFFLEBOARD_TAB.add(name, defaultValue).withWidget(BuiltInWidgets.kNumberSlider)
 				.withProperties(Map.of("min", min, "max", max)).getEntry();
 	}
 
 	public Slider(String name, double defaultValue, int x, int y, int w, int h) {
-		this.value = defaultValue;
-        this.name = name;
+		value = defaultValue;
+        name = name;
 		entry = OIConstants.SHUFFLEBOARD_TAB.add(name, defaultValue).withWidget(BuiltInWidgets.kNumberSlider)
 				.withProperties(Map.of("min", 0, "max", 1)).withPosition(x, y).withSize(w, h).getEntry();
 	}
 
 	public Slider(String name, double defaultValue, double min, double max, int x, int y, int w, int h) {
-		this.value = defaultValue;
-        this.name = name;
+		value = defaultValue;
+        name = name;
 		entry = OIConstants.SHUFFLEBOARD_TAB.add(name, defaultValue).withWidget(BuiltInWidgets.kNumberSlider)
 				.withProperties(Map.of("min", min, "max", max)).withPosition(x, y).withSize(w, h).getEntry();
 	}
