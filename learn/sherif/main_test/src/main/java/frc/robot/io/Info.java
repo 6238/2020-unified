@@ -9,13 +9,13 @@ public class Info {
     private final SimpleWidget value;
 
     public Info(String name, double defaultValue) {
-        this.value = BoardManager.getManager().getTab()
+        value = BoardManager.getManager().getTab()
                 .add(name, defaultValue)
                 .withWidget(BuiltInWidgets.kDial);
     }
 
     public Info withMinMax(double min, double max) {
-        this.value.withProperties(Map.of(
+        value.withProperties(Map.of(
                 "min", min,
                 "max", max
         ));
@@ -23,7 +23,7 @@ public class Info {
     }
 
     public void setOutput(double out) {
-        this.value.getEntry()
+        value.getEntry()
                 .setDouble(out);
     }
 }

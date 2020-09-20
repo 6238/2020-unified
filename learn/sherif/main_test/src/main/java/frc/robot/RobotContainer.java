@@ -11,15 +11,15 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.Drive;
-import frc.robot.commands.Intake;
-import frc.robot.commands.Shoot;
+import frc.robot.commands.DriveCommand;
+import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.ShootCommand;
 import frc.robot.helpers.RobotInjection;
 import frc.robot.helpers.TestableJoystick;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.Factory;
-import frc.robot.subsystems.IntakeControl;
-import frc.robot.subsystems.ShooterController;
+import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
 import javax.annotation.Nullable;
 
@@ -32,40 +32,41 @@ import javax.annotation.Nullable;
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
     public Factory factory = new Factory();
-    @Nullable private final DriveTrain driveTrain;
+    @Nullable private final DriveSubsystem driveSubsystem;
     @Nullable private final TestableJoystick joystick;
-    @Nullable private final IntakeControl intakeControl;
-    @Nullable private final ShooterController shooterController;
+    @Nullable private final IntakeSubsystem intakeSubsystem;
+    @Nullable private final ShooterSubsystem shooterSubsystem;
 
     @Nullable
-    public Drive getDriveCommand() {
+    public DriveCommand getDriveCommand() {
         return driveCommand;
     }
 
-    @Nullable private Drive driveCommand = null;
-    @Nullable private Intake intakeCommand = null;
-    @Nullable private Shoot shootCommand = null;
+    @Nullable private DriveCommand driveCommand = null;
+    @Nullable private IntakeCommand intakeCommand = null;
+    @Nullable private ShootCommand shootCommand = null;
 
     /**
      * The container for the robot.  Contains subsystems, OI devices, and commands.
      */
     public RobotContainer() {
         // Configure the button bindings
-        this.driveTrain = new DriveTrain(factory);
-        this.joystick = new TestableJoystick(Constants.JOYSTICK_A);
-        this.intakeControl = new IntakeControl(factory);
-//        this.shooterController = null;
-        this.shooterController = new ShooterController(factory, true);
+        driveSubsystem = new DriveSubsystem(factory);
+        joystick = new TestableJoystick(Constants.JOYSTICK_A);
+        intakeSubsystem = new IntakeSubsystem(factory);
+//        shooterController = null;
+        shooterSubsystem = new ShooterSubsystem(factory, true);
 
         configureButtonBindings();
     }
 
     // Allows for a (mock) controller to be injected
     public RobotContainer(RobotInjection injection) {
-        this.joystick = injection.joystick;
-        this.driveTrain = injection.driveTrain;
-        this.intakeControl = injection.intakeControl;
-        this.shooterController = injection.shooterController;
+        joystick = injection.joystick;
+        driveSubsystem = injection.driveSubsystem;
+        intakeSubsystem = injection.intakeSubsystem;
+        shooterSubsystem = injection.shooterSubsystem;
+        factory = injection.factory != null ? injection.factory : new Factory();
 
         configureButtonBindings();
     }
@@ -79,62 +80,60 @@ public class RobotContainer {
      * verify(f.getMotor(1)).set(0.8); * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
-        if (this.joystick == null) return;
+        if (joystick == null) return;
 
-//        if (this.m_drivetrain != null) {
+//        if (m_drivetrain != null) {
 //            new JoystickButton(m_controller, Joystick.AxisType.kThrottle.value)
 //                    .or(new TestableJoystickButton(m_controller, Joystick.AxisType.kTwist.value))
-//                    .whenActive(new Drive(this.m_drivetrain, m_controller))
-//                    .whenInactive(new Drive(this.m_drivetrain, 0, 0));
+//                    .whenActive(new Drive(m_drivetrain, m_controller))
+//                    .whenInactive(new Drive(m_drivetrain, 0, 0));
 //        }
 
-//        if (this.m_intake != null) {
+//        if (m_intake != null) {
 ////            new JoystickButton(m_controller, Joystick.ButtonType.kTop.value)
-////                    .whenPressed(new Intake(this.m_intake, this.m_controller));
+////                    .whenPressed(new Intake(m_intake, m_controller));
 //        }
     }
 
     public void startDrive() {
-        if (this.driveTrain != null) {
-            this.driveCommand = new Drive(this.driveTrain, this.joystick);
-            this.driveCommand.useShuffleboard(this.factory);
-            CommandScheduler.getInstance().schedule(this.driveCommand);
+        if (driveSubsystem != null) {
+            driveCommand = new DriveCommand(factory, driveSubsystem, joystick);
+            CommandScheduler.getInstance().schedule(driveCommand);
         }
 
-        if (this.intakeControl != null) {
-            this.intakeCommand = new Intake(this.factory, this.intakeControl, this.joystick);
-            CommandScheduler.getInstance().schedule(this.intakeCommand);
+        if (intakeSubsystem != null) {
+            intakeCommand = new IntakeCommand(factory, intakeSubsystem, joystick);
+            CommandScheduler.getInstance().schedule(intakeCommand);
         }
 
-        if (this.shooterController != null) {
-            this.shootCommand = new Shoot(this.shooterController);
-            this.shootCommand.useSlider(this.factory);
-            CommandScheduler.getInstance().schedule(this.shootCommand);
+        if (shooterSubsystem != null) {
+            shootCommand = new ShootCommand(factory, shooterSubsystem);
+            CommandScheduler.getInstance().schedule(shootCommand);
         }
     }
 
     public void stopDrive() {
-        CommandScheduler.getInstance().cancel(this.driveCommand);
-        CommandScheduler.getInstance().cancel(this.intakeCommand);
-        CommandScheduler.getInstance().cancel(this.shootCommand);
+        CommandScheduler.getInstance().cancel(driveCommand);
+        CommandScheduler.getInstance().cancel(intakeCommand);
+        CommandScheduler.getInstance().cancel(shootCommand);
     }
 
     public void logTestableJoystick() {
-        if (this.joystick == null) return;
-        System.out.println("GetX: " + this.joystick.getX());
-        System.out.println("GetY: " + this.joystick.getY());
-        System.out.println("GetZ: " + this.joystick.getZ());
-        System.out.println("Throttle: " + this.joystick.getThrottle());
-        System.out.println("Radians: " + this.joystick.getTwist());
+        if (joystick == null) return;
+        System.out.println("GetX: " + joystick.getX());
+        System.out.println("GetY: " + joystick.getY());
+        System.out.println("GetZ: " + joystick.getZ());
+        System.out.println("Throttle: " + joystick.getThrottle());
+        System.out.println("Radians: " + joystick.getTwist());
     }
 
     public void logIntake() {
-        if (this.joystick == null) return;
+        if (joystick == null) return;
 
-        System.out.println("Raw button 3: " + this.joystick.getRawButton(3));
-        System.out.println("Raw button 4: " + this.joystick.getRawButton(4));
-        System.out.println("Raw button 5: " + this.joystick.getRawButton(5));
-        System.out.println("Raw button 6: " + this.joystick.getRawButton(6));
+        System.out.println("Raw button 3: " + joystick.getRawButton(3));
+        System.out.println("Raw button 4: " + joystick.getRawButton(4));
+        System.out.println("Raw button 5: " + joystick.getRawButton(5));
+        System.out.println("Raw button 6: " + joystick.getRawButton(6));
     }
 
     /**

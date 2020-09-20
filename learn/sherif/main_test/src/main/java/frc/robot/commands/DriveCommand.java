@@ -3,18 +3,16 @@ package frc.robot.commands;
 import frc.robot.helpers.TestableCommand;
 import frc.robot.helpers.TestableJoystick;
 import frc.robot.io.Slider;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.Factory;
-
-import javax.annotation.Nullable;
 
 /**
  * Drive command for a two motor system
  * @author sherif
  */
-public class Drive extends TestableCommand {
-    private final DriveTrain driveTrain;
-    @Nullable private Slider maxSpeedSlider = null;
+public class DriveCommand extends TestableCommand {
+    private final DriveSubsystem driveSubsystem;
+    private final Slider maxSpeedSlider;
     private final TestableJoystick controller;
 
     /**
@@ -22,30 +20,26 @@ public class Drive extends TestableCommand {
      * @param dr The robot's drivetrain
      * @param controller The joystick controller to use
      */
-    public Drive(DriveTrain dr, TestableJoystick controller) {
-
-        driveTrain = dr;
+    public DriveCommand(Factory f, DriveSubsystem dr, TestableJoystick controller) {
+        driveSubsystem = dr;
         this.controller = controller;
 
+        maxSpeedSlider = f.getSlider("Max Speed", 1.0, 0.0, 1.0);
 
         addRequirements(dr);
-    }
-
-    public void useShuffleboard(Factory f) {
-        this.maxSpeedSlider = f.getSlider("Max Speed", 1.0, 0.0, 1.0);
     }
 
 
     @Override
     public void execute() {
-        if (this.maxSpeedSlider != null) {
-            this.driveTrain.setMaxSpeed(this.maxSpeedSlider.getDouble());
+        if (maxSpeedSlider != null) {
+            driveSubsystem.setMaxSpeed(maxSpeedSlider.getDouble());
         }
 
         if (controller != null) {
-            driveTrain.drive(-controller.getAxisY(), controller.getTwist());
+            driveSubsystem.drive(-controller.getAxisY(), controller.getTwist());
         } else {
-            driveTrain.drive(0, 0);
+            driveSubsystem.drive(0, 0);
         }
     }
 

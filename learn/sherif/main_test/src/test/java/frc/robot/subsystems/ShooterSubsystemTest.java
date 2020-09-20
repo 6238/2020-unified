@@ -10,7 +10,7 @@ import org.mockito.MockitoAnnotations;
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
-public class ShooterControllerTest {
+public class ShooterSubsystemTest {
     @Mock Factory f;
 
     @Mock CANSparkMaxInterface leftSide;
@@ -25,7 +25,7 @@ public class ShooterControllerTest {
 
     @Test
     public void testSpeed() {
-        var shooterController = new ShooterController(this.f);
+        var shooterController = new ShooterSubsystem(this.f);
         shooterController.setSpeed(0.5);
         shooterController.periodic();
 

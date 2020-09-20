@@ -23,7 +23,7 @@ public class Slider {
     }
 
     private void saveToCache() {
-        Slider.cache.put(this.value.getTitle(), this);
+        Slider.cache.put(value.getTitle(), this);
     }
 
     public Slider(String name, double defaultValue) {
@@ -34,7 +34,7 @@ public class Slider {
     public Slider(String name, double defaultValue, double min, double max) {
         value = BoardManager.getManager().getTab().add(name, defaultValue).withWidget(BuiltInWidgets.kNumberSlider)
                 .withProperties(Map.of("min", min, "max", max));
-        this.lastDouble = defaultValue;
+        lastDouble = defaultValue;
         saveToCache();
     }
 
@@ -55,11 +55,11 @@ public class Slider {
     }
 
     public double getDouble(double def) {
-        this.lastDouble = this.getEntry().getDouble(def);
-        return this.getEntry().getDouble(def);
+        lastDouble = getEntry().getDouble(def);
+        return getEntry().getDouble(def);
     }
 
     public double getDouble() {
-        return this.getDouble(this.lastDouble);
+        return getDouble(lastDouble);
     }
 }

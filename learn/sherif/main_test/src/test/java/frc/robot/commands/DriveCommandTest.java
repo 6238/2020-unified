@@ -7,9 +7,9 @@ import frc.robot.helpers.RobotInjection;
 import frc.robot.helpers.TestableCommand;
 import frc.robot.helpers.TestableJoystick;
 import frc.robot.io.Slider;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.Factory;
-import frc.robot.subsystems.IntakeControl;
+import frc.robot.subsystems.IntakeSubsystem;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -17,12 +17,14 @@ import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.*;
 
-public class DriveTest {
-    @Mock DriveTrain dr;
+public class DriveCommandTest {
+    @Mock
+    DriveSubsystem dr;
     @Mock TestableJoystick controller;
     @Mock Factory f;
     @Mock Slider slider;
-    @Mock IntakeControl control;
+    @Mock
+    IntakeSubsystem control;
     RobotContainer container;
     Robot robot;
 
@@ -36,8 +38,8 @@ public class DriveTest {
 
         var injection = new RobotInjection();
         injection.joystick = this.controller;
-        injection.driveTrain = this.dr;
-        injection.intakeControl = this.control;
+        injection.driveSubsystem = this.dr;
+        injection.intakeSubsystem = this.control;
         this.container = new RobotContainer(injection);
         this.robot = new Robot(this.container);
     }
@@ -45,8 +47,7 @@ public class DriveTest {
     @Test
     public void TestShuffleBoard() {
         when(this.slider.getDouble()).thenReturn(0.8);
-        var drive = new Drive(dr, controller);
-        drive.useShuffleboard(f);
+        var drive = new DriveCommand(f, dr, controller);
 
         drive.execute();
 

@@ -1,8 +1,9 @@
 package frc.robot.helpers;
 
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.IntakeControl;
-import frc.robot.subsystems.ShooterController;
+import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.Factory;
+import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
 import javax.annotation.Nullable;
 
@@ -14,7 +15,8 @@ import javax.annotation.Nullable;
  */
 public class RobotInjection {
     @Nullable public TestableJoystick joystick;
-    @Nullable public IntakeControl intakeControl;
-    @Nullable public DriveTrain driveTrain;
-    @Nullable public ShooterController shooterController;
+    @Nullable public IntakeSubsystem intakeSubsystem;
+    @Nullable public DriveSubsystem driveSubsystem;
+    @Nullable public ShooterSubsystem shooterSubsystem;
+    @Nullable public Factory factory;
 }

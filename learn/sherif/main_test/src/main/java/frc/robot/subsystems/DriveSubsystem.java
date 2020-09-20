@@ -7,7 +7,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import static frc.robot.Constants.*;
 
-public class DriveTrain extends SubsystemBase {
+
+public class DriveSubsystem extends SubsystemBase {
     private final WPI_TalonSRX leftA;
     private final WPI_TalonSRX leftB;
     private final WPI_TalonSRX leftC;
@@ -27,18 +28,18 @@ public class DriveTrain extends SubsystemBase {
     private double xSpeed = 0.0;
     private double rot = 0.0;
 
-    public DriveTrain(Factory f) {
-        this.leftA = f.getTalonMotor(DRIVE_LEFT_MOTOR_A);
-        this.leftB = f.getTalonMotor(DRIVE_LEFT_MOTOR_B);
-        this.leftC = f.getTalonMotor(DRIVE_LEFT_MOTOR_C);
-        this.left = new SpeedControllerGroup(this.leftA, this.leftB, this.leftC);
+    public DriveSubsystem(Factory f) {
+        leftA = f.getTalonMotor(DRIVE_LEFT_MOTOR_A);
+        leftB = f.getTalonMotor(DRIVE_LEFT_MOTOR_B);
+        leftC = f.getTalonMotor(DRIVE_LEFT_MOTOR_C);
+        left = new SpeedControllerGroup(leftA, leftB, leftC);
 
-        this.rightA = f.getTalonMotor(DRIVE_RIGHT_MOTOR_A);
-        this.rightB = f.getTalonMotor(DRIVE_RIGHT_MOTOR_B);
-        this.rightC = f.getTalonMotor(DRIVE_RIGHT_MOTOR_C);
-        this.right = new SpeedControllerGroup(this.rightA, this.rightB, this.rightC);
+        rightA = f.getTalonMotor(DRIVE_RIGHT_MOTOR_A);
+        rightB = f.getTalonMotor(DRIVE_RIGHT_MOTOR_B);
+        rightC = f.getTalonMotor(DRIVE_RIGHT_MOTOR_C);
+        right = new SpeedControllerGroup(rightA, rightB, rightC);
 
-        this.differentialDrive = new DifferentialDrive(this.left, this.right);
+        differentialDrive = new DifferentialDrive(left, right);
     }
 
     public void drive(double xSpeed, double rot) {
@@ -47,31 +48,31 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public void rotate(double rot) {
-        this.xSpeed = 0.0;
+        xSpeed = 0.0;
         this.rot = rot;
     }
 
     public void setMaxSpeed(double maxSpeed) {
         this.maxSpeed = maxSpeed;
-        this.differentialDrive.setMaxOutput(maxSpeed);
+        differentialDrive.setMaxOutput(maxSpeed);
     }
 
     @Override
     public void periodic() {
-        if (Math.abs(this.xSpeed) >= ROTATE_THRESHOLD) {
-            this.differentialDrive.arcadeDrive(this.xSpeed, this.rot, false);
+        if (Math.abs(xSpeed) >= ROTATE_THRESHOLD) {
+            differentialDrive.arcadeDrive(xSpeed, rot, false);
         } else {
             if (Math.abs(rot) < 0.05) {
                 brake();
             } else {
-                this.differentialDrive.setMaxOutput(1.0);
-                this.differentialDrive.tankDrive(Math.max(rot, 0.3), -Math.max(rot, 0.3), false);
-                this.differentialDrive.setMaxOutput(this.maxSpeed);
+                differentialDrive.setMaxOutput(1.0);
+                differentialDrive.tankDrive(Math.max(rot, 0.3), -Math.max(rot, 0.3), false);
+                differentialDrive.setMaxOutput(maxSpeed);
             }
         }
     }
 
     public void brake() {
-        this.differentialDrive.tankDrive(0.0, 0.0, false);
+        differentialDrive.tankDrive(0.0, 0.0, false);
     }
 }

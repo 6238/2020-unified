@@ -10,7 +10,7 @@ import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.*;
 
-public class IntakeControlTest {
+public class IntakeCommandSubsystemTest {
     @Mock Factory f;
     @Mock WPI_TalonSRX er;
     @Mock WPI_TalonSRX el;
@@ -33,7 +33,7 @@ public class IntakeControlTest {
 
     @Test
     public void TestThroat() {
-        var controller = new IntakeControl(this.f);
+        var controller = new IntakeSubsystem(this.f);
         controller.setThroatSpeed(0.5);
         controller.periodic();
 
@@ -49,7 +49,7 @@ public class IntakeControlTest {
 
     @Test
     public void testElevate() {
-        var controller = new IntakeControl(this.f);
+        var controller = new IntakeSubsystem(this.f);
         controller.setElevatorSpeed(0.3);
         controller.periodic();
 
@@ -65,7 +65,7 @@ public class IntakeControlTest {
 
     @Test
     public void testFeeder() {
-        var controller = new IntakeControl(this.f);
+        var controller = new IntakeSubsystem(this.f);
         controller.setFeederSpeed(0.3);
         controller.periodic();
 

@@ -9,7 +9,7 @@ import frc.robot.helpers.TestableCommand;
 import frc.robot.helpers.TestableJoystick;
 import frc.robot.io.Slider;
 import frc.robot.subsystems.Factory;
-import frc.robot.subsystems.IntakeControl;
+import frc.robot.subsystems.IntakeSubsystem;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -17,8 +17,9 @@ import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.*;
 
-public class IntakeTest {
-    @Mock IntakeControl intakeControl;
+public class IntakeCommandTest {
+    @Mock
+    IntakeSubsystem intakeSubsystem;
     @Mock TestableJoystick controller;
     @Mock Factory f;
     @Mock Slider throat_slider;
@@ -31,7 +32,7 @@ public class IntakeTest {
         TestableCommand.activateTestMode();
         var injection = new RobotInjection();
         injection.joystick = this.controller;
-        injection.intakeControl = this.intakeControl;
+        injection.intakeSubsystem = this.intakeSubsystem;
 
         this.container = new RobotContainer(injection);
         this.robot = new Robot(this.container);
@@ -39,10 +40,10 @@ public class IntakeTest {
 
     @Test
     public void TestIntake() {
-        var intake = new Intake(intakeControl, controller);
+        var intake = new IntakeCommand(f, intakeSubsystem, controller);
         when(controller.getRawButton(Constants.FEEDER_BUTTON)).thenReturn(true);
         intake.execute();
-        verify(intakeControl).setFeederSpeed(1.0);
+        verify(intakeSubsystem).setFeederSpeed(1.0);
     }
 
     @Test
@@ -51,11 +52,11 @@ public class IntakeTest {
         when(throat_slider.getDouble()).thenReturn(0.3);
 
         when(controller.getRawButton(Constants.ELEVATOR_REVERSE_BUTTON)).thenReturn(true);
-        var intake = new Intake(f, intakeControl, controller);
+        var intake = new IntakeCommand(f, intakeSubsystem, controller);
 
         intake.execute();
 
-        verify(intakeControl).setElevatorSpeed(-0.3);
+        verify(intakeSubsystem).setElevatorSpeed(-0.3);
     }
 
     @Test
@@ -67,6 +68,6 @@ public class IntakeTest {
 
         robot.robotPeriodic();
 
-        verify(this.intakeControl, times(1)).setElevatorSpeed(-1.0);
+        verify(this.intakeSubsystem, times(1)).setElevatorSpeed(-1.0);
     }
 }
