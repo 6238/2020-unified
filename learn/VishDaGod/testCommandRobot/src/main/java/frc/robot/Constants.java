@@ -74,7 +74,7 @@ public final class Constants {
 
 		public static final int[] SHOOTER_TOGGLE = { 1, 1 };
 
-		public static final int[] ELEVATOR_TOGGLE = { 0, 5, 3 };
+		public static final int[] ELEVATOR_TOGGLE = { 0, 5, 3 }; //TODO: turn this into 3 separate variables
 
 		private static final NetworkTableInstance NETWORK_TABLE_INSTANCE = NetworkTableInstance.getDefault();
 		public static final NetworkTable NETWORK_TABLE = NETWORK_TABLE_INSTANCE.getTable("SmartDashboard");

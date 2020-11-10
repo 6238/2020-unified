@@ -49,7 +49,7 @@ public class IntakeSubsystem extends SubsystemBase {
 	}
 
 	public void in() {
-		m_left.set(innerSpeed);
+		m_left.set(innerSpeed); //TODO: split up inner and outer
 		m_outer.set(outerSpeed);
 	}
 	

@@ -49,7 +49,7 @@ public class ElevatorSubsystem extends SubsystemBase {
 	}
 
 	public void up() {
-		m_front.set(speed);
+		m_front.set(speed); //TODO: split up elevator and feeder
 		m_feeder.set(feederSpeed);
 	}
 

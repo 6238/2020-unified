@@ -46,7 +46,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class RobotContainer {
     private final Factory factory = new Factory();
     private final Dashboard dashboard = new Dashboard();
-    private final DriveSubsystem m_drive;
+    private final DriveSubsystem drive;
     private final ElevatorSubsystem m_elevator;
     private final IntakeSubsystem m_intake;
     private final ShooterSubsystem m_shooter;
@@ -59,7 +59,7 @@ public class RobotContainer {
      * The container for the robot. Contains subsystems, OI devices, and commands.
      */
     public RobotContainer() {
-        m_drive = new DriveSubsystem(factory, dashboard);
+        drive = new DriveSubsystem(factory, dashboard);
         m_elevator = new ElevatorSubsystem(factory, dashboard);
         m_intake = new IntakeSubsystem(factory, dashboard);
         m_shooter = new ShooterSubsystem(factory, dashboard);
@@ -68,9 +68,9 @@ public class RobotContainer {
         joysticks[0] = new TestableJoystick(OIConstants.JOYSTICK_LEFT_PORT);
         joysticks[1] = new TestableJoystick(OIConstants.JOYSTICK_RIGHT_PORT);
 
-        m_driveCommand = new DriveCommand(m_drive, joysticks[0], joysticks[1]);
+        m_driveCommand = new DriveCommand(drive, joysticks[0], joysticks[1]);
 
-        m_drive.setDefaultCommand(m_driveCommand);
+        drive.setDefaultCommand(m_driveCommand);
 
         configureButtonBindings();
     }
@@ -80,7 +80,7 @@ public class RobotContainer {
      * Allows for a (mock) controller to be injected.
      */
     public RobotContainer(final RobotInjection injection) {
-        m_drive = injection.m_drive;
+        drive = injection.m_drive;
         m_elevator = injection.m_elevator;
         m_intake = injection.m_intake;
         m_shooter = injection.m_shooter;
@@ -91,7 +91,7 @@ public class RobotContainer {
 
         m_driveCommand = injection.m_driveCommand;
         
-        m_drive.setDefaultCommand(m_driveCommand);
+        drive.setDefaultCommand(m_driveCommand);
 
         configureButtonBindings();
     }
@@ -107,11 +107,11 @@ public class RobotContainer {
             return;
         }
 
-        if (m_drive != null) {
+        if (drive != null) {
             new JoystickButton(joysticks[OIConstants.CURVATURE_DRIVE_QUICK_TURN_TOGGLE[0]],
                     OIConstants.CURVATURE_DRIVE_QUICK_TURN_TOGGLE[1])
-                            .whenPressed(() -> m_drive.setCurvatureDriveQuickTurn(true))
-                            .whenReleased(() -> m_drive.setCurvatureDriveQuickTurn(false));
+                            .whenPressed(() -> drive.setCurvatureDriveQuickTurn(true))
+                            .whenReleased(() -> drive.setCurvatureDriveQuickTurn(false));
         }
 
         if (m_elevator != null) {
