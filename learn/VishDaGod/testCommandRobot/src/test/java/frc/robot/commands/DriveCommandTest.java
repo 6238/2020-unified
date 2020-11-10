@@ -3,6 +3,8 @@ package frc.robot.commands;
 import org.junit.*;
 import org.mockito.*;
 
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+
 import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.*;
 
@@ -90,6 +92,8 @@ public class DriveCommandTest {
         robot.teleopInit();
         
         verify(m_drive).setDefaultCommand(m_driveCommand);
+        container.scheduleCommands();
+        verify(CommandScheduler.getInstance()).schedule(m_driveCommand);
 
         when(insanityFactorSlider.get()).thenReturn(0.5);
         when(sensitivitySlider.get()).thenReturn(0.75);
