@@ -25,7 +25,11 @@ public final class Constants {
     public static final int DRIVE_RIGHT_MOTOR_B = 23;
     public static final int DRIVE_RIGHT_MOTOR_C = 24;
 
-    // Elevator ID's
+    // Drive
+
+    public static final double ROTATE_THRESHOLD = 0.1;
+
+    // Intake ID's
     public static final int THROAT_FRONT = 20;
     public static final int THROAT_BACK = 30;
     public static final int ELEVATOR_FRONT = 32;
@@ -33,15 +37,22 @@ public final class Constants {
     public static final int INTAKE_SOLENOID = 10;
     public static final int FEEDER = 21;
 
+    // Shooter ID's
+    public static final int SHOOTER_LEFT = 6;
+    public static final int SHOOTER_RIGHT = 7;
+
+    // Shooters
+    public static final double INITIAL_SHOOTER = 0.0;
+
     // ShuffleBoard
-    public static final String DEFAULT_TAB = "telemetry";
+    public static final String DEFAULT_TAB = "SmartDashboard";
 
     // Joysticks
     public static final int JOYSTICK_A = 0;
 
     // Joystick buttons
-    public static final int ELEVATOR_LEFT_BUTTON = 3;
-    public static final int ELEVATOR_RIGHT_BUTTON = 4;
-    public static final int THROAT_BUTTON = 5;
+    public static final int ELEVATOR_BUTTON = 3;
+    public static final int FEEDER_REVERSE_BUTTON = 4;
+    public static final int ELEVATOR_REVERSE_BUTTON = 5;
     public static final int FEEDER_BUTTON = 6;
 }

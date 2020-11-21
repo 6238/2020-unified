@@ -6,8 +6,10 @@ import frc.robot.RobotContainer;
 import frc.robot.helpers.RobotInjection;
 import frc.robot.helpers.TestableCommand;
 import frc.robot.helpers.TestableJoystick;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.IntakeControl;
+import frc.robot.io.Slider;
+import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.Factory;
+import frc.robot.subsystems.IntakeSubsystem;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -15,10 +17,14 @@ import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.*;
 
-public class DriveTest {
-    @Mock DriveTrain dr;
+public class DriveCommandTest {
+    @Mock
+    DriveSubsystem dr;
     @Mock TestableJoystick controller;
-    @Mock IntakeControl control;
+    @Mock Factory f;
+    @Mock Slider slider;
+    @Mock
+    IntakeSubsystem control;
     RobotContainer container;
     Robot robot;
 
@@ -27,31 +33,29 @@ public class DriveTest {
         MockitoAnnotations.initMocks(this);
         when(this.controller.getAxisY()).thenReturn(0.0);
         when(this.controller.getTwist()).thenReturn(0.0);
+        when(this.f.getSlider("Max Speed", 1.0, 0.0, 1.0)).thenReturn(this.slider);
         TestableCommand.activateTestMode();
 
         var injection = new RobotInjection();
         injection.joystick = this.controller;
-        injection.driveTrain = this.dr;
-        injection.intakeControl = this.control;
+        injection.driveSubsystem = this.dr;
+        injection.intakeSubsystem = this.control;
         this.container = new RobotContainer(injection);
         this.robot = new Robot(this.container);
     }
 
     @Test
-    public void TestDriveCommand() {
-        var command = new Drive(dr, 0.5, 0.2);
-        command.execute();
-
-        verify(dr).drive(0.5, 0.2);
-    }
-
-    @Test
     public void TestShuffleBoard() {
+        when(this.slider.getDouble()).thenReturn(0.8);
+        var drive = new DriveCommand(f, dr, controller);
 
+        drive.execute();
+
+        verify(this.dr, times(1)).setMaxSpeed(0.8);
     }
 
     @Test
-    public void TestMockedRobot() {
+    public void TestJoystickControl() {
         this.robot.teleopInit();
 
         // Test Command runs
@@ -60,6 +64,7 @@ public class DriveTest {
         when(this.controller.getRawButton(Joystick.AxisType.kTwist.value)).thenReturn(true);
         when(this.controller.getRawButton(Joystick.AxisType.kY.value)).thenReturn(true);
 
+        assert this.container.getDriveCommand() != null;
         this.container.getDriveCommand().execute();
 
         verify(dr, times(1)).drive(-0.5, 0.5);
