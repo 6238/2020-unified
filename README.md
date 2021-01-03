@@ -2,6 +2,8 @@
 
 **One combined repository for Popcorn Penguins 6238 in the 2020 Infinite Recharge Season**
 
+### This repository is now archived and read-only.
+
 Run `./update` in the root (2020-unified) directory to update all submodules (macOS/Linux only). To allow running the command without the `./`, copy the `update` executable to `/usr/local/bin/`.
 
 ## Table of Contents
