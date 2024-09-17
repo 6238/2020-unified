@@ -8,10 +8,9 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
-public class IntakeControlTest {
+public class IntakeCommandSubsystemTest {
     @Mock Factory f;
     @Mock WPI_TalonSRX er;
     @Mock WPI_TalonSRX el;
@@ -34,7 +33,7 @@ public class IntakeControlTest {
 
     @Test
     public void TestThroat() {
-        var controller = new IntakeControl(this.f);
+        var controller = new IntakeSubsystem(this.f);
         controller.setThroatSpeed(0.5);
         controller.periodic();
 
@@ -50,7 +49,7 @@ public class IntakeControlTest {
 
     @Test
     public void testElevate() {
-        var controller = new IntakeControl(this.f);
+        var controller = new IntakeSubsystem(this.f);
         controller.setElevatorSpeed(0.3);
         controller.periodic();
 
@@ -62,6 +61,21 @@ public class IntakeControlTest {
 
         verify(er).set(-0.0);
         verify(el).set(0.0);
+    }
+
+    @Test
+    public void testFeeder() {
+        var controller = new IntakeSubsystem(this.f);
+        controller.setFeederSpeed(0.3);
+        controller.periodic();
+
+        verify(fe).set(0.3);
+
+        controller.setFeederSpeed(0.0);
+        controller.periodic();
+
+        verify(fe).set(0.0);
+        verifyNoMoreInteractions(fe);
     }
 
 //    @Test

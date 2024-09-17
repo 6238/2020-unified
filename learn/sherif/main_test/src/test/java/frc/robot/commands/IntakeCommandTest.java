@@ -1,7 +1,6 @@
 package frc.robot.commands;
 
 
-import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
@@ -10,7 +9,7 @@ import frc.robot.helpers.TestableCommand;
 import frc.robot.helpers.TestableJoystick;
 import frc.robot.io.Slider;
 import frc.robot.subsystems.Factory;
-import frc.robot.subsystems.IntakeControl;
+import frc.robot.subsystems.IntakeSubsystem;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -18,10 +17,10 @@ import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.*;
 
-public class IntakeTest {
-    @Mock IntakeControl intakeControl;
-    @Mock Timer timer;
-    @Mock TestableJoystick m_controller;
+public class IntakeCommandTest {
+    @Mock
+    IntakeSubsystem intakeSubsystem;
+    @Mock TestableJoystick controller;
     @Mock Factory f;
     @Mock Slider throat_slider;
     RobotContainer container;
@@ -32,8 +31,8 @@ public class IntakeTest {
         MockitoAnnotations.initMocks(this);
         TestableCommand.activateTestMode();
         var injection = new RobotInjection();
-        injection.joystick = this.m_controller;
-        injection.intakeControl = this.intakeControl;
+        injection.joystick = this.controller;
+        injection.intakeSubsystem = this.intakeSubsystem;
 
         this.container = new RobotContainer(injection);
         this.robot = new Robot(this.container);
@@ -41,23 +40,23 @@ public class IntakeTest {
 
     @Test
     public void TestIntake() {
-        var intake = new Intake(intakeControl, m_controller);
-        when(m_controller.getRawButton(Constants.FEEDER_BUTTON)).thenReturn(true);
+        var intake = new IntakeCommand(f, intakeSubsystem, controller);
+        when(controller.getRawButton(Constants.FEEDER_BUTTON)).thenReturn(true);
         intake.execute();
-        verify(intakeControl).setFeederSpeed(1.0);
+        verify(intakeSubsystem).setFeederSpeed(1.0);
     }
 
     @Test
     public void TestSliderIntake() {
-        when(f.getSlider("Throat Speed", 1.0, -1.0, 1.0)).thenReturn(throat_slider);
-        when(throat_slider.getDouble(1.0)).thenReturn(0.3);
+        when(f.getSlider("Elevator Speed", 1.0, -1.0, 1.0)).thenReturn(throat_slider);
+        when(throat_slider.getDouble()).thenReturn(0.3);
 
-        when(m_controller.getRawButton(Constants.THROAT_BUTTON)).thenReturn(true);
-        var intake = new Intake(f, intakeControl, m_controller);
+        when(controller.getRawButton(Constants.ELEVATOR_REVERSE_BUTTON)).thenReturn(true);
+        var intake = new IntakeCommand(f, intakeSubsystem, controller);
 
         intake.execute();
 
-        verify(intakeControl).setThroatSpeed(0.3);
+        verify(intakeSubsystem).setElevatorSpeed(-0.3);
     }
 
     @Test
@@ -65,10 +64,10 @@ public class IntakeTest {
         robot.robotInit();
         robot.teleopInit();
 
-        when(this.m_controller.getRawButton(Constants.THROAT_BUTTON)).thenReturn(true);
+        when(this.controller.getRawButton(Constants.ELEVATOR_REVERSE_BUTTON)).thenReturn(true);
 
         robot.robotPeriodic();
 
-        verify(this.intakeControl, times(1)).setThroatSpeed(1.0);
+        verify(this.intakeSubsystem, times(1)).setElevatorSpeed(-1.0);
     }
 }
